@@ -10,6 +10,6 @@ class RemoveMeTest {
     @Test
     void justRemoveMe() {
         RemoveMe removeMe = new RemoveMe();
-        assertThat(removeMe.justRemoveMe()).isEqualTo("Remove me");
+        assertThat(removeMe.justRemoveMe()).isEqualTo("Remove m");
     }
 }
