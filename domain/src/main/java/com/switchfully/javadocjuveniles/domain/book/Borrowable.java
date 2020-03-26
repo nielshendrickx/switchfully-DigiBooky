@@ -4,14 +4,14 @@ import java.util.Date;
 
 public interface Borrowable {
 
-    public String getTitle();
-    public String getSummary();
-    public int getNumberOfCopies();
-    public Date getDateAdded();
-    public void setTitle(String title);
-    public void setSummary(String summary);
-    public void setNumberOfCopies(int numberOfCopies);
-    public void toggleAvailability();
-    public String getDetails();
+    String getTitle();
+    String getSummary();
+    int getNumberOfCopies();
+    Date getDateAdded();
+    void setTitle(String title);
+    void setSummary(String summary);
+    void setNumberOfCopies(int numberOfCopies);
+    void toggleAvailability();
+    String getDetails();
 
 }
