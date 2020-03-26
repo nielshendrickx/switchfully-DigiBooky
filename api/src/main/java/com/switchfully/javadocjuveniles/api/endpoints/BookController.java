@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.api.placeholder;
+package com.switchfully.javadocjuveniles.api.endpoints;
 
 import com.switchfully.javadocjuveniles.service.placeholder.BookDto;
 import com.switchfully.javadocjuveniles.service.placeholder.BookService;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "/books")
+@RequestMapping(path = BookController.BOOK_RESOURCE_PATH)
 public class BookController {
+
+    public static final String BOOK_RESOURCE_PATH = "/books";
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
     private BookService bookService;
 

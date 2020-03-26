@@ -3,7 +3,7 @@ language: java
 
 #we add the java development kit (jdk)
 jdk:
-- openjdk-13.0.2
+- openjdk-13
 services:
 #Linking Travis CI and Docker
 - docker
