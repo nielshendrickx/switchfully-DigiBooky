@@ -2,12 +2,20 @@ package com.switchfully.javadocjuveniles.domain.user.builders;
 
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.Member;
+import com.switchfully.javadocjuveniles.domain.user.User;
+import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+
+import java.net.DatagramPacket;
 
 public class MemberBuilder {
 
+    //User
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
     private String inss;
-    private AddressBuilder addressBuilder;
-    private UserBuilder userBuilder;
+    private Address address;
 
     private MemberBuilder() {
     }
@@ -20,7 +28,27 @@ public class MemberBuilder {
     }
 
     public Member build() {
-        return new Member(userBuilder, this, addressBuilder);
+        return new Member(this);
+    }
+
+    public MemberBuilder withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public MemberBuilder withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public MemberBuilder withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public MemberBuilder withPassword(String password) {
+        this.password = password;
+        return this;
     }
 
     public MemberBuilder withINSS(String inss) {
@@ -28,8 +56,32 @@ public class MemberBuilder {
         return this;
     }
 
+    public MemberBuilder setAddress(Address address) {
+        this.address = address;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public String getInss() {
         return inss;
     }
 
+    public Address getAddress() {
+        return address;
+    }
 }

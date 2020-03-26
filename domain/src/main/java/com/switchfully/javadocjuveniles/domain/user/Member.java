@@ -4,6 +4,7 @@ import com.switchfully.javadocjuveniles.domain.book.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
 import com.switchfully.javadocjuveniles.domain.user.builders.MemberBuilder;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
+import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,16 @@ public class Member extends User {
     private final List<Borrowable> itemsBorrowed;
     //private final List<Fines> fines;
 
-    public Member(UserBuilder userBuilder, MemberBuilder memberBuilder, AddressBuilder addressBuilder) {
-        super(userBuilder);
+    public Member(MemberBuilder memberBuilder) {
+        super(memberBuilder.getFirstName(), memberBuilder.getLastName(), memberBuilder.getEmail(), UserRole.MEMBER, memberBuilder.getPassword());
         this.inss = memberBuilder.getInss();
-        this.address = addressBuilder.build();
+        this.address = memberBuilder.getAddress();
         itemsBorrowed = new ArrayList<>();
     }
 
+    public String getInss() {
+        return inss;
+    }
 
 
 }

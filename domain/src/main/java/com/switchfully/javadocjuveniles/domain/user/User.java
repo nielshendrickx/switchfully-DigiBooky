@@ -9,7 +9,7 @@ public class User {
     private final String id;
     private final String firstName;
     private final String lastName;
-    private final String eMail;
+    private final String email;
     private final UserRole role;
     private String passWord;
 
@@ -17,9 +17,18 @@ public class User {
         id = UUID.randomUUID().toString();
         firstName = userBuilder.getFirstName();
         lastName = userBuilder.getLastName();
-        eMail = userBuilder.getEMail();
+        email = userBuilder.getEmail();
         role = userBuilder.getRole();
         passWord = userBuilder.getPassWord();
+    }
+
+    public User(String firstName, String lastName, String email, UserRole role, String passWord) {
+        id = UUID.randomUUID().toString();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.passWord = passWord;
     }
 
     public String getFirstName() {
@@ -30,8 +39,8 @@ public class User {
         return lastName;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     public UserRole getRole() {

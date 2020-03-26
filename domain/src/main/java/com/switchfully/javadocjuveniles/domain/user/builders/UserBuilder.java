@@ -6,7 +6,7 @@ import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 public class UserBuilder {
     private String firstName;
     private String lastName;
-    private String eMail;
+    private String email;
     private UserRole role;
     private String passWord;
 
@@ -31,8 +31,8 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder withEMail(String eMail) {
-        this.eMail = eMail;
+    public UserBuilder withEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -54,8 +54,8 @@ public class UserBuilder {
         return lastName;
     }
 
-    public String getEMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     public UserRole getRole() {
