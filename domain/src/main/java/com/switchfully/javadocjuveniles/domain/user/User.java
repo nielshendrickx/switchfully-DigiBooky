@@ -9,7 +9,7 @@ public class User {
     private final String id;
     private final String firstName;
     private final String lastName;
-    private final String email;
+    private final String email; //TODO implement format validation in the controller & unique
     private final UserRole role;
     private String passWord;
 
