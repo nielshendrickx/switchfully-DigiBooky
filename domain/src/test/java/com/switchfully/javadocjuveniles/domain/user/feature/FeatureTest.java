@@ -1,20 +1,19 @@
-package com.switchfully.javadocjuveniles.api.security.authentication.feature;
+package com.switchfully.javadocjuveniles.domain.user.feature;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class FeatureTest {
-
     @Test
     void getFeaturesForRoles_GivenFeatureContainsOneOfTheRoles_ThenReturnAllFeaturesContainingOneOfThoseRoles() {
         List<Feature> actual = Feature.getFeaturesForRoles(newArrayList(UserRole.ADMIN.name()));
 
-        Assertions.assertThat(actual).contains(Feature.VIEW_MEMBERS, Feature.REGISTER_NEW_ITEM);
-        Assertions.assertThat(actual).doesNotContain(Feature.LEND_AN_ITEM);
+        assertThat(actual).contains(Feature.VIEW_MEMBERS, Feature.REGISTER_NEW_ITEM);
+        assertThat(actual).doesNotContain(Feature.LEND_AN_ITEM);
     }
 
     @Test
@@ -22,6 +21,7 @@ class FeatureTest {
 
         List<Feature> actual = Feature.getFeaturesForRoles(newArrayList());
 
-        Assertions.assertThat(actual).isEmpty();
+        assertThat(actual).isEmpty();
     }
+
 }

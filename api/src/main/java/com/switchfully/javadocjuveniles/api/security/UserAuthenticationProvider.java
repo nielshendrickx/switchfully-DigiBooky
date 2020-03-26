@@ -2,7 +2,7 @@ package com.switchfully.javadocjuveniles.api.security;
 
 import com.switchfully.javadocjuveniles.api.security.authentication.external.ExternalAuthentication;
 import com.switchfully.javadocjuveniles.api.security.authentication.external.FakeAuthenticationService;
-import com.switchfully.javadocjuveniles.api.security.authentication.feature.Feature;
+import com.switchfully.javadocjuveniles.domain.user.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.api.security.authentication.feature;
+package com.switchfully.javadocjuveniles.domain.user.feature;
 
 import java.util.Arrays;
 import java.util.Collections;
