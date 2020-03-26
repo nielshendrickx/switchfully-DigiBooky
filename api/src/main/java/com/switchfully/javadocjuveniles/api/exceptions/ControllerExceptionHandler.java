@@ -19,7 +19,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     //private final Logger logger = LoggerFactory.getLogger(ProfessorController.class); //TODO create logger after setting up the user controller
 
     @ExceptionHandler(EmailNotValidException.class)
-    protected void professorDoesNotExistsException(EmailNotValidException ex, HttpServletResponse response) throws IOException {
+    protected void emailNotValidException(EmailNotValidException ex, HttpServletResponse response) throws IOException {
         //logger.error("Email is not valid!", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
