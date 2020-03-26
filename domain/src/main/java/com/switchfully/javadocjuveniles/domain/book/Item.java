@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.book;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public abstract class Item implements Borrowable {
@@ -9,13 +9,30 @@ public abstract class Item implements Borrowable {
     private String summary;
     private int numberOfCopies;
     private boolean available;
-    private Date dateAdded;
+    private LocalDate dateAdded;
     private float initialPrice;
 
-    protected Item() {
+
+    public Item(String title, String summary, int numberOfCopies, LocalDate dateAdded) {
         this.ID = UUID.randomUUID().toString();
+        this.title = title;
+        this.summary = summary;
+        this.numberOfCopies = numberOfCopies;
+        this.available = true;
+        this.dateAdded = dateAdded;
+    }
+    public Item(String id, String title, String summary, int numberOfCopies, LocalDate dateAdded) {
+        this.ID = id;
+        this.title = title;
+        this.summary = summary;
+        this.numberOfCopies = numberOfCopies;
+        this.available = true;
+        this.dateAdded = dateAdded;
     }
 
+    public String getID() {
+        return ID;
+    }
 
     @Override
     public String getTitle() {
@@ -50,20 +67,12 @@ public abstract class Item implements Borrowable {
         return available;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void toggleAvailability(){
+        this.available = !available;
     }
 
-//    public void toggleAvailability(){
-//        if(isAvailable()){
-//            available = false;
-//        }
-//        else
-//            available = true;
-//    }
-
     @Override
-    public Date getDateAdded() {
+    public LocalDate getDateAdded() {
         return dateAdded;
     }
 
