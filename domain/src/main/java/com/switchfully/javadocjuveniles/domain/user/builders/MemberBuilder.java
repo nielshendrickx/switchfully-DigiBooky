@@ -2,14 +2,8 @@ package com.switchfully.javadocjuveniles.domain.user.builders;
 
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.Member;
-import com.switchfully.javadocjuveniles.domain.user.User;
-import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
-
-import java.net.DatagramPacket;
 
 public class MemberBuilder {
-
-    //User
     private String firstName;
     private String lastName;
     private String email;
