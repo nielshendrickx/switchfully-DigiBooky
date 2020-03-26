@@ -1,8 +1,7 @@
-package com.switchfully.javadocjuveniles.domain.user;
+package com.switchfully.javadocjuveniles.domain.user.builders;
 
+import com.switchfully.javadocjuveniles.domain.user.User;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
-
-import java.util.UUID;
 
 public class UserBuilder {
     private String firstName;
