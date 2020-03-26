@@ -1,5 +1,7 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
+import com.switchfully.javadocjuveniles.domain.user.Address;
+import com.switchfully.javadocjuveniles.domain.user.Member;
 import com.switchfully.javadocjuveniles.domain.user.User;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
@@ -9,16 +11,22 @@ public class UserBuilder {
     private String email;
     private UserRole role;
     private String passWord;
+    private String inss;
+    private Address address;
 
-    private UserBuilder() {
+    protected UserBuilder () {
     }
 
     public static UserBuilder userBuilder() {
         return new UserBuilder();
     }
 
-    public User build() {
+    public User buildUser() {
         return new User(this);
+    }
+
+    public Member buildMember() {
+        return new Member(this);
     }
 
     public UserBuilder withFirstName(String firstName) {
@@ -46,6 +54,16 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder withINSS(String inss) {
+        this.inss = inss;
+        return this;
+    }
+
+    public UserBuilder setAddress(Address address) {
+        this.address = address;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -64,5 +82,13 @@ public class UserBuilder {
 
     public String getPassWord() {
         return passWord;
+    }
+
+    public String getInss() {
+        return inss;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

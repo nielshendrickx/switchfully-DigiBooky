@@ -22,15 +22,6 @@ public class User {
         passWord = userBuilder.getPassWord();
     }
 
-    public User(String firstName, String lastName, String email, UserRole role, String passWord) {
-        id = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.role = role;
-        this.passWord = passWord;
-    }
-
     public String getFirstName() {
         return firstName;
     }
