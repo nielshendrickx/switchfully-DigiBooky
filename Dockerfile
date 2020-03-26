@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:13.0.2-jdk-alpine
+FROM openjdk:13-jdk-alpine3.10
 
 # Add Maintainer Info
 LABEL maintainer="niels.hendrickx@cegeka.com"
