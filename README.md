@@ -1,7 +1,6 @@
 # Digibooky
 
 [![Build Status](https://api.travis-ci.com/nielshendrickx/switchfully-DigiBooky.svg)](https://travis-ci.com/github/nielshendrickx/switchfully-DigiBooky)
-[![docker build](https://img.shields.io/docker/cloud/build/nielshendrickx/digibooky)](https://hub.docker.com/r/nielshendrickx/digibooky)
 [![codecov](https://codecov.io/gh/nielshendrickx/digibooky/branch/master/graph/badge.svg)](https://codecov.io/gh/nielshendrickx/digibooky)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=nielshendrickx_switchfully-DigiBooky&metric=alert_status)](https://sonarcloud.io/dashboard/index/nielshendrickx_switchfully-DigiBooky)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
