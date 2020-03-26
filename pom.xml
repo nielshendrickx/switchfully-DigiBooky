@@ -48,7 +48,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Dependencies required by al modules -->
+    <!-- Dependencies required by all modules -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
