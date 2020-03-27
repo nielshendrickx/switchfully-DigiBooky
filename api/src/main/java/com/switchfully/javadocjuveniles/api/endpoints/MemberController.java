@@ -1,5 +1,7 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.switchfully.javadocjuveniles.api.security.validation.Validation;
+import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.service.users.MemberDto;
 import com.switchfully.javadocjuveniles.service.users.MemberService;
@@ -11,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+
+import static com.switchfully.javadocjuveniles.api.security.validation.Validation.*;
 
 @RestController
 @RequestMapping(path = MemberController.USER_RESOURCE_PATH)
@@ -34,9 +38,12 @@ public class MemberController {
 
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto register(@RequestBody MemberDto infos) {
+    public MemberDto register(@RequestBody MemberDto newMember) {
+        if(!isValidEmailAddress(newMember.getEmail())) {
+            throw new EmailNotValidException(newMember.getEmail());
+        };
         logger.info("Creating a new member");
-        memberService.register(infos);
-        return infos;
+        memberService.register(newMember);
+        return newMember;
     }
 }

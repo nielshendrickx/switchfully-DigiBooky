@@ -2,6 +2,7 @@ package com.switchfully.javadocjuveniles.domain.user.builders;
 
 import com.switchfully.javadocjuveniles.domain.user.Address;
 
+
 public class AddressBuilder {
 
     private String street;

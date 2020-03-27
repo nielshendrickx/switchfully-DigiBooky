@@ -5,18 +5,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class MemberRepository {
-    private final ArrayList<Member> memberRepository;
+    private final ConcurrentHashMap<String, Member> memberRepository;
 
     public MemberRepository() {
-        this.memberRepository = new ArrayList<>();
+        this.memberRepository = new ConcurrentHashMap<>();
         createDefaultData();
     }
 
     public Collection<Member> getAllMembers() {
-        return memberRepository;
+        return memberRepository.values();
     }
 
     private void createDefaultData() {
@@ -74,14 +75,8 @@ public class MemberRepository {
         memberRepository.addAll(Arrays.asList(member1, member2, member3));*/
     }
 
-    public void registerNewMember(Member newMember) {
-        UserBuilder.userBuilder()
-                .withFirstName(newMember.getFirstName())
-                .withLastName(newMember.getLastName())
-                .withEmail(newMember.getEmail())
-                .withPassWord(newMember.getPassWord())
-                .withINSS(newMember.getInss())
-                .setAddress(newMember.getAddress())
-                .buildMember();
+    public Member registerNewMember(Member newMember) {
+        memberRepository.put(newMember.getId(), newMember);
+        return newMember;
     }
 }
