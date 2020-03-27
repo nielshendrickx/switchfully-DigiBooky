@@ -24,5 +24,31 @@ public class Member extends User {
         return inss;
     }
 
+    public String getFirstName() {
+        return super.getFirstName();
+    }
 
+    public String getLastName() {
+        return super.getLastName();
+    }
+
+    public String getEmail() {
+        return super.getEmail();
+    }
+
+    public String getPassword() {
+        return super.getPassWord();
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getId() {
+        return super.getId();
+    }
+
+    public List<Borrowable> getBorrowedItems() {
+        return itemsBorrowed;
+    }
 }

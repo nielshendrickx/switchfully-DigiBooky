@@ -21,4 +21,9 @@ public class MemberService {
         return memberMapper.toDto(memberRepository.getAllMembers());
     }
 
+    public MemberDto register(MemberDto newMember) {
+        memberRepository.registerNewMember(memberMapper.toMember(newMember));
+        return newMember;
+    }
+
 }

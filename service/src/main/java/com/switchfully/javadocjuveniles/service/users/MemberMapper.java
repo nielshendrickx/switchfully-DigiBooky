@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static com.switchfully.javadocjuveniles.domain.user.builders.MemberBuilder.memberBuilder;
+import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
 
 @Component
 public class MemberMapper {
@@ -16,12 +16,16 @@ public class MemberMapper {
     }
 
     public MemberDto toDto(Member member) {
-        return new MemberDto(member.getPersonalInfo(), member.getAddress(), member.getBorrowedItems());
+        return new MemberDto(member.getId(), member.getFirstName(), member.getLastName(), member.getEmail(), member.getPassword(), member.getInss(), member.getAddress(), member.getBorrowedItems());
     }
 
     public Member toMember(MemberDto memberDto) {
-        return memberBuilder()
-                .withPersonalInfo(memberDto.getPersonalInfo())
+        return userBuilder()
+                .withFirstName(memberDto.getFirstName())
+                .withLastName(memberDto.getLastName())
+                .withEmail(memberDto.getEmail())
+                .withPassWord(memberDto.getPassWord())
+                .withINSS(memberDto.getINSS())
                 .setAddress(memberDto.getAddress())
                 .buildMember();
     }

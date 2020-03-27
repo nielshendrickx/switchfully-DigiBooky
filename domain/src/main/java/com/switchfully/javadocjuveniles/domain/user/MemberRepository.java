@@ -1,10 +1,9 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
-import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
+import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 @Repository
@@ -73,5 +72,11 @@ public class MemberRepository {
                 .withINSS("88.07.22-123.45")
                 .buildMember();
         memberRepository.addAll(Arrays.asList(member1, member2, member3));*/
+    }
+
+    public void registerNewMember(Member newMember) {
+        UserBuilder.userBuilder()
+                .withFirstName(newMember.getFirstName())
+                .buildMember();
     }
 }

@@ -1,11 +1,8 @@
-package com.switchfully.javadocjuveniles.domain.user;
+package com.switchfully.javadocjuveniles.service.users;
 
-import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
-import java.util.UUID;
-
-public class User {
+public class UserDto {
     private final String id;
     private final String firstName;
     private final String lastName;
@@ -13,13 +10,13 @@ public class User {
     private final UserRole role;
     private String passWord;
 
-    public User(UserBuilder userBuilder) {
-        id = UUID.randomUUID().toString();
-        firstName = userBuilder.getFirstName();
-        lastName = userBuilder.getLastName();
-        email = userBuilder.getEmail();
-        role = userBuilder.getRole();
-        passWord = userBuilder.getPassWord();
+    public UserDto(String id, String firstName, String lastName, String email, String password, UserRole userRole) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = userRole;
+        this.passWord = password;
     }
 
     public String getFirstName() {
@@ -40,9 +37,5 @@ public class User {
 
     public String getPassWord() {
         return passWord;
-    }
-
-    protected String getId() {
-        return id;
     }
 }
