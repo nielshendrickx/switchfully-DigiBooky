@@ -8,21 +8,21 @@ import java.util.stream.Collectors;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum Feature {
-    REGISTER_NEW_ITEM(SecurityRole.LIBRARIAN, SecurityRole.ADMIN),
-    VIEW_MEMBERS(SecurityRole.ADMIN),
-    LEND_AN_ITEM(SecurityRole.MEMBER);
+    REGISTER_NEW_ITEM(UserRole.LIBRARIAN, UserRole.ADMIN),
+    VIEW_MEMBERS(UserRole.ADMIN),
+    LEND_AN_ITEM(UserRole.MEMBER);
 
-    private SecurityRole[] roles;
+    private UserRole[] roles;
 
-    Feature(SecurityRole... roles) {this.roles = roles; }
+    Feature(UserRole... roles) {this.roles = roles; }
 
-    public List<SecurityRole> getRoles() {
+    public List<UserRole> getRoles() {
         return newArrayList(roles);
     }
 
     public static List<Feature> getFeaturesForRoles(List<String> rolesOfUserAsString) {
-        List<SecurityRole> rolesOfUser = rolesOfUserAsString.stream()
-                .map(SecurityRole::valueOf)
+        List<UserRole> rolesOfUser = rolesOfUserAsString.stream()
+                .map(UserRole::valueOf)
                 .collect(Collectors.toList());
         return Arrays.stream(Feature.values())
                 .filter(feature -> !Collections.disjoint(feature.getRoles(), rolesOfUser))

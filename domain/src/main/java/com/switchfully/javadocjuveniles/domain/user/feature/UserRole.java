@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user.feature;
 
-public enum SecurityRole {
+public enum UserRole {
     MEMBER,
     LIBRARIAN,
     ADMIN

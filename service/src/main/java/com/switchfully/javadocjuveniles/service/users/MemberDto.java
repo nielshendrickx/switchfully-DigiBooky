@@ -1,7 +1,7 @@
 package com.switchfully.javadocjuveniles.service.users;
 
 import com.switchfully.javadocjuveniles.domain.book.Borrowable;
-import com.switchfully.javadocjuveniles.domain.user.userinfo.Address;
+import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 import java.util.List;

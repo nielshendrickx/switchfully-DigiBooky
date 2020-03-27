@@ -1,7 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
-import com.switchfully.javadocjuveniles.domain.exceptions.PersonalInfoException;
-import com.switchfully.javadocjuveniles.domain.user.userinfo.Address;
+import com.switchfully.javadocjuveniles.domain.user.Address;
 
 public class AddressBuilder {
 
@@ -18,17 +17,7 @@ public class AddressBuilder {
     }
 
     public Address build(){
-        if (!everythingIsFilledIn()) {
-            throw new PersonalInfoException();
-        }
         return new Address(this);
-    }
-
-    private boolean everythingIsFilledIn() {
-        return street != null &&
-                streetNumber != null &&
-                postalCode != null &&
-                city != null;
     }
 
     public AddressBuilder withStreet(String street) {

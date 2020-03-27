@@ -1,14 +1,8 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
-import com.switchfully.javadocjuveniles.domain.book.Author;
-import com.switchfully.javadocjuveniles.domain.book.Book;
 import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
-import com.switchfully.javadocjuveniles.domain.user.builders.MemberBuilder;
-import com.switchfully.javadocjuveniles.domain.user.builders.PersonalInfoBuilder;
-import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,7 +21,7 @@ public class MemberRepository {
     }
 
     private void createDefaultData() {
-        Member member1 = MemberBuilder.memberBuilder()
+/*        Member member1 = MemberBuilder.memberBuilder()
                 .withPersonalInfo(PersonalInfoBuilder.personalInfoBuilder()
                         .withFirstName("John")
                         .withLastName("Doe")
@@ -78,6 +72,6 @@ public class MemberRepository {
                 )
                 .withINSS("88.07.22-123.45")
                 .buildMember();
-        memberRepository.addAll(Arrays.asList(member1, member2, member3));
+        memberRepository.addAll(Arrays.asList(member1, member2, member3));*/
     }
 }

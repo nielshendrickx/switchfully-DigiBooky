@@ -1,27 +1,44 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
-import com.switchfully.javadocjuveniles.domain.user.behavior.Informative;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
-import com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole;
-import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
+import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
-import static com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole.ADMIN;
+import java.util.UUID;
 
-public class User implements Informative {
-    private final PersonalInfo personalInfo;
-    private final SecurityRole securityRole = ADMIN;
+public class User {
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final String email; //TODO implement format validation in the controller & unique
+    private final UserRole role;
+    private String passWord;
 
     public User(UserBuilder userBuilder) {
-        personalInfo = userBuilder.getPersonalInfo();
+        id = UUID.randomUUID().toString();
+        firstName = userBuilder.getFirstName();
+        lastName = userBuilder.getLastName();
+        email = userBuilder.getEmail();
+        role = userBuilder.getRole();
+        passWord = userBuilder.getPassWord();
     }
 
-    @Override
-    public PersonalInfo getPersonalInfo() {
-        return personalInfo;
+    public String getFirstName() {
+        return firstName;
     }
 
-    @Override
-    public SecurityRole getRole() {
-        return securityRole;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public String getPassWord() {
+        return passWord;
     }
 }
