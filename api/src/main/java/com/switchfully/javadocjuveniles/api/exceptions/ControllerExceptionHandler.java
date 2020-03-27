@@ -1,6 +1,8 @@
 package com.switchfully.javadocjuveniles.api.exceptions;
 
 
+import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
+import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,4 +24,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         //logger.error("Email is not valid!", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
+
+//    @ExceptionHandler(BookNotFoundException.class)
+//    protected void bookNotFoundException(BookNotFoundException ex, HttpServletResponse response) throws IOException {
+//        //logger.error("Book not found!", ex);
+//        response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+//    }
+//
+//    @ExceptionHandler(BookNotFoundException.class)
+//    protected void bookNotValidException(BookIsNotValidException ex, HttpServletResponse response) throws IOException {
+//        //logger.error("Book is not valid!", ex);
+//        response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+//    }
+
 }

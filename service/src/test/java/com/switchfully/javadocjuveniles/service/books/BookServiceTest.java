@@ -5,6 +5,9 @@ import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
+import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
+
 
 class BookServiceTest {
 
@@ -15,7 +18,7 @@ class BookServiceTest {
         BookService bookService = new BookService(bookRepository, bookMapper);
 
         bookService.update(bookRepository.getBookByISBN("9787166484100").getID()
-                , new Author("Paulo", "Coelho"), "abc", "summary", 1);
+                , authorBuilder().withFirstName("Paulo").withLastName("Coelho").build(), "abc", "summary", 1);
         Assertions.assertEquals("abc", bookRepository.getBookByISBN("9787166484100").getTitle());
     }
 

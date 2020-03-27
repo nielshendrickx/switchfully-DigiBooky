@@ -1,5 +1,7 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.FieldMustBeProvidedException;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -8,10 +10,10 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    public Author(String firstName, String lastName) {
+    public Author(AuthorBuilder authorBuilder) {
         this.ID = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = authorBuilder.firstName;
+        this.lastName = authorBuilder.lastName;
     }
 
     public String getFirstName() {
@@ -21,6 +23,11 @@ public class Author {
     public String getLastName() {
         return lastName;
     }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -34,5 +41,31 @@ public class Author {
     @Override
     public int hashCode() {
         return Objects.hash(getFirstName(), getLastName());
+    }
+
+    public static class AuthorBuilder{
+        private String firstName;
+        private String lastName;
+
+        private AuthorBuilder(){}
+        public static AuthorBuilder authorBuilder() {
+            return new AuthorBuilder();
+        }
+
+        public Author build() {
+            if (lastName == null) {
+                throw new FieldMustBeProvidedException("Author's last name");
+            }
+            return new Author(this);
+        }
+
+        public AuthorBuilder withFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+        public AuthorBuilder withLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
     }
 }

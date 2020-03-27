@@ -14,6 +14,9 @@ public class BookDto {
     private LocalDate dateAdded;
     private float initialPrice;
 
+    public BookDto() {
+    }
+
     public BookDto(String ID, String ISBN, Author author, String title, String summary
             , int numberOfCopies, LocalDate dateAdded, float initialPrice) {
         this.ID = ID;
