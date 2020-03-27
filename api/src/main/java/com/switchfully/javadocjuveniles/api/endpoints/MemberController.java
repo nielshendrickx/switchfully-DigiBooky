@@ -34,7 +34,7 @@ public class MemberController {
 
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto register(MemberDto infos) {
+    public MemberDto register(@RequestBody MemberDto infos) {
         logger.info("Creating a new member");
         memberService.register(infos);
         return null;
