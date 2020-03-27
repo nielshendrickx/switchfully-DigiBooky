@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.service.users;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
 public class UserDto {
@@ -10,8 +11,8 @@ public class UserDto {
     private UserRole role;
     private String passWord;
 
-    public UserDto(String id, String firstName, String lastName, String email, String password, UserRole userRole) {
-        this.id = id;
+    @JsonCreator
+    public UserDto(String firstName, String lastName, String email, String password, UserRole userRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -37,5 +38,9 @@ public class UserDto {
 
     public String getPassWord() {
         return passWord;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

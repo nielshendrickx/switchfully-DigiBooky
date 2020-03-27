@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
 
 import java.util.UUID;
@@ -11,6 +12,7 @@ public class Address {
     private final String postalCode;
     private final String city;
 
+    @JsonCreator
     public Address(AddressBuilder addressBuilder) {
         id = UUID.randomUUID().toString();
         street = addressBuilder.getStreet();

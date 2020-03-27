@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
@@ -13,6 +14,7 @@ public class User {
     private final UserRole role;
     private String passWord;
 
+    @JsonCreator
     public User(UserBuilder userBuilder) {
         id = UUID.randomUUID().toString();
         firstName = userBuilder.getFirstName();

@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.switchfully.javadocjuveniles.domain.item.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 
@@ -13,6 +14,7 @@ public class Member extends User {
     private final List<Borrowable> itemsBorrowed;
     //private final List<Fines> fines;
 
+    @JsonCreator
     public Member(UserBuilder userBuilder) {
         super(userBuilder);
         this.inss = userBuilder.getInss();

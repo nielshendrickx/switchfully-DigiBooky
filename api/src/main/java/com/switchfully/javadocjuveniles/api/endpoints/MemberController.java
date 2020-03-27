@@ -37,6 +37,6 @@ public class MemberController {
     public MemberDto register(@RequestBody MemberDto infos) {
         logger.info("Creating a new member");
         memberService.register(infos);
-        return null;
+        return infos;
     }
 }
