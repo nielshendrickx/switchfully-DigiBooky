@@ -8,8 +8,6 @@ jdk:
 addons:
   sonarcloud:
     organization: "nielshendrickx"
-    token:
-      secure: $SONAR_TOKEN # encrypted value of your token
 
 before_install:
 - mvn clean
