@@ -8,6 +8,8 @@ jdk:
 addons:
   sonarcloud:
     organization: "nielshendrickx"
+    token:
+      secure: "WYRpB/eFYyXtQRc+zvHuNtaAnM2k5I0pW5VBqwB84q+ksnWYXtvTHn2Ek4drASbxGMuQDN2D+4aACyrX06T/66oSnoUZzT+vDp42471kBgREYudCw9JRmUc6uwquvqPvNaoLlTAp3Lgdt1/kbb0/yvw0UsBzl8bByjYrLZs2VI4c7VUOOT+mU/RprCX7ZnSmdWEjXsgHp8yDvFisC9SS6UKOAfU2diTWMq0jbu0UZVSEUx/XMxsbq4KX4QXUR/tx7h9r6jBb4D83WQSf6DPv7xYLV+tKr6dbqbyhP9zoIQpTY2eIMevKTx7vujYcgG+nAYVGfhAI+V3Ud7/Cg2szlZj+CuD/43fQnUgVB0wpCbHvcw7C1HEY2SOwncQTrbennr1vy7ZkgQwaa9EoBhBPpA/eqYfZhMxwpcxCAAJp8+L32nyGi89KDeVM0+HnKvYbK94iyvEyUoElOCtmYxd1+4XtwYOsT9hDNUZH5ybxrlLyRs9xP2IMx4Ej/i2iBFgs1ymcCWU+Z72ennNS11ZU5KnnSrfccpe4DTTGJ1JKjq3KxoIdt3F60H/nXsBI1f8fNkZ4Kl+kxyU7GYF9okgJjG37e5iCIRQr5w5rivrbJXsj/UZU8DFsPI5qpCbA8Jy+oLpU5/ApEoDGJBQB/vXRKODYl86UtzDHcyLF7frw6sk=" # encrypted value of your token
 
 before_install:
 - mvn clean
