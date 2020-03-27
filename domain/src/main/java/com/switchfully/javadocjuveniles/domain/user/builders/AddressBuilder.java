@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
-import com.switchfully.javadocjuveniles.domain.user.Address;
+import com.switchfully.javadocjuveniles.domain.user.userinfo.Address;
 
 public class AddressBuilder {
 

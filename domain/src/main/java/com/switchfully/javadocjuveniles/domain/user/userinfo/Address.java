@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.domain.user;
+package com.switchfully.javadocjuveniles.domain.user.userinfo;
 
 import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
 

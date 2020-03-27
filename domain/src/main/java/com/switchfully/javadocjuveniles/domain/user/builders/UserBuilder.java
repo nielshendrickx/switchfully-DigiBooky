@@ -1,94 +1,41 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
-import com.switchfully.javadocjuveniles.domain.user.Address;
-import com.switchfully.javadocjuveniles.domain.user.Member;
-import com.switchfully.javadocjuveniles.domain.user.User;
+import com.switchfully.javadocjuveniles.domain.user.Administrator;
+import com.switchfully.javadocjuveniles.domain.user.Librarian;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 public class UserBuilder {
-    private String firstName;
-    private String lastName;
-    private String email;
+    private PersonalInfo personalInfo;
     private UserRole role;
-    private String passWord;
-    private String inss;
-    private Address address;
 
-    protected UserBuilder () {
+    protected UserBuilder() {
     }
 
     public static UserBuilder userBuilder() {
         return new UserBuilder();
     }
 
-    public User buildUser() {
-        return new User(this);
+    public Librarian buildLibrarian(){
+        this.role = UserRole.LIBRARIAN;
+        return new Librarian(this);
     }
 
-    public Member buildMember() {
-        return new Member(this);
+    public Administrator buildAdministrator() {
+        this.role = UserRole.ADMIN;
+        return new Administrator(this);
     }
 
-    public UserBuilder withFirstName(String firstName) {
-        this.firstName = firstName;
+    public UserBuilder withPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
         return this;
     }
 
-    public UserBuilder withLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public UserBuilder withEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public UserBuilder withRole(UserRole role) {
-        this.role = role;
-        return this;
-    }
-
-    public UserBuilder withPassWord(String passWord) {
-        this.passWord = passWord;
-        return this;
-    }
-
-    public UserBuilder withINSS(String inss) {
-        this.inss = inss;
-        return this;
-    }
-
-    public UserBuilder setAddress(Address address) {
-        this.address = address;
-        return this;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
     }
 
     public UserRole getRole() {
         return role;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public String getInss() {
-        return inss;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 }
