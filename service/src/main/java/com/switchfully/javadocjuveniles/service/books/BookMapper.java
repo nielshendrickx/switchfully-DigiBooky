@@ -3,8 +3,12 @@ package com.switchfully.javadocjuveniles.service.books;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
+import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
 
 @Component
 public class BookMapper {
@@ -19,7 +23,9 @@ public class BookMapper {
     }
 
     public Book toBook(BookDto bookDto) {
-        return new Book(bookDto.getTitle(), bookDto.getSummary(), bookDto.getNumberOfCopies(), bookDto.getDateAdded()
-                , bookDto.getISBN(), bookDto.getAuthor());
+        return bookBuilder().withTitle(bookDto.getTitle()).withSummary(bookDto.getSummary())
+                .withNumberOfCopies(bookDto.getNumberOfCopies())
+                .withDateAdded(bookDto.getDateAdded()).withISBN(bookDto.getISBN())
+                .withAuthor(bookDto.getAuthor()).build();
     }
 }

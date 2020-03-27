@@ -33,7 +33,20 @@ public class BookService {
     public BookDto getBookByISBN(String ISBN){
         return bookMapper.toDto(bookRepository.getBookByISBN(ISBN));
     }
+
     public BookDto getBookByID(String ID){
         return bookMapper.toDto(bookRepository.getBookById(ID));
+    }
+
+    public BookDto getBookByTitle(String title){
+        return bookMapper.toDto(bookRepository.getBookByTitle(title));
+    }
+
+    public BookDto getBookByAuthor(String name){
+        return bookMapper.toDto(bookRepository.getBookByAuthor(name));
+    }
+
+    public BookDto addBook(BookDto bookDto){
+        return bookMapper.toDto(bookRepository.addBook(bookMapper.toBook(bookDto)));
     }
 }
