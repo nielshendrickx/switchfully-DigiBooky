@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.api.security;
 
 import com.switchfully.javadocjuveniles.api.endpoints.BookController;
+import com.switchfully.javadocjuveniles.api.endpoints.MemberController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.csrf().disable().authorizeRequests()
-                .antMatchers(BookController.BOOK_RESOURCE_PATH).permitAll()
+                .antMatchers(MemberController.USER_RESOURCE_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .authenticationEntryPoint(authEntryPoint)

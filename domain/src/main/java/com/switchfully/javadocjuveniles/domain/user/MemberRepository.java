@@ -77,6 +77,11 @@ public class MemberRepository {
     public void registerNewMember(Member newMember) {
         UserBuilder.userBuilder()
                 .withFirstName(newMember.getFirstName())
+                .withLastName(newMember.getLastName())
+                .withEmail(newMember.getEmail())
+                .withPassWord(newMember.getPassWord())
+                .withINSS(newMember.getInss())
+                .setAddress(newMember.getAddress())
                 .buildMember();
     }
 }

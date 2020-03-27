@@ -3,11 +3,11 @@ package com.switchfully.javadocjuveniles.service.users;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
 public class UserDto {
-    private final String id;
-    private final String firstName;
-    private final String lastName;
-    private final String email; //TODO implement format validation in the controller & unique
-    private final UserRole role;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String email; //TODO implement format validation in the controller & unique
+    private UserRole role;
     private String passWord;
 
     public UserDto(String id, String firstName, String lastName, String email, String password, UserRole userRole) {
