@@ -1,12 +1,13 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.PersonalInfoException;
-import com.switchfully.javadocjuveniles.domain.user.Administrator;
-import com.switchfully.javadocjuveniles.domain.user.Librarian;
+import com.switchfully.javadocjuveniles.domain.user.User;
+import com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 public class UserBuilder {
     private PersonalInfo personalInfo;
+    private SecurityRole securityRole;
 
     protected UserBuilder() {
     }
@@ -15,14 +16,16 @@ public class UserBuilder {
         return new UserBuilder();
     }
 
-    public Librarian buildLibrarian(){
+    public User buildLibrarian(){
         if (!everythingIsFilledIn()) throw new PersonalInfoException();
-        return new Librarian(this);
+        securityRole = SecurityRole.LIBRARIAN;
+        return new User(this);
     }
 
-    public Administrator buildAdministrator() {
+    public User buildAdministrator() {
         if (!everythingIsFilledIn()) throw new PersonalInfoException();
-        return new Administrator(this);
+        securityRole = SecurityRole.ADMIN;
+        return new User(this);
     }
 
     private boolean everythingIsFilledIn() {
