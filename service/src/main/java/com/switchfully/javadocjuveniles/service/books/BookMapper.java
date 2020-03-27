@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.service.books;
 
-import com.switchfully.javadocjuveniles.domain.book.Book;
+import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -20,11 +20,6 @@ public class BookMapper {
 
     public Book toBook(BookDto bookDto) {
         return new Book(bookDto.getTitle(), bookDto.getSummary(), bookDto.getNumberOfCopies(), bookDto.getDateAdded()
-                , bookDto.getISBN(), bookDto.getAuthor());
-    }
-    public Book toExistingBook(BookDto bookDto) {
-        return new Book(bookDto.getID(), bookDto.getTitle(), bookDto.getSummary()
-                , bookDto.getNumberOfCopies(), bookDto.getDateAdded()
                 , bookDto.getISBN(), bookDto.getAuthor());
     }
 }

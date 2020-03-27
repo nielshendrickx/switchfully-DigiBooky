@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item.book;
 
 import java.util.Objects;
 import java.util.UUID;

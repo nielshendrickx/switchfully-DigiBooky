@@ -6,10 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -31,5 +28,19 @@ public class BookController {
     public Collection<BookDto> findAll() {
         logger.info("Returning all books");
         return bookService.findAll();
+    }
+
+    @GetMapping(path = "/isbn/{ISBN}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDto getBookByISBN(@PathVariable("ISBN") String ISBN) {
+        logger.info("Returning the book for given ISBN");
+        return bookService.getBookByISBN(ISBN);
+    }
+
+    @GetMapping(path = "/{ID}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDto getBookByID(@PathVariable("ID") String ID) {
+        logger.info("Returning the book for given ID");
+        return bookService.getBookByID(ID);
     }
 }

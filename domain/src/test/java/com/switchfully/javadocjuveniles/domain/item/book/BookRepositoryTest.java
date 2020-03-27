@@ -1,5 +1,7 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
+import com.switchfully.javadocjuveniles.domain.exceptions.ISBNNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +12,9 @@ import java.util.List;
 
 
 class BookRepositoryTest {
-
+    BookRepository bookRepository = new BookRepository();
     @Test
     void getAllItemsTest(){
-        BookRepository bookRepository = new BookRepository();
         Book book1 = new Book("War and Peace", "Summary", 1
                 , LocalDate.of(2020, 3, 25), "9787166484100", new Author("Leo", "Tolstoy"));
         Book book2 = new Book("It", "Summary", 1
@@ -26,11 +27,30 @@ class BookRepositoryTest {
 
     @Test
     void addItemTest(){
-        BookRepository bookRepository = new BookRepository();
         Book bookToTest = new Book("The trial", "Summary", 1
                 , LocalDate.of(2020, 3, 25),"9783161484100", new Author("Franz", "Kafka"));
         bookRepository.addBook(bookToTest);
-        Assertions.assertTrue(bookRepository.getBookByISBN().contains(bookToTest));
+        Assertions.assertTrue(bookRepository.getAllBooks().contains(bookToTest));
     }
+
+    @Test
+    void checkIfErrorIsThrownWhenBookISNull(){
+        Assertions.assertThrows(BookIsNotValidException.class, () -> {
+            bookRepository.addBook(null);
+        });
+    }
+
+    @Test
+    void checkIfTheCorrectBookIsReturnedWhenISBNIsProvided(){
+        Assertions.assertEquals("War and Peace", bookRepository.getBookByISBN("9787166484100").getTitle());
+    }
+
+    @Test
+    void checkIfAnExceptionIsThrownWhenUnknownISBNIsProvided(){
+        Assertions.assertThrows(ISBNNotFoundException.class, () -> {
+            bookRepository.getBookByISBN("9787166484444");
+        });
+    }
+
 
 }

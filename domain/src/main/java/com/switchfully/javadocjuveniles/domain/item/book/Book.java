@@ -1,5 +1,6 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.item.Item;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,12 +15,6 @@ public class Book extends Item {
         this.author = author;
     }
 
-    public Book(String id, String title, String summary, int numberOfCopies, LocalDate dateAdded, String ISBN, Author author) {
-        super(id, title, summary, numberOfCopies, dateAdded);
-        this.ISBN = ISBN;
-        this.author = author;
-    }
-
     public String getISBN() {
         return ISBN;
     }
@@ -28,10 +23,10 @@ public class Book extends Item {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public Book setAuthor(Author author) {
         this.author = author;
+        return this;
     }
-
 
 
     @Override

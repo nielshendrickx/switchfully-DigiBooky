@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.service.books;
 
-import com.switchfully.javadocjuveniles.domain.book.Author;
+import com.switchfully.javadocjuveniles.domain.item.book.Author;
 
 import java.time.LocalDate;
 
@@ -35,9 +35,6 @@ public class BookDto {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
 
     public int getNumberOfCopies() {
         return numberOfCopies;
@@ -47,17 +44,11 @@ public class BookDto {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getSummary() {
         return summary;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
 
     public LocalDate getDateAdded() {
         return dateAdded;
@@ -65,9 +56,5 @@ public class BookDto {
 
     public float getInitialPrice() {
         return initialPrice;
-    }
-
-    public String getID() {
-        return ID;
     }
 }
