@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.csrf().disable().authorizeRequests()
-                .antMatchers(MemberController.USER_RESOURCE_PATH).permitAll()
-                .antMatchers(BookController.BOOK_RESOURCE_PATH).permitAll()
+                .antMatchers(MemberController.USER_RESOURCE_PATH + "/**").permitAll()
+                .antMatchers(BookController.BOOK_RESOURCE_PATH + "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .authenticationEntryPoint(authEntryPoint)

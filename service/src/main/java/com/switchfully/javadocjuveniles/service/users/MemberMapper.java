@@ -19,7 +19,6 @@ public class MemberMapper {
         return new MemberDto(member.getId(), member.getFirstName(), member.getLastName(), member.getEmail(), member.getPassword(), member.getInss(), member.getAddress());
     }
 
-    // comment to get it pushed
     public Member toMember(MemberDto memberDto) {
         return userBuilder()
                 .withFirstName(memberDto.getFirstName())

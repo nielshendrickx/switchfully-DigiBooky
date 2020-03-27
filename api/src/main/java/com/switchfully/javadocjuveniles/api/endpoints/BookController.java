@@ -30,7 +30,7 @@ public class BookController {
         return bookService.findAll();
     }
 
-    @GetMapping(path = "/{ISBN}", produces = "application/json")
+    @GetMapping(path = "/isbn/{ISBN}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDto getBookByISBN(@PathVariable("ISBN") String ISBN) {
         logger.info("Returning the book for given ISBN");
