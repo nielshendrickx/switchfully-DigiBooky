@@ -32,9 +32,9 @@ public class MemberController {
         return memberService.getAllMembers();
     }
 
-    @PostMapping(path = "/register/{infos}", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto register(@PathVariable(value = "infos") MemberDto infos) {
+    public MemberDto register(MemberDto infos) {
         logger.info("Creating a new member");
         memberService.register(infos);
         return null;
