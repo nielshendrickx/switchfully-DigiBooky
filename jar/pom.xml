@@ -6,6 +6,11 @@
 
     <artifactId>jar</artifactId>
 
+    <properties>
+        <maven.compiler.target>13</maven.compiler.target>
+        <maven.compiler.source>13</maven.compiler.source>
+    </properties>
+
     <parent>
         <artifactId>javadocjuveniles</artifactId>
         <groupId>com.switchfully.javadocjuveniles</groupId>
@@ -29,9 +34,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <appName>digibooky</appName>
+                    <jdkVersion>13</jdkVersion>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -jar -Dserver.port=$PORT ${full-artifact-name}</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-
-
 </project>

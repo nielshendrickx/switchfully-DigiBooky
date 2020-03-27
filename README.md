@@ -1,5 +1,10 @@
 # Digibooky
 
+[![Build Status](https://api.travis-ci.com/nielshendrickx/switchfully-DigiBooky.svg)](https://travis-ci.com/github/nielshendrickx/switchfully-DigiBooky)
+[![codecov](https://codecov.io/gh/nielshendrickx/digibooky/branch/master/graph/badge.svg)](https://codecov.io/gh/nielshendrickx/digibooky)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=nielshendrickx_switchfully-DigiBooky&metric=alert_status)](https://sonarcloud.io/dashboard/index/nielshendrickx_switchfully-DigiBooky)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ![Digibooky logo](digibooky.png)
 
 Digibooky is going to revolutionize the classic libraries. Users will come to the VR offices where VR headsets are available. 
@@ -11,7 +16,7 @@ It'll be developed in a later stadium by a company specialized in VR application
 The front-end of Digibooky will communicate with the back end of Digibooky through a REST(ful) web API (over HTTP(s)), 
 using JSON as its message format. This back end will contain the entire domain and all the business logic.
 It's your job to implement this back-end.
-
+ 
 ## Technical requirements for JAVA
 
 - Create a new GitHub repository (one per team)
