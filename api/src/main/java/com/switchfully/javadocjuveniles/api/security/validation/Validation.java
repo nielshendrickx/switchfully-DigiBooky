@@ -6,7 +6,5 @@ public class Validation {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();
-
-
     }
 }
