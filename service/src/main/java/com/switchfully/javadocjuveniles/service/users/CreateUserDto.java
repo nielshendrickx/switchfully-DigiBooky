@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
-public class UserDto {
+public class CreateUserDto {
     private String id;
     private String firstName;
     private String lastName;
@@ -13,8 +13,7 @@ public class UserDto {
     private String passWord;
 
     @JsonCreator
-    public UserDto(@JsonProperty("id") String id, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userRole") UserRole userRole) {
-        this.id = id;
+    public CreateUserDto(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userRole") UserRole userRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -42,7 +41,7 @@ public class UserDto {
         return passWord;
     }
 
-    public void getId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

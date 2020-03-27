@@ -25,7 +25,7 @@ class MemberTest {
                 .withPassWord("aPassword")
                 .buildMember();
 
-        Assertions.assertEquals("299.18.02-10.08.1996", member.getInss());
+        Assertions.assertEquals("299.18.02-10.08.1996", member.getINSS());
     }
 
 }
