@@ -1,31 +1,60 @@
 package com.switchfully.javadocjuveniles.domain.book;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.BookIDNotFoundException;
+import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
+import com.switchfully.javadocjuveniles.domain.exceptions.ISBNNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 @Repository
 public class BookRepository {
-    private final ConcurrentHashMap<String, Book> bookByISBN;
+    private final ConcurrentHashMap<String, Book> bookDatabase;
 
     public BookRepository() {
-        this.bookByISBN = new ConcurrentHashMap<>();
+        this.bookDatabase = new ConcurrentHashMap<>();
         createDefaultData();
     }
 
     public Book addBook(Book book) {
-        bookByISBN.put(book.getISBN(), book);
+        if(book == null) {
+            throw new BookIsNotValidException();
+        }
+        bookDatabase.put(book.getISBN(), book);
         return book;
     }
 
     public Collection<Book> getAllBooks(){
-        return bookByISBN.values();
+        return bookDatabase.values();
     }
 
-    public ConcurrentHashMap<String, Book> getBookByISBN() {
-        return bookByISBN;
+    public Book getBookByISBN(String isbn){
+        String status = bookDatabase.keySet()
+                .stream().filter(key -> checkIfISBNExists(isbn, key))
+                .findAny().orElse("Unknown ISBN");
+
+        if(status.equals("Unknown ISBN")){
+            throw new ISBNNotFoundException();
+        }
+        return bookDatabase.get(isbn);
+    }
+
+    public static boolean checkIfISBNExists(String isbn, String input){
+        boolean bool = Pattern.compile(".*" + isbn +".*").matcher(input).find();
+        return bool;
+    }
+
+    public Book getBookById(String id){
+        Book book = bookDatabase.values().stream().filter(x -> id.equals(x.getID()))
+                .findAny()
+                .orElse(null);
+        if (book == null) {
+            throw new BookIDNotFoundException();
+        }
+        return book;
     }
 
     private void createDefaultData(){

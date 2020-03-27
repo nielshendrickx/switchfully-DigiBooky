@@ -22,9 +22,4 @@ public class BookMapper {
         return new Book(bookDto.getTitle(), bookDto.getSummary(), bookDto.getNumberOfCopies(), bookDto.getDateAdded()
                 , bookDto.getISBN(), bookDto.getAuthor());
     }
-    public Book toExistingBook(BookDto bookDto) {
-        return new Book(bookDto.getID(), bookDto.getTitle(), bookDto.getSummary()
-                , bookDto.getNumberOfCopies(), bookDto.getDateAdded()
-                , bookDto.getISBN(), bookDto.getAuthor());
-    }
 }

@@ -8,9 +8,9 @@ public interface Borrowable {
     String getSummary();
     int getNumberOfCopies();
     LocalDate getDateAdded();
-    void setTitle(String title);
-    void setSummary(String summary);
-    void setNumberOfCopies(int numberOfCopies);
+    Item setTitle(String title);
+    Item setSummary(String summary);
+    Item setNumberOfCopies(int numberOfCopies);
     void toggleAvailability();
     String getDetails();
 }

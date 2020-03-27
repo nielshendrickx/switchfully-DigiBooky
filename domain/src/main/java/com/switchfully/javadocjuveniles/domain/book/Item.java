@@ -21,14 +21,6 @@ public abstract class Item implements Borrowable {
         this.available = true;
         this.dateAdded = dateAdded;
     }
-    public Item(String id, String title, String summary, int numberOfCopies, LocalDate dateAdded) {
-        this.ID = id;
-        this.title = title;
-        this.summary = summary;
-        this.numberOfCopies = numberOfCopies;
-        this.available = true;
-        this.dateAdded = dateAdded;
-    }
 
     public String getID() {
         return ID;
@@ -40,8 +32,9 @@ public abstract class Item implements Borrowable {
     }
 
     @Override
-    public void setTitle(String title) {
+    public Item setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     @Override
@@ -50,8 +43,9 @@ public abstract class Item implements Borrowable {
     }
 
     @Override
-    public void setSummary(String summary) {
+    public Item setSummary(String summary) {
         this.summary = summary;
+        return this;
     }
 
     @Override
@@ -59,8 +53,9 @@ public abstract class Item implements Borrowable {
         return numberOfCopies;
     }
 
-    public void setNumberOfCopies(int numberOfCopies) {
+    public Item setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
+        return this;
     }
 
     public boolean isAvailable() {
