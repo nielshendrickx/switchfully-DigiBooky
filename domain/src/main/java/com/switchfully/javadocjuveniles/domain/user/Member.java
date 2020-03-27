@@ -3,18 +3,20 @@ package com.switchfully.javadocjuveniles.domain.user;
 import com.switchfully.javadocjuveniles.domain.book.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.behavior.Informative;
 import com.switchfully.javadocjuveniles.domain.user.builders.MemberBuilder;
-import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.Address;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole.MEMBER;
+
 public class Member implements Informative {
     private final String inss;
     private PersonalInfo personalInfo;
     private final Address address;
-    private final UserRole role;
+    private final SecurityRole securityRole = MEMBER;
     private final List<Borrowable> itemsBorrowed;
     //private final List<Fines> fines;
 
@@ -22,7 +24,6 @@ public class Member implements Informative {
         personalInfo = memberBuilder.getPersonalInfo();
         inss = memberBuilder.getInss();
         address = memberBuilder.getAddress();
-        role = memberBuilder.getRole();
         itemsBorrowed = new ArrayList<>();
     }
 
@@ -40,7 +41,7 @@ public class Member implements Informative {
     }
 
     @Override
-    public UserRole getRole() {
-        return role;
+    public SecurityRole getRole() {
+        return securityRole;
     }
 }

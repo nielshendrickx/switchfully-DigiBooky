@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FeatureTest {
     @Test
     void getFeaturesForRoles_GivenFeatureContainsOneOfTheRoles_ThenReturnAllFeaturesContainingOneOfThoseRoles() {
-        List<Feature> actual = Feature.getFeaturesForRoles(newArrayList(UserRole.ADMIN.name()));
+        List<Feature> actual = Feature.getFeaturesForRoles(newArrayList(SecurityRole.ADMIN.name()));
 
         assertThat(actual).contains(Feature.VIEW_MEMBERS, Feature.REGISTER_NEW_ITEM);
         assertThat(actual).doesNotContain(Feature.LEND_AN_ITEM);

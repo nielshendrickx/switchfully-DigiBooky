@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user.builders;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.PersonalInfoException;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 public class PersonalInfoBuilder {
@@ -16,7 +17,17 @@ public class PersonalInfoBuilder {
     }
 
     public PersonalInfo build() {
+        if (!everythingIsFilledIn()) {
+            throw new PersonalInfoException();
+        }
         return new PersonalInfo(this);
+    }
+
+    private boolean everythingIsFilledIn() {
+        return firstName != null &&
+                lastName != null &&
+                email != null &&
+                passWord != null;
     }
 
     public PersonalInfoBuilder withFirstName(String firstName) {
