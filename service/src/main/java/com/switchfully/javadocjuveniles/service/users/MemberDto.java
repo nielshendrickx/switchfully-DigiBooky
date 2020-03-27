@@ -16,10 +16,6 @@ public class MemberDto extends UserDto {
        // this.itemsBorrowed = new ArrayList<>();
     }
 
-//    public List<Borrowable> createFreshList() {
-//        if (!)
-//    }
-
     public String getFirstName() {
         return super.getFirstName();
     }
