@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
 import com.switchfully.javadocjuveniles.api.security.validation.Validation;
+import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.service.users.MemberDto;
@@ -39,11 +40,10 @@ public class MemberController {
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDto register(@RequestBody MemberDto newMember) {
-        if(!isValidEmailAddress(newMember.getEmail())) {
-            throw new EmailNotValidException(newMember.getEmail());
-        };
+        isValidEmailAddress(newMember.getEmail());
+        memberService.isEmailAvailable(newMember.getEmail());
         logger.info("Creating a new member");
         memberService.register(newMember);
-        return newMember;
+        return newMember; //TODO Return the new member created?
     }
 }

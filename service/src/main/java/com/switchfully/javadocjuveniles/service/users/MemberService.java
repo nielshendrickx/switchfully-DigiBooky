@@ -21,6 +21,14 @@ public class MemberService {
         return memberMapper.toDto(memberRepository.getAllMembers());
     }
 
+    public MemberDto getMemberByEmail(String email) {
+        return memberMapper.toDto(memberRepository.getMemberByEmail(email));
+    }
+
+    public boolean isEmailAvailable(String email) {
+        return memberRepository.isEmailAvailable(email);
+    }
+
     public MemberDto register(MemberDto newMember) {
         memberRepository.registerNewMember(memberMapper.toMember(newMember));
         return newMember;
