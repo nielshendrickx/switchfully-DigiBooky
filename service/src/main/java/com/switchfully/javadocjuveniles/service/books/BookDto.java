@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.service.placeholder;
+package com.switchfully.javadocjuveniles.service.books;
 
 import com.switchfully.javadocjuveniles.domain.book.Author;
 

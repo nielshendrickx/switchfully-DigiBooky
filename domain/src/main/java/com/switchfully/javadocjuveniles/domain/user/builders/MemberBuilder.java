@@ -2,7 +2,6 @@ package com.switchfully.javadocjuveniles.domain.user.builders;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.PersonalInfoException;
 import com.switchfully.javadocjuveniles.domain.user.Member;
-import com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.Address;
 import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 

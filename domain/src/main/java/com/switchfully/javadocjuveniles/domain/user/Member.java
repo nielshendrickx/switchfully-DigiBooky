@@ -9,10 +9,12 @@ import com.switchfully.javadocjuveniles.domain.user.userinfo.PersonalInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.switchfully.javadocjuveniles.domain.user.feature.SecurityRole.MEMBER;
 
 public class Member implements Informative {
+    private final String id;
     private final String inss;
     private PersonalInfo personalInfo;
     private final Address address;
@@ -25,6 +27,7 @@ public class Member implements Informative {
         inss = memberBuilder.getInss();
         address = memberBuilder.getAddress();
         itemsBorrowed = new ArrayList<>();
+        id = UUID.randomUUID().toString();
     }
 
     public String getInss() {
@@ -44,4 +47,9 @@ public class Member implements Informative {
     public SecurityRole getRole() {
         return securityRole;
     }
+
+    public List<Borrowable> getBorrowedItems() {
+        return itemsBorrowed;
+    }
+
 }

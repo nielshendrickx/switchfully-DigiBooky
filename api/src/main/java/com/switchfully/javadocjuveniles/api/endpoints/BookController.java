@@ -1,7 +1,7 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
-import com.switchfully.javadocjuveniles.service.placeholder.BookDto;
-import com.switchfully.javadocjuveniles.service.placeholder.BookService;
+import com.switchfully.javadocjuveniles.service.books.BookDto;
+import com.switchfully.javadocjuveniles.service.books.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
