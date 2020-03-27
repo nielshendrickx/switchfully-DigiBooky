@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item;
 
 import java.time.LocalDate;
 

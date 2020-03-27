@@ -1,5 +1,6 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.item.Item;
 
 import java.time.LocalDate;
 import java.util.Objects;

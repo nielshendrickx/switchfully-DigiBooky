@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.domain.book;
+package com.switchfully.javadocjuveniles.domain.item.book;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.ISBNNotFoundException;

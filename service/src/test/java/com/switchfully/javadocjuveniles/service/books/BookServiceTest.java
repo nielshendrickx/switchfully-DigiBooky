@@ -1,7 +1,7 @@
 package com.switchfully.javadocjuveniles.service.books;
 
-import com.switchfully.javadocjuveniles.domain.book.Author;
-import com.switchfully.javadocjuveniles.domain.book.BookRepository;
+import com.switchfully.javadocjuveniles.domain.item.book.Author;
+import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

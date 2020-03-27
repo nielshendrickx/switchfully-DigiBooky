@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.service.books;
 
-import com.switchfully.javadocjuveniles.domain.book.Book;
+import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

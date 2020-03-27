@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
-import com.switchfully.javadocjuveniles.domain.book.Borrowable;
+import com.switchfully.javadocjuveniles.domain.item.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 
 import java.util.ArrayList;

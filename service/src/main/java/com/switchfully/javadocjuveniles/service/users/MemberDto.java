@@ -1,11 +1,7 @@
 package com.switchfully.javadocjuveniles.service.users;
 
-import com.switchfully.javadocjuveniles.domain.book.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MemberDto extends UserDto {
     private final String INSS;
