@@ -42,7 +42,7 @@ public class UserDto {
         return passWord;
     }
 
-    public void getId(String id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 }

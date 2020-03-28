@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
 public class CreateUserDto {
-    private String id;
     private String firstName;
     private String lastName;
     private String email; //TODO implement format validation in the controller & unique
@@ -41,7 +40,4 @@ public class CreateUserDto {
         return passWord;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 }
