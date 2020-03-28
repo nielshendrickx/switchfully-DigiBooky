@@ -56,5 +56,13 @@ class MemberRepositoryTest {
         assertTrue(emailChecked);
     }
 
+    @Test
+    void whenCreatingNewMember_withNewMail_shouldReturnTrue() {
+        // Given
 
+        // When
+
+        // Then
+
+    }
 }

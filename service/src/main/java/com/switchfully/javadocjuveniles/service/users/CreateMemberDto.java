@@ -30,7 +30,7 @@ public class CreateMemberDto extends CreateUserDto {
         return super.getEmail();
     }
 
-    public String getPassword() {
+    public String getPassWord() {
         return super.getPassWord();
     }
 

@@ -4,6 +4,7 @@ import com.switchfully.javadocjuveniles.api.security.validation.Validation;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
+import com.switchfully.javadocjuveniles.service.users.CreateMemberDto;
 import com.switchfully.javadocjuveniles.service.users.MemberDto;
 import com.switchfully.javadocjuveniles.service.users.MemberService;
 import org.slf4j.Logger;
@@ -39,11 +40,16 @@ public class MemberController {
 
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto register(@RequestBody MemberDto newMember) {
+    public MemberDto register(@RequestBody CreateMemberDto newMember) {
         isValidEmailAddress(newMember.getEmail());
         memberService.isEmailAvailable(newMember.getEmail());
         logger.info("Creating a new member");
-        memberService.register(newMember);
-        return newMember; //TODO Return the new member created?
+        return memberService.register(newMember);
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public MemberDto getById(@PathVariable String id) {
+        return memberService.getById(id);
     }
 }

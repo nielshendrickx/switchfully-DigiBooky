@@ -37,7 +37,6 @@ public class BookRepository {
         String status = bookDatabase.keySet()
                 .stream().filter(key -> checkIfKeywordExists(isbn, key))
                 .findAny().orElse("Unknown ISBN");
-
         if(status.equals("Unknown ISBN")){
             throw new BookNotFoundException("ISBN");
         }
@@ -48,7 +47,6 @@ public class BookRepository {
         Book bookByTitle = bookDatabase.values()
                 .stream().filter(object -> checkIfKeywordExists(title, object.getTitle()))
                 .findAny().orElse(null);
-
         if(bookByTitle == null){
             throw new BookNotFoundException("Title");
         }
@@ -68,8 +66,7 @@ public class BookRepository {
     }
 
     public static boolean checkIfKeywordExists(String isbn, String input){
-        boolean bool = Pattern.compile(".*" + isbn +".*").matcher(input).find();
-        return bool;
+        return Pattern.compile(".*" + isbn +".*").matcher(input).find();
     }
 
     public Book getBookById(String id){
