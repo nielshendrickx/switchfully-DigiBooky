@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import org.junit.jupiter.api.Test;
@@ -40,10 +41,8 @@ class MemberRepositoryTest {
                 .withINSS("63.07.13-123.45")
                 .buildMember();
         memberRepository.registerNewMember(member1);
-        //WHEN
-        boolean emailChecked = memberRepository.isEmailAvailable("john.doe@dead.com");
         //THEN
-        assertFalse(emailChecked);
+        assertThrows(EmailAlreadyRegisteredException.class, () -> { memberRepository.isEmailAvailable("john.doe@dead.com"); });
     }
 
     @Test
