@@ -8,7 +8,7 @@ public class UserDto {
     private String id;
     private String firstName;
     private String lastName;
-    private String email; //TODO implement format validation in the controller & unique
+    private String email;
     private UserRole role;
     private String passWord;
 

@@ -7,7 +7,7 @@ import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 public class CreateUserDto {
     private String firstName;
     private String lastName;
-    private String email; //TODO implement format validation in the controller & unique
+    private String email;
     private UserRole role;
     private String passWord;
 
