@@ -65,7 +65,8 @@ public class Book extends Item {
         public Book build() {
             if(title == null) {
                 throw new FieldMustBeProvidedException("Title");
-            } else if (ISBN == null){
+            }
+            if (ISBN == null){
                 throw new FieldMustBeProvidedException("ISBN");
             }
             return new Book(this);

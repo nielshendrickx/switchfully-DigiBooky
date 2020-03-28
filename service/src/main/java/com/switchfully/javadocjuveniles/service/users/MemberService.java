@@ -29,9 +29,11 @@ public class MemberService {
         return memberRepository.isEmailAvailable(email);
     }
 
-    public MemberDto register(MemberDto newMember) {
-        memberRepository.registerNewMember(memberMapper.toMember(newMember));
-        return newMember;
+    public MemberDto register(CreateMemberDto newMember) {
+        return memberMapper.toDto(memberRepository.registerNewMember(memberMapper.toMember(newMember)));
     }
 
+    public MemberDto getById(String id) {
+        return memberMapper.toDto(memberRepository.getMemberById(id));
+    }
 }

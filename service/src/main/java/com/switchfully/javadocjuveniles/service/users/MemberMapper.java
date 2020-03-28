@@ -19,14 +19,15 @@ public class MemberMapper {
         return new MemberDto(member.getId(), member.getFirstName(), member.getLastName(), member.getEmail(), member.getPassword(), member.getINSS(), member.getAddress());
     }
 
-    public Member toMember(MemberDto memberDto) {
+    public Member toMember(CreateMemberDto createMemberDto) {
         return userBuilder()
-                .withFirstName(memberDto.getFirstName())
-                .withLastName(memberDto.getLastName())
-                .withEmail(memberDto.getEmail())
-                .withPassWord(memberDto.getPassWord())
-                .withINSS(memberDto.getINSS())
-                .setAddress(memberDto.getAddress())
+                .withFirstName(createMemberDto.getFirstName())
+                .withLastName(createMemberDto.getLastName())
+                .withEmail(createMemberDto.getEmail())
+                .withPassWord(createMemberDto.getPassWord())
+                .withINSS(createMemberDto.getINSS())
+                .setAddress(createMemberDto.getAddress())
                 .buildMember();
     }
 }
+

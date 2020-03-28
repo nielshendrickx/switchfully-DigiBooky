@@ -1,16 +1,11 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.MemberNotFoundException;
-import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Repository
 public class MemberRepository {
@@ -33,9 +28,13 @@ public class MemberRepository {
     }
 
     public boolean isEmailAvailable(String email) {
-        return !memberRepository.values().stream()
-                .anyMatch(member -> member.getEmail().equals(email));
+        if (memberRepository.values().stream()
+                .anyMatch(member -> member.getEmail().equals(email))) {
+            throw new EmailAlreadyRegisteredException(email);
+        }
+        return true;
     }
+
 
     private void createDefaultData() {
 /*        Member member1 = MemberBuilder.memberBuilder()
@@ -95,5 +94,9 @@ public class MemberRepository {
     public Member registerNewMember(Member newMember) {
         memberRepository.put(newMember.getId(), newMember);
         return newMember;
+    }
+
+    public Member getMemberById(String id) {
+        return memberRepository.get(id);
     }
 }
