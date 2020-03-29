@@ -19,29 +19,29 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
-    private final Logger logger = LoggerFactory.getLogger(MemberController.class);
+    private final Logger loggerMember = LoggerFactory.getLogger(MemberController.class);
 
     @ExceptionHandler(EmailNotValidException.class)
     protected void emailNotValidException(EmailNotValidException ex, HttpServletResponse response) throws IOException {
-        logger.error("Email is not valid!", ex);
+        loggerMember.error("Email is not valid!", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
     protected void emailAlreadyRegisteredException(EmailAlreadyRegisteredException ex, HttpServletResponse response) throws IOException {
-        logger.error("Email is already registered!", ex);
+        loggerMember.error("Email is already registered!", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(MemberNotFoundException.class)
     protected void memberNotFoundException(MemberNotFoundException ex, HttpServletResponse response) throws IOException {
-        logger.error("Could not find any member.", ex);
+        loggerMember.error("Could not find any member.", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(InssNotValidException.class)
     protected void inssNotValidException(InssNotValidException ex, HttpServletResponse response) throws IOException {
-        logger.error("Inss is not valid!", ex);
+        loggerMember.error("Inss is not valid!", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
