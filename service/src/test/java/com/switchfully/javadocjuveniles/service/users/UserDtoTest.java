@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.service.users;
 
+import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,9 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDtoTest {
     @Test
-    void creatingUserDto_shouldContainId() {
-        String givenId = "id";
-        UserDto userDto = new UserDto(givenId, null, null, null, null, null);
-        assertThat(userDto.getId()).isEqualTo(givenId);
+    void userDto_returnsCorrectValues() {
+        UserDto userDto = new UserDto("id", "firstName", "lastName", "email", "password", UserRole.ADMIN);
+        assertEquals("id", userDto.getId());
+        assertEquals("firstName", userDto.getFirstName());
+        assertEquals("lastName", userDto.getLastName());
+        assertEquals("email", userDto.getEmail());
+        assertEquals("password", userDto.getPassWord());
+        assertEquals(UserRole.ADMIN, userDto.getRole());
     }
 }

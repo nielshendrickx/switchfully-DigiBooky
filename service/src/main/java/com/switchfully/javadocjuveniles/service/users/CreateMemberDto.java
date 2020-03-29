@@ -41,4 +41,6 @@ public class CreateMemberDto extends CreateUserDto {
     public String getINSS() {
         return INSS;
     }
+
+
 }
