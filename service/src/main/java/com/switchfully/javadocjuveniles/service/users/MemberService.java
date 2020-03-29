@@ -29,6 +29,8 @@ public class MemberService {
         return memberRepository.isEmailAvailable(email);
     }
 
+    public boolean isInssAvailable(String inss) { return memberRepository.isInssAvailable(inss); }
+
     public MemberDto register(CreateMemberDto newMember) {
         return memberMapper.toDto(memberRepository.registerNewMember(memberMapper.toMember(newMember)));
     }

@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
+import com.switchfully.javadocjuveniles.domain.exceptions.InssAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.MemberNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,14 @@ public class MemberRepository {
         if (memberRepository.values().stream()
                 .anyMatch(member -> member.getEmail().equals(email))) {
             throw new EmailAlreadyRegisteredException(email);
+        }
+        return true;
+    }
+
+    public boolean isInssAvailable(String inss) {
+        if (memberRepository.values().stream()
+        .anyMatch(member -> member.getINSS().equals(inss))) {
+            throw new InssAlreadyRegisteredException(inss);
         }
         return true;
     }

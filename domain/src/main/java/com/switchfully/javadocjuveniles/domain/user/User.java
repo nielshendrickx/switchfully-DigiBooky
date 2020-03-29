@@ -10,7 +10,7 @@ public class User {
     private final String id = UUID.randomUUID().toString();
     private final String firstName;
     private final String lastName;
-    private final String email; //TODO implement format validation in the controller & unique
+    private final String email;
     private final UserRole role;
     private String passWord;
 

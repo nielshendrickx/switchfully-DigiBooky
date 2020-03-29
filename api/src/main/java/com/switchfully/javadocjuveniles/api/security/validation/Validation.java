@@ -2,6 +2,7 @@ package com.switchfully.javadocjuveniles.api.security.validation;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
+import com.switchfully.javadocjuveniles.domain.exceptions.InssNotValidException;
 import com.switchfully.javadocjuveniles.service.users.MemberDto;
 import com.switchfully.javadocjuveniles.service.users.MemberService;
 
@@ -13,7 +14,16 @@ public class Validation {
         if (!m.matches()) {
             throw new EmailNotValidException(email);
         }
-
     }
 
+
+    public static boolean isValidInss(String inss) {
+        String ePattern = "^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{3}\\.[0-9]{2}$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(inss);
+        if (!m.matches()) {
+            throw new InssNotValidException(inss);
+        }
+        return true;
+    }
 }

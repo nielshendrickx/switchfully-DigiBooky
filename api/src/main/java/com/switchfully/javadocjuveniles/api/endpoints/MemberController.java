@@ -41,10 +41,16 @@ public class MemberController {
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDto register(@RequestBody CreateMemberDto newMember) {
-        isValidEmailAddress(newMember.getEmail());
-        memberService.isEmailAvailable(newMember.getEmail());
+        validateNewMember(newMember);
         logger.info("Creating a new member");
         return memberService.register(newMember);
+    }
+
+    private void validateNewMember(@RequestBody CreateMemberDto newMember) {
+        isValidEmailAddress(newMember.getEmail());
+        memberService.isEmailAvailable(newMember.getEmail());
+        isValidInss(newMember.getINSS());
+        memberService.isInssAvailable(newMember.getINSS());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
