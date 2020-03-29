@@ -29,6 +29,9 @@ public class BookDto {
         this.initialPrice = initialPrice;
     }
 
+    public String getID() {
+        return ID;
+    }
 
     public String getISBN() {
         return ISBN;
