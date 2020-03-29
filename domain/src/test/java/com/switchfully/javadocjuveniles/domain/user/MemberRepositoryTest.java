@@ -42,7 +42,7 @@ class MemberRepositoryTest {
                 .buildMember();
         memberRepository.registerNewMember(member1);
         //THEN
-        assertThrows(EmailAlreadyRegisteredException.class, () -> { memberRepository.isEmailAvailable("john.doe@dead.com"); });
+        assertThrows(EmailAlreadyRegisteredException.class, () -> memberRepository.isEmailAvailable("john.doe@dead.com"));
     }
 
     @Test
@@ -53,15 +53,5 @@ class MemberRepositoryTest {
         boolean emailChecked = memberRepository.isEmailAvailable("test@dgc.com");
         //THEN
         assertTrue(emailChecked);
-    }
-
-    @Test
-    void whenCreatingNewMember_withNewMail_shouldReturnTrue() {
-        // Given
-
-        // When
-
-        // Then
-
     }
 }

@@ -1,7 +1,6 @@
 
 package com.switchfully.javadocjuveniles.domain.user;
 
-import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.junit.jupiter.api.Test;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
@@ -23,7 +22,7 @@ class UserTest {
         assertEquals("lastName", user.getLastName());
         assertEquals("email", user.getEmail());
         assertEquals(ADMIN, user.getRole());
-        assertEquals("password", user.getPassWord());
+        assertEquals("password", user.getPassword());
         assertNotNull(user.getId());
     }
 }

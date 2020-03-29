@@ -24,7 +24,7 @@ public class MemberMapper {
                 .withFirstName(createMemberDto.getFirstName())
                 .withLastName(createMemberDto.getLastName())
                 .withEmail(createMemberDto.getEmail())
-                .withPassWord(createMemberDto.getPassWord())
+                .withPassWord(createMemberDto.getPassword())
                 .withINSS(createMemberDto.getINSS())
                 .setAddress(createMemberDto.getAddress())
                 .buildMember();

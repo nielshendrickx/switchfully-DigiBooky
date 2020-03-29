@@ -14,7 +14,7 @@ class UserDtoTest {
         assertEquals("firstName", userDto.getFirstName());
         assertEquals("lastName", userDto.getLastName());
         assertEquals("email", userDto.getEmail());
-        assertEquals("password", userDto.getPassWord());
+        assertEquals("password", userDto.getPassword());
         assertEquals(UserRole.ADMIN, userDto.getRole());
     }
 }

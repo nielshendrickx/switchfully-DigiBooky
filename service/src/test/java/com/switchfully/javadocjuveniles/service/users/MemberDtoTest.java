@@ -1,7 +1,6 @@
 package com.switchfully.javadocjuveniles.service.users;
 
 import com.switchfully.javadocjuveniles.domain.user.Address;
-import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.junit.jupiter.api.Test;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
@@ -20,7 +19,7 @@ class MemberDtoTest {
         assertEquals("firstName", memberDto.getFirstName());
         assertEquals("lastName", memberDto.getLastName());
         assertEquals("email", memberDto.getEmail());
-        assertEquals("password", memberDto.getPassWord());
+        assertEquals("password", memberDto.getPassword());
         assertEquals("inss", memberDto.getINSS());
         assertEquals(address, memberDto.getAddress());
     }
