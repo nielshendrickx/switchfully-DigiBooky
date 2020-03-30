@@ -4,6 +4,8 @@ import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 import com.switchfully.javadocjuveniles.domain.borrow.BorrowRepository;
 import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.fines.OverdueFine;
+import com.switchfully.javadocjuveniles.domain.item.Borrowable;
+import com.switchfully.javadocjuveniles.service.books.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,8 @@ public class BorrowService {
         return null;
     }
 
-    public BorrowDto addBorrow(CreateBorrowDto createBorrowDto) {
-        return borrowMapper.toDto(borrowRepository.addBorrow(borrowMapper.toBorrow(createBorrowDto)));
+    public BorrowDto addBorrow(CreateBookBorrowDto createBookBorrowDto) {
+        return borrowMapper.toDto(borrowRepository.addBorrow(borrowMapper.toBorrow(createBookBorrowDto)));
     }
 
     public BorrowDto endBorrow(String id) {

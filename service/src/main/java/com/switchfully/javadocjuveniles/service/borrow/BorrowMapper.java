@@ -22,6 +22,7 @@ public class BorrowMapper {
     public BorrowMapper(MemberMapper memberMapper, MemberService memberService, BookService bookService) {
         this.memberMapper = memberMapper;
         this.memberService = memberService;
+        this.bookService = bookService;
     }
 
     public Collection<BorrowDto> toDto(Collection<Borrow> memberCollection) {
@@ -32,10 +33,10 @@ public class BorrowMapper {
         return new BorrowDto(borrow.getId(), memberMapper.toDto(borrow.getMember()), borrow.getBorrowable(), borrow.getStartDate(), borrow.getDueDate(), borrow.getEndDate());
     }
 
-    public Borrow toBorrow(CreateBorrowDto createBorrowDto) {
+    public Borrow toBorrow(CreateBookBorrowDto createBookBorrowDto) {
         return borrowBuilder()
-                .withMember(memberService.getMemberById(createBorrowDto.getMemberId()))
-                .withBorrowable(bookService.getBookByID(createBorrowDto.getBorrowableId()))
+                .withMember(memberService.getMemberById(createBookBorrowDto.getMemberId()))
+                .withBorrowable(bookService.getBookByISBN(createBookBorrowDto.getBookISBN()))
                 .buildBorrow();
     }
 }

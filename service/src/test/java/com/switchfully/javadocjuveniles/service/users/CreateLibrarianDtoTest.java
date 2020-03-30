@@ -14,6 +14,7 @@ class CreateLibrarianDtoTest {
         assertEquals("firstName", librarianDto.getFirstName());
         assertEquals("lastName", librarianDto.getLastName());
         assertEquals("email", librarianDto.getEmail());
+        assertEquals("password", librarianDto.getPassword());
         assertEquals(UserRole.LIBRARIAN, librarianDto.getRole());
     }
 }

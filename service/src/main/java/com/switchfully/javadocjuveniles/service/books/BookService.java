@@ -3,7 +3,6 @@ package com.switchfully.javadocjuveniles.service.books;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
-import com.switchfully.javadocjuveniles.domain.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
