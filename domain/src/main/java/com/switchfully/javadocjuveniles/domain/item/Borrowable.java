@@ -13,5 +13,4 @@ public interface Borrowable {
     Item setNumberOfCopies(int numberOfCopies);
     Item setInitialPrice(float initialPrice);
     void toggleAvailability();
-    String getDetails();
 }
