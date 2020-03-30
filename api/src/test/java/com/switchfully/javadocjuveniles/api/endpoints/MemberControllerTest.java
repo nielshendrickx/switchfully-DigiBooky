@@ -13,23 +13,35 @@ import com.switchfully.javadocjuveniles.service.users.services.MemberService;
 import com.switchfully.javadocjuveniles.service.users.services.UserService;
 import com.switchfully.javadocjuveniles.service.users.users.UserDto;
 import com.switchfully.javadocjuveniles.service.users.users.UserMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberControllerTest {
 
-    MemberRepository memberRepository = new MemberRepository();
-    MemberMapper memberMapper = new MemberMapper();
-    MemberService memberService = new MemberService(memberRepository, memberMapper);
-    UserRepository userRepository = new UserRepository();
-    UserMapper userMapper = new UserMapper();
-    UserService userService = new UserService(userRepository, userMapper);
-    MemberController memberController = new MemberController(memberService, userService);
+    MemberRepository memberRepository;
+    MemberMapper memberMapper;
+    MemberService memberService;
+    UserRepository userRepository;
+    UserMapper userMapper;
+    UserService userService;
+    MemberController memberController;
+
+    @BeforeEach
+    void init() {
+        memberRepository = new MemberRepository();
+        memberMapper = new MemberMapper();
+        memberService = new MemberService(memberRepository, memberMapper);
+        userRepository = new UserRepository();
+        userMapper = new UserMapper();
+        userService = new UserService(userRepository, userMapper);
+        memberController = new MemberController(memberService, userService);
+    }
 
     @Test
     void whenRegister_ifGivenWrongMail_shouldThrowException() {
@@ -56,7 +68,7 @@ class MemberControllerTest {
         String expectedId = memberController.register(createMemberDto).getId();
         List<String> actualId = memberController.getAllMembers().stream().map(UserDto::getId).collect(Collectors.toList());
         // Then
-        assertThat(actualId).containsExactly(expectedId);
+        assertThat(actualId).contains(expectedId);
     }
 
     @Test
