@@ -3,9 +3,8 @@ package com.switchfully.javadocjuveniles.service.users.users;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
-import com.switchfully.javadocjuveniles.domain.user.interfaces.Createable;
 
-public class CreateUserDto implements Createable {
+public class CreateUserDto {
     private String firstName;
     private String lastName;
     private String email;
@@ -21,27 +20,22 @@ public class CreateUserDto implements Createable {
         this.password = password;
     }
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
 
-    @Override
     public String getLastName() {
         return lastName;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
 
-    @Override
     public UserRole getRole() {
         return role;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }

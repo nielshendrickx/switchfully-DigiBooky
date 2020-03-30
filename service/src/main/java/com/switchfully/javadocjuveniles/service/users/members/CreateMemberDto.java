@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
-import com.switchfully.javadocjuveniles.domain.user.interfaces.ExtraInformation;
 import com.switchfully.javadocjuveniles.service.users.users.CreateUserDto;
 
-public class CreateMemberDto extends CreateUserDto implements ExtraInformation {
+public class CreateMemberDto extends CreateUserDto {
     private final String INSS;
     private final Address address;
     //private final List<Borrowable> itemsBorrowed;
@@ -20,32 +19,26 @@ public class CreateMemberDto extends CreateUserDto implements ExtraInformation {
         this.address = address;
     }
 
-    @Override
     public String getFirstName() {
         return super.getFirstName();
     }
 
-    @Override
     public String getLastName() {
         return super.getLastName();
     }
 
-    @Override
     public String getEmail() {
         return super.getEmail();
     }
 
-    @Override
     public String getPassword() {
         return super.getPassword();
     }
 
-    @Override
     public Address getAddress() {
         return address;
     }
 
-    @Override
     public String getINSS() {
         return INSS;
     }
