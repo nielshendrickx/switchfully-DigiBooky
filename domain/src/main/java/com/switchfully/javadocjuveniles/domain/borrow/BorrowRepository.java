@@ -1,7 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.NoMoreItemsAvailableException;
-import com.switchfully.javadocjuveniles.domain.item.Item;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -18,16 +17,16 @@ public class BorrowRepository {
     }
 
     public Borrow addBorrow(Borrow borrow) {
-        if (borrow.getItem().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getItem()).size()) {
+        if (borrow.getItem().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getItem().getID()).size()) {
             throw new NoMoreItemsAvailableException();
         }
         borrowDatabase.put(borrow.getId(), borrow);
         return borrow;
     }
 
-    public Collection<Borrow> getActiveBorrowsForItem(Item item) {
+    public Collection<Borrow> getActiveBorrowsForItem(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getItem().getID().equals(item.getID()))
+                .filter(borrow -> borrow.getItem().getID().equals(id))
                 .filter(borrow -> borrow.getEndDate() == null)
                 .collect(Collectors.toList());
     }
@@ -43,8 +42,11 @@ public class BorrowRepository {
         return borrowDatabase.get(id).setEndDate();
     }
 
-    public Borrow getBorrowById(String id) {
-        return borrowDatabase.get(id);
+    public Collection<Borrow> getBorrowReportForItem(String id) {
+        return borrowDatabase.values().stream()
+                .filter(borrow -> borrow.getItem().getID().equals(id))
+                .filter(borrow -> borrow.getEndDate() != null)
+                .collect(Collectors.toList());
     }
 
     public Collection<Borrow> getOverdueBooks() {

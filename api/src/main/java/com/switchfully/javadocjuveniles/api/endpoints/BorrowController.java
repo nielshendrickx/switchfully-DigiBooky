@@ -70,4 +70,17 @@ public class BorrowController {
         loggerBorrow.info("Retrieving list of overdue books.");
         return borrowService.findOverdueBooks();
     }
+
+    @PreAuthorize("hasAuthority('VIEW_LENDING_HISTORY')")
+    @GetMapping(path = "/history/{id}", produces = "application/json")
+    @ApiOperation(value = "List lending history of an item.", notes = "Returns all lending history of an item" , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BorrowDto> getLendingHistory(@PathVariable String id) {
+        loggerBorrow.info("Retrieving lending history of an item.");
+        return borrowService.generateBorrowReport(id);
+    }
+
+
+
+
 }

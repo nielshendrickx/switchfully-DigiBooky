@@ -21,8 +21,8 @@ public class BorrowService {
         this.borrowRepository = borrowRepository;
     }
 
-    public Collection<BorrowDto> findAllBorrowsForItem() {
-        return null;
+    public Collection<BorrowDto> findAllActiveBorrowsForItem(String id) {
+        return borrowMapper.toDto(borrowRepository.getBorrowReportForItem(id));
     }
 
     public Collection<BorrowDto> findAllBorrowsForMember(String id) {
@@ -33,8 +33,8 @@ public class BorrowService {
         return borrowMapper.toDto(borrowRepository.getOverdueBooks());
     }
 
-    public Collection<BorrowDto> generateBorrowReport() {
-        return null;
+    public Collection<BorrowDto> generateBorrowReport(String id) {
+        return borrowMapper.toDto(borrowRepository.getBorrowReportForItem(id));
     }
 
     public BorrowDto addBorrow(CreateBookBorrowDto createBookBorrowDto) {
