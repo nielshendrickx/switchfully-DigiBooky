@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = MemberController.USER_RESOURCE_PATH)
+@RequestMapping(path = BorrowController.BORROW_RESOURCE_PATH)
 public class BorrowController {
 
     public static final String BORROW_RESOURCE_PATH = "/borrow";
@@ -25,7 +25,7 @@ public class BorrowController {
         this.borrowService = borrowService;
     }
 
-    @PostMapping(path = "/book/", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/book", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Generating a new borrow", notes = "INSS and ISBN should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public BorrowDto startBorrow(@RequestBody CreateBookBorrowDto newBookBorrow) {
