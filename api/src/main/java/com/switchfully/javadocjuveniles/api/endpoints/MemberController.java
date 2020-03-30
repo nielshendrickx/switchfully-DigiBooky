@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import static com.switchfully.javadocjuveniles.api.security.validation.Validation.*;
@@ -45,13 +46,13 @@ public class MemberController {
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Register as a member", notes = "Everyone can freely join Digibooky!" , response = MemberDto.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto register(@RequestBody CreateMemberDto newMember) {
+    public MemberDto register(@RequestBody CreateMemberDto newMember) throws IOException {
         validateNewMember(newMember);
         loggerMember.info("Creating a new member");
         return memberService.register(newMember);
     }
 
-    private void validateNewMember(CreateMemberDto newMember) {
+    private void validateNewMember(CreateMemberDto newMember) throws IOException {
         isValidEmailAddress(newMember.getEmail());
         memberService.isEmailAvailable(newMember.getEmail());
         isValidInss(newMember.getINSS());
@@ -62,7 +63,7 @@ public class MemberController {
     @PostMapping(path = "/librarian", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Create a new librarian", notes = "A librarian can be created with admin role." , response = LibrarianDto.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto registerALibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
+    public UserDto registerALibrarian(@RequestBody CreateLibrarianDto newLibrarian) throws IOException {
         validateMailForNewUser(newLibrarian.getEmail());
         loggerMember.info("Creating a new librarian");
         return userService.register(newLibrarian);
@@ -72,13 +73,13 @@ public class MemberController {
     @PostMapping(path = "/admin", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Create a new admin", notes = "An admin can only be created with admin role." , response = AdminDto.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto registerAnAdmin(@RequestBody CreateAdminDto newAdmin) {
+    public UserDto registerAnAdmin(@RequestBody CreateAdminDto newAdmin) throws IOException {
         validateMailForNewUser(newAdmin.getEmail());
         loggerMember.info("Creating a new librarian");
         return userService.register(newAdmin);
     }
 
-    private void validateMailForNewUser(String email) {
+    private void validateMailForNewUser(String email) throws IOException {
         isValidEmailAddress(email);
         userService.isEmailAvailable(email);
     }
