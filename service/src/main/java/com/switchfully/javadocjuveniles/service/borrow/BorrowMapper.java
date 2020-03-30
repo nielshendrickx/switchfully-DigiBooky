@@ -34,8 +34,6 @@ public class BorrowMapper {
         return borrowBuilder()
                 .withMember(memberService.getMemberById(createBorrowDto.getMember().getId()))
                 .withBorrowable(createBorrowDto.getBorrowable())
-                .withStartDate(createBorrowDto.getStartDate())
-                .withDueDate(createBorrowDto.getDueDate())
                 .withEndDate(createBorrowDto.getEndDate())
                 .buildBorrow();
     }
