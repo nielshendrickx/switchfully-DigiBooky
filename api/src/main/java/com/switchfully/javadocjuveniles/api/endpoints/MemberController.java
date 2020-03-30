@@ -33,6 +33,7 @@ public class MemberController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('VIEW_MEMBERS')")
     @GetMapping(produces = "application/json")
     @ApiOperation(value = "Get all registered members", notes = "A list of all the registered members will be returned" , response = MemberDto.class)
     @ResponseStatus(HttpStatus.OK)
