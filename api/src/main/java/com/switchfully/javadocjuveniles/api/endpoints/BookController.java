@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookService;
 import com.switchfully.javadocjuveniles.service.books.View;
-import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -67,6 +67,7 @@ public class BookController {
         return bookService.getBookByAuthor(author);
     }
 
+    @PreAuthorize("hasAuthority('REGISTER_NEW_ITEM')")
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Save book", notes = "The book will be saved" , response = BookDto.class)
     @ResponseStatus(HttpStatus.CREATED)
@@ -75,17 +76,18 @@ public class BookController {
         return bookService.addBook(bookDto);
     }
 
+    @PreAuthorize("hasAuthority('UPDATE_ITEM')")
     @PutMapping(path = "/update/{ID}", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Update book", notes = "The book will be updated" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     public BookDto updateBook(@RequestBody BookDto bookDto, @PathVariable("ID") String ID) {
         logger.info("Updating a book");
-        BookDto bookToUpdate = bookService.updateBook(ID
+        return bookService.updateBook(ID
                 , bookDto.getAuthor(), bookDto.getTitle(), bookDto.getSummary()
                 , bookDto.getNumberOfCopies(), bookDto.getInitialPrice());
-        return bookToUpdate;
     }
 
+    @PreAuthorize("hasAuthority('DELETE_ITEM')")
     @DeleteMapping(path = "/delete/{ID}")
     @ApiOperation(value = "Delete book", notes = "The book will be deleted" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
@@ -94,6 +96,7 @@ public class BookController {
         bookService.deleteBook(ID);
     }
 
+    @PreAuthorize("hasAuthority('RESTORE_ITEM')")
     @PutMapping (path = "/restore/{ID}")
     @ApiOperation(value = "Restore book", notes = "The deleted book will be restored" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
@@ -111,6 +114,7 @@ public class BookController {
         return bookService.findAll();
     }
 
+    @PreAuthorize("hasAuthority('VIEW_ITEM_DETAILS')")
     @GetMapping(path = "/details/{ID}", produces = "application/json")
     @ApiOperation(value = "Get details of a book by ID", notes = "ISBN, title, author and summary of a book be returned" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)

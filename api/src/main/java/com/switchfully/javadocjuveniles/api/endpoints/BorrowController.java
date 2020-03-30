@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -25,6 +26,7 @@ public class BorrowController {
         this.borrowService = borrowService;
     }
 
+    @PreAuthorize("hasAuthority('LEND_AN_ITEM')")
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Generating a new borrow", notes = "INSS and ISBN should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,6 +35,7 @@ public class BorrowController {
         return borrowService.addBorrow(newBookBorrow);
     }
 
+    @PreAuthorize("hasAuthority('RETURN_AN_ITEM')")
     @PostMapping(path = "/return/{id}", produces = "application/json")
     @ApiOperation(value = "Ending borrow", notes = "BorrowId should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.OK)
@@ -41,19 +44,21 @@ public class BorrowController {
         return borrowService.endBorrow(id);
     }
 
-    @GetMapping(path = "/overdue", produces = "application/json")
-    @ApiOperation(value = "List of overdue books", notes = "Returns all overdue books." , response = BorrowDto.class)
-    @ResponseStatus(HttpStatus.OK)
-    public Collection<BorrowDto> getOverdue() {
-        loggerBorrow.info("Retrieving list of overdue books.");
-        return borrowService.findOverdueBooks();
-    }
-
+    @PreAuthorize("hasAuthority('VIEW_LENT_ITEMS')")
     @GetMapping(path = "/listforuser/{id}", produces = "application/json")
     @ApiOperation(value = "List of lent books", notes = "Returns all lent books per user" , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.OK)
     public Collection<BorrowDto> getLentBooksForUser(@PathVariable String id) {
         loggerBorrow.info("Retrieving list of lent books.");
         return borrowService.findAllBorrowsForMember(id);
+    }
+
+    @PreAuthorize("hasAuthority('VIEW_OVERDUE_ITEMS')")
+    @GetMapping(path = "/overdue", produces = "application/json")
+    @ApiOperation(value = "List of overdue books", notes = "Returns all overdue books." , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BorrowDto> getOverdue() {
+        loggerBorrow.info("Retrieving list of overdue books.");
+        return borrowService.findOverdueBooks();
     }
 }

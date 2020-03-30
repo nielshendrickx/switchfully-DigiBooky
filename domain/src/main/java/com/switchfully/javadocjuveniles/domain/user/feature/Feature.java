@@ -8,11 +8,21 @@ import java.util.stream.Collectors;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum Feature {
-    REGISTER_NEW_ITEM(UserRole.LIBRARIAN, UserRole.ADMIN),
     VIEW_MEMBERS(UserRole.ADMIN),
-    REGISTER_LIBRARIAN(UserRole.ADMIN),
     REGISTER_ADMIN(UserRole.ADMIN),
-    LEND_AN_ITEM(UserRole.MEMBER);
+    REGISTER_LIBRARIAN(UserRole.ADMIN),
+    REGISTER_NEW_ITEM(UserRole.LIBRARIAN),
+    UPDATE_ITEM(UserRole.LIBRARIAN),
+    DELETE_ITEM(UserRole.LIBRARIAN),
+    RESTORE_ITEM(UserRole.LIBRARIAN),
+    LEND_AN_ITEM(UserRole.MEMBER),
+    RETURN_AN_ITEM(UserRole.MEMBER),
+    VIEW_LENT_ITEMS(UserRole.LIBRARIAN),
+    VIEW_OVERDUE_ITEMS(UserRole.LIBRARIAN),
+    VIEW_ITEM_DETAILS(UserRole.MEMBER),
+    CREATE_OVERDUE_FINE(UserRole.LIBRARIAN),
+    CREATE_DAMAGE_FINE(UserRole.LIBRARIAN),
+    VIEW_LENDING_HISTORY(UserRole.LIBRARIAN);
 
     private UserRole[] roles;
 

@@ -51,12 +51,19 @@ public class MemberController {
         return memberService.register(newMember);
     }
 
+    private void validateNewMember(CreateMemberDto newMember) {
+        isValidEmailAddress(newMember.getEmail());
+        memberService.isEmailAvailable(newMember.getEmail());
+        isValidInss(newMember.getINSS());
+        memberService.isInssAvailable(newMember.getINSS());
+    }
+
     @PreAuthorize("hasAuthority('REGISTER_LIBRARIAN')")
     @PostMapping(path = "/librarian", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Create a new librarian", notes = "A librarian can be created with admin role." , response = LibrarianDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto registerALibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
-        validateNewUser(newLibrarian);
+        validateMailForNewUser(newLibrarian.getEmail());
         loggerMember.info("Creating a new librarian");
         return userService.register(newLibrarian);
     }
@@ -66,23 +73,17 @@ public class MemberController {
     @ApiOperation(value = "Create a new admin", notes = "An admin can only be created with admin role." , response = AdminDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto registerAnAdmin(@RequestBody CreateAdminDto newAdmin) {
-        validateNewUser(newAdmin);
+        validateMailForNewUser(newAdmin.getEmail());
         loggerMember.info("Creating a new librarian");
         return userService.register(newAdmin);
     }
 
-    private void validateNewMember(@RequestBody CreateMemberDto newMember) {
-        isValidEmailAddress(newMember.getEmail());
-        memberService.isEmailAvailable(newMember.getEmail());
-        isValidInss(newMember.getINSS());
-        memberService.isInssAvailable(newMember.getINSS());
+    private void validateMailForNewUser(String email) {
+        isValidEmailAddress(email);
+        userService.isEmailAvailable(email);
     }
 
-    private void validateNewUser(@RequestBody CreateUserDto newUser) {
-        isValidEmailAddress(newUser.getEmail());
-        userService.isEmailAvailable(newUser.getEmail());
-    }
-
+    @PreAuthorize("hasAuthority('VIEW_MEMBERS')")
     @GetMapping(path = "/{id}", produces = "application/json")
     @ApiOperation(value = "Find member by id", notes = "Provide an id to look up a member", response = MemberDto.class)
     @ResponseStatus(HttpStatus.OK)
