@@ -23,7 +23,7 @@ class BookControllerTest {
     BookRepository bookRepository = new BookRepository();
     BookMapper bookMapper = new BookMapper();
     BookService bookService = new BookService(bookRepository, bookMapper);
-    BookController bookController = new BookController(bookService);
+    BookController bookController = new BookController(bookService, null);
     Author author = authorBuilder().withFirstName("firstName").withLastName("lastName").build();
     Book book1 = bookBuilder()
             .withISBN("9783161484100")

@@ -16,7 +16,7 @@ public class MemberMapper {
     }
 
     public MemberDto toDto(Member member) {
-        return new MemberDto(member.getId(), member.getFirstName(), member.getLastName(), member.getEmail(), member.getPassword(), member.getINSS(), member.getAddress());
+        return new MemberDto(member.getId(), member.getFirstName(), member.getLastName(), member.getEmail(), member.getPassword(), member.getINSS(), member.getAddress(), member.getFines());
     }
 
     public Member toMember(CreateMemberDto createMemberDto) {
