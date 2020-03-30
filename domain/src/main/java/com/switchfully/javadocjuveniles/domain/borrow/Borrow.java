@@ -1,10 +1,12 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
+import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.item.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.Member;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class Borrow {
@@ -13,7 +15,7 @@ public class Borrow {
     private final Borrowable borrowable;
     private final LocalDate startDate;
     private final LocalDate dueDate;
-    private final LocalDate endDate;
+    private LocalDate endDate;
 
     public String getId() {
         return id;
@@ -45,7 +47,11 @@ public class Borrow {
         borrowable = borrowBuilder.borrowable;
         startDate = borrowBuilder.startDate;
         dueDate = borrowBuilder.dueDate;
-        endDate = borrowBuilder.endDate;
+    }
+
+    public Borrow setEndDate() {
+        this.endDate = LocalDate.now();
+        return this;
     }
 
     public static class BorrowBuilder {
@@ -53,7 +59,6 @@ public class Borrow {
         private Borrowable borrowable;
         private LocalDate startDate;
         private LocalDate dueDate;
-        private LocalDate endDate;
 
         private BorrowBuilder() {
 
@@ -80,11 +85,6 @@ public class Borrow {
 
         public BorrowBuilder withBorrowable(Borrowable borrowable) {
             this.borrowable = borrowable;
-            return this;
-        }
-
-        public BorrowBuilder withEndDate(LocalDate endDate) {
-            this.endDate = endDate;
             return this;
         }
     }

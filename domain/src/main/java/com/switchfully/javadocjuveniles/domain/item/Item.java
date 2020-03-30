@@ -9,10 +9,10 @@ public abstract class Item implements Borrowable {
     private String summary;
     private int numberOfCopies;
     private LocalDate dateAdded;
-    private float initialPrice;
+    private double initialPrice;
 
 
-    public Item(String title, String summary, int numberOfCopies, LocalDate dateAdded, float initialPrice) {
+    public Item(String title, String summary, int numberOfCopies, LocalDate dateAdded, double initialPrice) {
         this.ID = UUID.randomUUID().toString();
         this.title = title;
         this.summary = summary;
@@ -63,12 +63,13 @@ public abstract class Item implements Borrowable {
         return dateAdded;
     }
 
-    public float getInitialPrice() {
+    @Override
+    public double getInitialPrice() {
         return initialPrice;
     }
 
     @Override
-    public Item setInitialPrice(float initialPrice) {
+    public Item setInitialPrice(double initialPrice) {
         this.initialPrice = initialPrice;
         return this;
     }
