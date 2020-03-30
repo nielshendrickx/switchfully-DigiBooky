@@ -15,7 +15,7 @@ public class Validation {
 
 
     public static boolean isValidInss(String inss) {
-        String ePattern = "^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{3}\\.[0-9]{2}$";
+        String ePattern = "^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}\\-[0-9]{3}\\.[0-9]{2}$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(inss);
         if (!m.matches()) {
