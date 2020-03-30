@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
+
 @Repository
 public class MemberRepository {
     private final ConcurrentHashMap<String, Member> memberRepository;
@@ -48,12 +50,19 @@ public class MemberRepository {
 
 
     private void createDefaultData() {
+        Address address = addressBuilder()
+                .withCity("Brussels")
+                .withPostalCode("1000")
+                .withStreet("Piglane")
+                .withStreetNumber("42")
+                .build();
         Member member1 = UserBuilder.userBuilder()
                 .withINSS("10.10.10-101.10")
                 .withEmail("dummy@mail.com")
                 .withFirstName("Dummy")
                 .withLastName("Member")
                 .withPassWord("0000")
+                .setAddress(address)
                 .withRole(UserRole.MEMBER)
                 .buildMember();
         Member member2 = UserBuilder.userBuilder()
@@ -62,6 +71,7 @@ public class MemberRepository {
                 .withFirstName("John")
                 .withLastName("Doe")
                 .withPassWord("DEAD")
+                .setAddress(address)
                 .withRole(UserRole.MEMBER)
                 .buildMember();
         registerNewMember(member1);

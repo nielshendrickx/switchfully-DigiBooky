@@ -17,7 +17,7 @@ public class BorrowRepository {
     }
 
     public Borrow addBorrow(Borrow borrow) {
-        if (borrow.getBorrowable().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getBorrowable()).size()) {
+        if (borrow.getBorrowable().getNumberOfCopies() > getActiveBorrowsForItem(borrow.getBorrowable()).size()) {
             throw new NoMoreItemsAvailableException();
         }
         borrowDatabase.put(borrow.getId(), borrow);
@@ -33,7 +33,7 @@ public class BorrowRepository {
 
     public Collection<Borrow> getActiveBorrowsForMember(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getMember().getINSS().equals(id))
+                .filter(borrow -> borrow.getMember().getId().equals(id))
                 .filter(borrow -> borrow.getEndDate() == null)
                 .collect(Collectors.toList());
     }

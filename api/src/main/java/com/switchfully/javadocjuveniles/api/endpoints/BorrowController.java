@@ -25,7 +25,7 @@ public class BorrowController {
         this.borrowService = borrowService;
     }
 
-    @PostMapping(path = "/book", consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Generating a new borrow", notes = "INSS and ISBN should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public BorrowDto startBorrow(@RequestBody CreateBookBorrowDto newBookBorrow) {
@@ -33,7 +33,7 @@ public class BorrowController {
         return borrowService.addBorrow(newBookBorrow);
     }
 
-    @PostMapping(path = "/return/{id}", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/return/{id}", produces = "application/json")
     @ApiOperation(value = "Ending borrow", notes = "BorrowId should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.OK)
     public BorrowDto endBorrow(@PathVariable String id ) {

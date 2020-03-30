@@ -23,7 +23,7 @@ public class BookDto extends Item {
     private String title;
     @JsonView(View.PublicWithSummary.class)
     private String summary;
-    @JsonView(View.Restricted.class)
+    @JsonView(View.Public.class)
     private int numberOfCopies;
     @JsonView(View.Restricted.class)
     private double initialPrice;
