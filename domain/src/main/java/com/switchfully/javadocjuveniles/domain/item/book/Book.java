@@ -32,12 +32,6 @@ public class Book extends Item {
         return this;
     }
 
-
-    @Override
-    public String getDetails() {
-        return "The book title is:" + getTitle() + " and his ISBN number is:" + getISBN() + " and his author is:" + getAuthor() + "\n Summary:" + getSummary();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,7 +72,7 @@ public class Book extends Item {
         }
 
         public BookBuilder withISBN(String ISBN) {
-            if(validateISBN(ISBN) == false){
+            if(!validateISBN(ISBN)){
                 throw new ISBNNotValidException();
             }
             this.ISBN = ISBN;
