@@ -1,9 +1,7 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
-import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import com.switchfully.javadocjuveniles.domain.exceptions.NoMoreItemsAvailableException;
 import com.switchfully.javadocjuveniles.domain.item.Borrowable;
-import com.switchfully.javadocjuveniles.domain.user.Member;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -26,13 +24,6 @@ public class BorrowRepository {
         return borrow;
     }
 
-
-    public static <T> void checkIfInputNull(T input) {
-        if (input == null) {
-            throw new InputCanNotBeNullException();
-        }
-    }
-
     public Collection<Borrow> getActiveBorrowsForItem(Borrowable borrowable) {
         return borrowDatabase.values().stream()
                 .filter(borrow -> borrow.getBorrowable().equals(borrowable))
@@ -40,9 +31,9 @@ public class BorrowRepository {
                 .collect(Collectors.toList());
     }
 
-    public Collection<Borrow> getActiveBorrowsForMember(Member member) {
+    public Collection<Borrow> getActiveBorrowsForMember(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getMember().equals(member))
+                .filter(borrow -> borrow.getMember().getINSS().equals(id))
                 .filter(borrow -> borrow.getEndDate() == null)
                 .collect(Collectors.toList());
     }

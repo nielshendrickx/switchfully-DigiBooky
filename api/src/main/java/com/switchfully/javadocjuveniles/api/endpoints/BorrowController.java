@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping(path = MemberController.USER_RESOURCE_PATH)
 public class BorrowController {
@@ -39,5 +41,19 @@ public class BorrowController {
         return borrowService.endBorrow(id);
     }
 
+    @GetMapping(path = "/overdue", produces = "application/json")
+    @ApiOperation(value = "List of overdue books", notes = "Returns all overdue books." , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BorrowDto> getOverdue() {
+        loggerBorrow.info("Retrieving list of overdue books.");
+        return borrowService.findOverdueBooks();
+    }
 
+    @GetMapping(path = "/listforuser/{id}", produces = "application/json")
+    @ApiOperation(value = "List of lent books", notes = "Returns all lent books per user" , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BorrowDto> getLentBooksForUser(@PathVariable String id) {
+        loggerBorrow.info("Retrieving list of lent books.");
+        return borrowService.findAllBorrowsForMember(id);
+    }
 }

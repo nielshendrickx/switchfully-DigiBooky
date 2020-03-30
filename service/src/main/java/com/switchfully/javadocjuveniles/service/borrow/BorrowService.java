@@ -24,8 +24,8 @@ public class BorrowService {
         return null;
     }
 
-    public Collection<BorrowDto> findAllBorrowsForMember() {
-        return null;
+    public Collection<BorrowDto> findAllBorrowsForMember(String id) {
+        return borrowMapper.toDto(borrowRepository.getActiveBorrowsForMember(id));
     }
 
     public Collection<BorrowDto> findOverdueBooks() {
