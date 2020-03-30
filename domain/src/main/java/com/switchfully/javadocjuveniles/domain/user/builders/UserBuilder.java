@@ -4,6 +4,7 @@ import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.Member;
 import com.switchfully.javadocjuveniles.domain.user.User;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UserBuilder {
     private String firstName;
@@ -50,7 +51,7 @@ public class UserBuilder {
     }
 
     public UserBuilder withPassWord(String passWord) {
-        this.passWord = passWord;
+        this.passWord = hash(passWord);
         return this;
     }
 
@@ -90,5 +91,9 @@ public class UserBuilder {
 
     public Address getAddress() {
         return address;
+    }
+
+    private String hash(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 }

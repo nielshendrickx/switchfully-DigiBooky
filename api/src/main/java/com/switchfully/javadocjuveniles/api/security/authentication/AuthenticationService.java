@@ -7,6 +7,7 @@ import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,9 +33,13 @@ public class AuthenticationService {
 
     public User getUser(String email, String password) {
         return usersList.stream()
-                .filter(externalAuthentication -> externalAuthentication.getEmail().equals(email))
-                .filter(externalAuthentication -> externalAuthentication.getPassword().equals(password))
+                .filter(user -> user.getEmail().equals(email))
+                .filter(user -> verifyHash(password, user.getPassword()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public boolean verifyHash(String password, String hash) {
+        return BCrypt.checkpw(password, hash);
     }
 }
