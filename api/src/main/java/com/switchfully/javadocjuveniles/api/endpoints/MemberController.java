@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -45,6 +46,7 @@ public class MemberController {
         return memberService.register(newMember);
     }
 
+    @PreAuthorize("hasAuthority('REGISTER_LIBRARIAN')")
     @PostMapping(path = "/librarian", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Create a new librarian", notes = "A librarian can be created with admin role." , response = LibrarianDto.class)
     @ResponseStatus(HttpStatus.CREATED)

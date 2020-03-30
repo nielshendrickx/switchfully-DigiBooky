@@ -10,6 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public enum Feature {
     REGISTER_NEW_ITEM(UserRole.LIBRARIAN, UserRole.ADMIN),
     VIEW_MEMBERS(UserRole.ADMIN),
+    REGISTER_LIBRARIAN(UserRole.ADMIN),
     LEND_AN_ITEM(UserRole.MEMBER);
 
     private UserRole[] roles;
