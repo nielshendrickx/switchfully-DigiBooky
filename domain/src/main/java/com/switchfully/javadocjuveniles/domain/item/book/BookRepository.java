@@ -1,7 +1,9 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.BookAlreadyExistsException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
+import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -15,15 +17,18 @@ import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder
 @Repository
 public class BookRepository {
     private final ConcurrentHashMap<String, Book> bookDatabase;
+    private final ConcurrentHashMap<String, Book> deletedBooksDatabase;
 
     public BookRepository() {
         this.bookDatabase = new ConcurrentHashMap<>();
+        this.deletedBooksDatabase = new ConcurrentHashMap<>();
         createDefaultData();
     }
 
     public Book addBook(Book book) {
-        if(book == null) {
-            throw new BookIsNotValidException();
+        checkIfInputNull(book);
+        if(bookDatabase.keySet().contains(book.getISBN())){
+            throw new BookAlreadyExistsException();
         }
         bookDatabase.put(book.getISBN(), book);
         return book;
@@ -34,60 +39,78 @@ public class BookRepository {
     }
 
     public Book getBookByISBN(String isbn){
+        checkIfInputNull(isbn);
         String status = bookDatabase.keySet()
                 .stream().filter(key -> checkIfKeywordExists(isbn, key))
-                .findAny().orElse("Unknown ISBN");
-        if(status.equals("Unknown ISBN")){
-            throw new BookNotFoundException("ISBN");
-        }
+                .findAny()
+                .orElseThrow(() -> new BookNotFoundException("ISBN"));
         return bookDatabase.get(status);
     }
 
     public Book getBookByTitle(String title){
+        checkIfInputNull(title);
         Book bookByTitle = bookDatabase.values()
                 .stream().filter(object -> checkIfKeywordExists(title, object.getTitle()))
-                .findAny().orElse(null);
-        if(bookByTitle == null){
-            throw new BookNotFoundException("Title");
-        }
+                .findAny()
+                .orElseThrow(() -> new BookNotFoundException("Title"));
         return bookByTitle;
     }
     public Book getBookByAuthor(String author){
+        checkIfInputNull(author);
         Book bookByAuthor = bookDatabase.values()
-                .stream().filter(object -> author.equals(object.getAuthor().getFirstName())
-                        || author.equals(object.getAuthor().getLastName())
-                        || author.equals(object.getAuthor().getFullName()))
-                .findAny().orElse(null);
-
-        if(bookByAuthor == null){
-            throw new BookNotFoundException("Author");
-        }
+                .stream().filter(object -> author.toLowerCase().equals(object.getAuthor().getFirstName().toLowerCase())
+                        || author.toLowerCase().equals(object.getAuthor().getLastName().toLowerCase())
+                        || author.toLowerCase().equals(object.getAuthor().getFullName().toLowerCase()))
+                .findAny()
+                .orElseThrow(() -> new BookNotFoundException("Author"));
         return bookByAuthor;
     }
 
-    public static boolean checkIfKeywordExists(String isbn, String input){
-        return Pattern.compile(".*" + isbn +".*").matcher(input).find();
+    public Book getBookById(String ID){
+        checkIfInputNull(ID);
+        Book book = bookDatabase.values()
+                .stream().filter(searchedBook -> ID.equals(searchedBook.getID()))
+                .findAny()
+                .orElseThrow(() -> new BookNotFoundException("ID"));
+        return book;
     }
 
-    public Book getBookById(String id){
-        Book book = bookDatabase.values().stream().filter(x -> id.equals(x.getID()))
+    public void deleteBook(String ID){
+        checkIfInputNull(ID);
+        deletedBooksDatabase.put(getBookById(ID).getISBN(), getBookById(ID));
+        bookDatabase.remove(getBookById(ID).getISBN());
+    }
+
+    public Book restoreBook(String ID){
+        checkIfInputNull(ID);
+        Book book = deletedBooksDatabase.values().stream().filter(x -> ID.equals(x.getID()))
                 .findAny()
-                .orElse(null);
-        if (book == null) {
-            throw new BookNotFoundException("ID");
-        }
+                .orElseThrow(() -> new BookNotFoundException("ID"));
+        bookDatabase.put(book.getISBN(), book);
+        deletedBooksDatabase.remove(book.getISBN());
         return book;
+    }
+
+    public static <T>  void checkIfInputNull(T input){
+        if (input == null){
+            throw new InputCanNotBeNullException();
+        }
+    }
+
+    public static boolean checkIfKeywordExists(String savedValue, String searchedValue){
+        boolean bool = Pattern.compile(".*" + savedValue.toLowerCase() +".*").matcher(searchedValue.toLowerCase()).find();
+        return bool;
     }
 
     private void createDefaultData(){
         Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9787166484100")
+                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780802148537").withInitialPrice(10)
                 .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
-        Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 23)).withISBN("7787169484107")
+        Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(5)
+                .withDateAdded(LocalDate.of(2020, 3, 23)).withISBN("9780062941503")
                 .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
-        Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("3387169484107")
+        Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(3)
+                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780805096606")
                 .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
         addBook(book1);
         addBook(book2);

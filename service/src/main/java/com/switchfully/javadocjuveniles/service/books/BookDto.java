@@ -1,24 +1,38 @@
 package com.switchfully.javadocjuveniles.service.books;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
-
 import java.time.LocalDate;
 
 public class BookDto {
+    @JsonView(View.Public.class)
     private String ID;
+    @JsonView(View.Public.class)
     private String ISBN;
+    @JsonView(View.Public.class)
     private Author author;
+    @JsonView(View.Public.class)
     private String title;
+    @JsonView(View.PublicWithSummary.class)
     private String summary;
+    @JsonView(View.Restricted.class)
     private int numberOfCopies;
-    private LocalDate dateAdded;
+    @JsonView(View.Restricted.class)
     private float initialPrice;
 
-    public BookDto() {
-    }
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonView(View.Restricted.class)
+    private LocalDate dateAdded;
 
-    public BookDto(String ID, String ISBN, Author author, String title, String summary
-            , int numberOfCopies, LocalDate dateAdded, float initialPrice) {
+    @JsonCreator
+    public BookDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
+            , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") float initialPrice) {
+
         this.ID = ID;
         this.ISBN = ISBN;
         this.author = author;
@@ -29,9 +43,6 @@ public class BookDto {
         this.initialPrice = initialPrice;
     }
 
-    public String getID() {
-        return ID;
-    }
 
     public String getISBN() {
         return ISBN;
@@ -41,7 +52,6 @@ public class BookDto {
         return author;
     }
 
-
     public int getNumberOfCopies() {
         return numberOfCopies;
     }
@@ -50,14 +60,16 @@ public class BookDto {
         return title;
     }
 
-
     public String getSummary() {
         return summary;
     }
 
-
     public LocalDate getDateAdded() {
         return dateAdded;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public float getInitialPrice() {

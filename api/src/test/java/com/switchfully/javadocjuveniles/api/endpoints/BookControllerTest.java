@@ -23,7 +23,7 @@ class BookControllerTest {
     BookController bookController = new BookController(bookService);
     Author author = authorBuilder().withFirstName("firstName").withLastName("lastName").build();
     Book book1 = bookBuilder()
-            .withISBN("1234")
+            .withISBN("9783161484100")
             .withTitle("book1")
             .withSummary("summary of book 1")
             .withAuthor(author)
@@ -31,7 +31,7 @@ class BookControllerTest {
             .withNumberOfCopies(1)
             .build();
     Book book2 = bookBuilder()
-            .withISBN("5678")
+            .withISBN("9783161484100")
             .withTitle("book2")
             .withSummary("summary of book 2")
             .withAuthor(author)
@@ -43,18 +43,18 @@ class BookControllerTest {
 
     @Test
     void verifyThatRepositoryContains3BooksToStartWith() {
-        assertThat(bookController.findAll().size()).isEqualTo(3);
+        assertThat(bookController.getAllBooksWithLimitedInfo().size()).isEqualTo(3);
     }
 
     @Test
     void getBookByIsbn_shouldReturnCorrectBook() {
-        bookController.save(bookDto1);
+        bookController.saveBook(bookDto1);
         assertThat(bookController.getBookByISBN(bookDto1.getISBN()).equals(bookDto1));
     }
 
     @Test
     void getBookByAuthor_shouldReturnCorrectBook() {
-        bookController.save(bookDto1);
+        bookController.saveBook(bookDto1);
         assertThat(bookController.getBookByAuthor(bookDto1.getAuthor().getFullName()).equals(bookDto1));
     }
 }

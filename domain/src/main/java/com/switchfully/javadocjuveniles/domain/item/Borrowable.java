@@ -11,6 +11,7 @@ public interface Borrowable {
     Item setTitle(String title);
     Item setSummary(String summary);
     Item setNumberOfCopies(int numberOfCopies);
+    Item setInitialPrice(float initialPrice);
     void toggleAvailability();
     String getDetails();
 }

@@ -23,11 +23,11 @@ public class BookService {
         return bookMapper.toDto(bookRepository.getAllBooks());
     }
 
-    public Book update(String id, Author author, String title, String summary, int numberOfCopies) {
-         Item item = bookRepository.getBookById(id)
-                .setTitle(title).setSummary(summary).setNumberOfCopies(numberOfCopies);
-         Book book = (Book) item;
-         return book.setAuthor(author);
+    public BookDto updateBook(String id, Author author, String title, String summary, int numberOfCopies, float initialPrice) {
+        Book item = (Book) bookRepository.getBookById(id)
+                .setTitle(title).setSummary(summary).setNumberOfCopies(numberOfCopies).setInitialPrice(initialPrice);
+        item.setAuthor(author);
+        return bookMapper.toDto(item);
     }
 
     public BookDto getBookByISBN(String ISBN){
@@ -49,4 +49,13 @@ public class BookService {
     public BookDto addBook(BookDto bookDto){
         return bookMapper.toDto(bookRepository.addBook(bookMapper.toBook(bookDto)));
     }
+
+    public void deleteBook(String ID){
+        bookRepository.deleteBook(ID);
+    }
+
+    public void restoreBook(String ID){
+        bookRepository.restoreBook(ID);
+    }
+
 }

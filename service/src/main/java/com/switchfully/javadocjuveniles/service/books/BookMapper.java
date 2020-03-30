@@ -14,9 +14,7 @@ import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder
 public class BookMapper {
 
     public Collection<BookDto> toDto(Collection<Book> bookCollection) {
-        return bookCollection.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        return bookCollection.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public BookDto toDto(Book book) {
@@ -25,13 +23,9 @@ public class BookMapper {
     }
 
     public Book toBook(BookDto bookDto) {
-        return bookBuilder()
-                .withTitle(bookDto.getTitle())
-                .withSummary(bookDto.getSummary())
+        return bookBuilder().withTitle(bookDto.getTitle()).withSummary(bookDto.getSummary())
                 .withNumberOfCopies(bookDto.getNumberOfCopies())
-                .withDateAdded(bookDto.getDateAdded())
-                .withISBN(bookDto.getISBN())
-                .withAuthor(bookDto.getAuthor())
-                .build();
+                .withDateAdded(bookDto.getDateAdded()).withISBN(bookDto.getISBN())
+                .withAuthor(bookDto.getAuthor()).build();
     }
 }

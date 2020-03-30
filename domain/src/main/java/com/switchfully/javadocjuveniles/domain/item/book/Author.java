@@ -10,6 +10,10 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    public Author() {
+        this.ID = UUID.randomUUID().toString();
+    }
+
     public Author(AuthorBuilder authorBuilder) {
         this.ID = UUID.randomUUID().toString();
         this.firstName = authorBuilder.firstName;
@@ -53,9 +57,6 @@ public class Author {
         }
 
         public Author build() {
-            if (lastName == null) {
-                throw new FieldMustBeProvidedException("Author's last name");
-            }
             return new Author(this);
         }
 
