@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.service.users;
 
+import com.switchfully.javadocjuveniles.domain.user.Member;
 import com.switchfully.javadocjuveniles.domain.user.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,12 @@ public class MemberService {
         return memberMapper.toDto(memberRepository.registerNewMember(memberMapper.toMember(newMember)));
     }
 
-    public MemberDto getById(String id) {
+    public MemberDto getDtoById(String id) {
         return memberMapper.toDto(memberRepository.getMemberById(id));
     }
+
+    public Member getMemberById(String id) {
+        return memberRepository.getMemberById(id);
+    }
+
 }
