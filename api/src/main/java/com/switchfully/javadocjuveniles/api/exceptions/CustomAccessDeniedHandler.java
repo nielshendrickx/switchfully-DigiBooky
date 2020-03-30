@@ -2,6 +2,7 @@ package com.switchfully.javadocjuveniles.api.exceptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                     + request.getRequestURI());
         }
 
-        response.sendRedirect(request.getContextPath() + "/accessDenied.jsp");
+        response.sendError(HttpStatus.FORBIDDEN.value(), "You don't have the rights to do that.");
     }
 }

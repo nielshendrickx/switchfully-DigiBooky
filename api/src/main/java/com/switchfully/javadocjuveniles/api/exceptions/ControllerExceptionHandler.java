@@ -80,5 +80,5 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         bookLogger.error("Required field is not provided", ex);
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
-    
+
 }
