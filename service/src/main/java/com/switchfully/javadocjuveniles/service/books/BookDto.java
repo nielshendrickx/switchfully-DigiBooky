@@ -7,11 +7,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.switchfully.javadocjuveniles.domain.item.Item;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 
 import java.time.LocalDate;
 
-public class BookDto {
+public class BookDto extends Item {
     @JsonView(View.Public.class)
     private String ID;
     @JsonView(View.Public.class)
@@ -35,17 +36,11 @@ public class BookDto {
     @JsonCreator
     public BookDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
             , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice) {
-
+        super(title, summary, numberOfCopies, dateAdded, initialPrice);
         this.ID = ID;
         this.ISBN = ISBN;
         this.author = author;
-        this.title = title;
-        this.summary = summary;
-        this.numberOfCopies = numberOfCopies;
-        this.dateAdded = dateAdded;
-        this.initialPrice = initialPrice;
     }
-
 
     public String getISBN() {
         return ISBN;
@@ -55,27 +50,8 @@ public class BookDto {
         return author;
     }
 
-    public int getNumberOfCopies() {
-        return numberOfCopies;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public LocalDate getDateAdded() {
-        return dateAdded;
-    }
-
     public String getID() {
         return ID;
     }
 
-    public double getInitialPrice() {
-        return initialPrice;
-    }
 }

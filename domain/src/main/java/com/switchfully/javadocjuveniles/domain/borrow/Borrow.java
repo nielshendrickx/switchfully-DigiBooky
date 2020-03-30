@@ -1,12 +1,9 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
-import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.item.Borrowable;
 import com.switchfully.javadocjuveniles.domain.user.Member;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 public class Borrow {

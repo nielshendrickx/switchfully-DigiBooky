@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.service.borrow;
 
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
+import com.switchfully.javadocjuveniles.service.books.BookService;
 import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
 import com.switchfully.javadocjuveniles.service.users.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ import static com.switchfully.javadocjuveniles.domain.borrow.Borrow.BorrowBuilde
 public class BorrowMapper {
     private MemberMapper memberMapper;
     private MemberService memberService;
+    private BookService bookService;
 
     @Autowired
-    public BorrowMapper( MemberMapper memberMapper, MemberService memberService) {
+    public BorrowMapper(MemberMapper memberMapper, MemberService memberService, BookService bookService) {
         this.memberMapper = memberMapper;
         this.memberService = memberService;
     }
@@ -32,8 +34,8 @@ public class BorrowMapper {
 
     public Borrow toBorrow(CreateBorrowDto createBorrowDto) {
         return borrowBuilder()
-                .withMember(memberService.getMemberById(createBorrowDto.getMember().getId()))
-                .withBorrowable(createBorrowDto.getBorrowable())
+                .withMember(memberService.getMemberById(createBorrowDto.getMemberId()))
+                .withBorrowable(bookService.getBookByID(createBorrowDto.getBorrowableId()))
                 .buildBorrow();
     }
 }
