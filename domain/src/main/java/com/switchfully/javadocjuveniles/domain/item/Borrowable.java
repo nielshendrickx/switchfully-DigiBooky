@@ -8,8 +8,9 @@ public interface Borrowable {
     String getSummary();
     int getNumberOfCopies();
     LocalDate getDateAdded();
+    double getInitialPrice();
     Item setTitle(String title);
     Item setSummary(String summary);
     Item setNumberOfCopies(int numberOfCopies);
-    Item setInitialPrice(float initialPrice);
+    Item setInitialPrice(double initialPrice);
 }

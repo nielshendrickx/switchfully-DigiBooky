@@ -1,6 +1,9 @@
 package com.switchfully.javadocjuveniles.service.borrow;
 
+import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 import com.switchfully.javadocjuveniles.domain.borrow.BorrowRepository;
+import com.switchfully.javadocjuveniles.domain.fines.FineType;
+import com.switchfully.javadocjuveniles.domain.fines.OverdueFine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +37,16 @@ public class BorrowService {
     }
 
     public BorrowDto addBorrow(CreateBorrowDto createBorrowDto) {
-        return null;
+        return borrowMapper.toDto(borrowRepository.addBorrow(borrowMapper.toBorrow(createBorrowDto)));
     }
 
-    public String endBorrow() {
-        return null;
+    public BorrowDto endBorrow(String id) {
+        Borrow borrow = borrowRepository.endBorrow(id);
+        if (borrow.getEndDate().isAfter(borrow.getDueDate())) {
+            FineType fine = new OverdueFine();
+            fine.calculateFine(borrow);
+            borrow.getMember().addFine(fine);
+        }
+        return borrowMapper.toDto(borrow);
     }
 }
