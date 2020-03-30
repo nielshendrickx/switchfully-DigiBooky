@@ -30,7 +30,7 @@ public class BorrowMapper {
     }
 
     public BorrowDto toDto(Borrow borrow) {
-        return new BorrowDto(borrow.getId(), memberMapper.toDto(borrow.getMember()), borrow.getBorrowable(), borrow.getStartDate(), borrow.getDueDate(), borrow.getEndDate());
+        return new BorrowDto(borrow.getId(), memberMapper.toDto(borrow.getMember()), borrow.getItem(), borrow.getStartDate(), borrow.getDueDate(), borrow.getEndDate());
     }
 
     public Borrow toBorrow(CreateBookBorrowDto createBookBorrowDto) {

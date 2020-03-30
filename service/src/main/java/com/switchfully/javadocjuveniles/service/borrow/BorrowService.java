@@ -2,10 +2,9 @@ package com.switchfully.javadocjuveniles.service.borrow;
 
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 import com.switchfully.javadocjuveniles.domain.borrow.BorrowRepository;
+import com.switchfully.javadocjuveniles.domain.fines.DamageFine;
 import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.fines.OverdueFine;
-import com.switchfully.javadocjuveniles.domain.item.Borrowable;
-import com.switchfully.javadocjuveniles.service.books.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +51,11 @@ public class BorrowService {
         return borrowMapper.toDto(borrow);
     }
 
-
+    public DamageFine endDamagedBorrow(String id) {
+        Borrow borrow = borrowRepository.endBorrow(id);
+        DamageFine fine = new DamageFine();
+        fine.calculateFine(borrow);
+        borrow.getMember().addFine(fine);
+        return fine;
+    }
 }

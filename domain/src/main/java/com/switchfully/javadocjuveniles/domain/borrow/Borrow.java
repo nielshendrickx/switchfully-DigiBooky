@@ -1,6 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
-import com.switchfully.javadocjuveniles.domain.item.Borrowable;
+import com.switchfully.javadocjuveniles.domain.item.Item;
 import com.switchfully.javadocjuveniles.domain.user.Member;
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Borrow {
     private final String id;
     private final Member member;
-    private final Borrowable borrowable;
+    private final Item item;
     private final LocalDate startDate;
     private final LocalDate dueDate;
     private LocalDate endDate;
@@ -22,8 +22,8 @@ public class Borrow {
         return member;
     }
 
-    public Borrowable getBorrowable() {
-        return borrowable;
+    public Item getItem() {
+        return item;
     }
 
     public LocalDate getStartDate() {
@@ -41,7 +41,7 @@ public class Borrow {
     public Borrow(BorrowBuilder borrowBuilder) {
         id = UUID.randomUUID().toString();
         member = borrowBuilder.member;
-        borrowable = borrowBuilder.borrowable;
+        item = borrowBuilder.item;
         startDate = borrowBuilder.startDate;
         dueDate = borrowBuilder.dueDate;
     }
@@ -53,7 +53,7 @@ public class Borrow {
 
     public static class BorrowBuilder {
         private Member member;
-        private Borrowable borrowable;
+        private Item item;
         private LocalDate startDate;
         private LocalDate dueDate;
 
@@ -80,8 +80,8 @@ public class Borrow {
             return this;
         }
 
-        public BorrowBuilder withBorrowable(Borrowable borrowable) {
-            this.borrowable = borrowable;
+        public BorrowBuilder withBorrowable(Item item) {
+            this.item = item;
             return this;
         }
     }

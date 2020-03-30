@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.switchfully.javadocjuveniles.domain.fines.DamageFine;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowService;
 import com.switchfully.javadocjuveniles.service.borrow.CreateBookBorrowDto;
@@ -42,6 +43,14 @@ public class BorrowController {
     public BorrowDto endBorrow(@PathVariable String id ) {
         loggerBorrow.info("Ending borrow for id: " + id);
         return borrowService.endBorrow(id);
+    }
+
+    @PostMapping(path = "/return/damaged/{id}", produces = "application/json")
+    @ApiOperation(value = "Ending borrow", notes = "BorrowId should be provided." , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public DamageFine endBorrowDamaged(@PathVariable String id ) {
+        loggerBorrow.info("Ending damaged borrow for id: " + id);
+        return borrowService.endDamagedBorrow(id);
     }
 
     @PreAuthorize("hasAuthority('VIEW_LENT_ITEMS')")
