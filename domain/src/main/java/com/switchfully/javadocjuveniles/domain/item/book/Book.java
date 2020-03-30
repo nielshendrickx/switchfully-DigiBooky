@@ -14,7 +14,7 @@ public class Book extends Item {
 
     public Book (BookBuilder bookBuilder){
         super(bookBuilder.title, bookBuilder.summary, bookBuilder.numberOfCopies
-                , bookBuilder.dateAdded, bookBuilder.initialPrice);
+                , bookBuilder.initialPrice);
         this.ISBN = bookBuilder.ISBN;
         this.author = bookBuilder.author;
     }
@@ -52,7 +52,6 @@ public class Book extends Item {
         private String title;
         private String summary;
         private int numberOfCopies;
-        private LocalDate dateAdded;
         private float initialPrice;
 
         private BookBuilder(){}
@@ -99,10 +98,7 @@ public class Book extends Item {
             this.numberOfCopies = numberOfCopies;
             return this;
         }
-        public BookBuilder withDateAdded(LocalDate dateAdded) {
-            this.dateAdded = dateAdded;
-            return this;
-        }
+
         public BookBuilder withInitialPrice(float initialPrice) {
             this.initialPrice = initialPrice;
             return this;

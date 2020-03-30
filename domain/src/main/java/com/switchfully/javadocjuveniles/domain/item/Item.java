@@ -13,12 +13,12 @@ public abstract class Item implements Borrowable {
     private double initialPrice;
 
 
-    public Item(String title, String summary, int numberOfCopies, LocalDate dateAdded, double initialPrice) {
+    public Item(String title, String summary, int numberOfCopies, double initialPrice) {
         this.ID = UUID.randomUUID().toString();
         this.title = title;
         this.summary = summary;
         this.numberOfCopies = numberOfCopies;
-        this.dateAdded = dateAdded;
+        this.dateAdded = LocalDate.now();
         this.initialPrice = initialPrice;
     }
 

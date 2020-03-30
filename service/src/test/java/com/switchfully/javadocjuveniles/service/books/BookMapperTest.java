@@ -27,7 +27,6 @@ class BookMapperTest {
         assertEquals(bookDto.getTitle(), book.getTitle());
         assertEquals(bookDto.getSummary(), book.getSummary());
         assertEquals(bookDto.getNumberOfCopies(), book.getNumberOfCopies());
-        assertEquals(bookDto.getDateAdded(), book.getDateAdded());
     }
 
     @Test
@@ -40,7 +39,6 @@ class BookMapperTest {
                 .withTitle("title")
                 .withSummary("summary")
                 .withNumberOfCopies(2)
-                .withDateAdded(LocalDate.of(2020, 3, 29))
                 .withAuthor(author)
                 .withISBN("9783161484100")
                 .build();

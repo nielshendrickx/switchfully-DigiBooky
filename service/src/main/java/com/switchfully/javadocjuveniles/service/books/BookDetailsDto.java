@@ -40,7 +40,7 @@ public class BookDetailsDto extends Item {
     @JsonCreator
     public BookDetailsDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
             , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice, @JsonProperty("borrowDtoList") Collection<BorrowDto> currentlyBorrowedTo) {
-        super(title, summary, numberOfCopies, dateAdded, initialPrice);
+        super(title, summary, numberOfCopies, initialPrice);
         this.title = title;
         this.summary = summary;
         this.numberOfCopies = numberOfCopies;

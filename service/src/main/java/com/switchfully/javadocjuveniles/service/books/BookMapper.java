@@ -26,7 +26,7 @@ public class BookMapper {
     public Book toBook(BookDto bookDto) {
         return bookBuilder().withTitle(bookDto.getTitle()).withSummary(bookDto.getSummary())
                 .withNumberOfCopies(bookDto.getNumberOfCopies())
-                .withDateAdded(bookDto.getDateAdded()).withISBN(bookDto.getISBN())
+                .withISBN(bookDto.getISBN())
                 .withAuthor(bookDto.getAuthor()).build();
     }
 

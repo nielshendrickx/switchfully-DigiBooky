@@ -21,13 +21,13 @@ class BookRepositoryTest {
     @Test
     void getAllItemsTest(){
         Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780802148537")
+                .withISBN("9780802148537")
                 .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
         Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 23)).withISBN("9780062941503")
+                .withISBN("9780062941503")
                 .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
         Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780805096606")
+                .withISBN("9780805096606")
                 .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
         Collection<Book> books = new ArrayList<>(List.of(book1, book2, book3));
         Assertions.assertTrue(bookRepository.getAllBooks().containsAll(books));
@@ -36,7 +36,7 @@ class BookRepositoryTest {
     @Test
     void addItemTest(){
         Book bookToTest = bookBuilder().withTitle("The trial").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 21)).withISBN("9780399589157")
+                .withISBN("9780399589157")
                 .withAuthor(authorBuilder().withFirstName("Franz").withLastName("Kafka").build()).build();
         bookRepository.addBook(bookToTest);
         Assertions.assertTrue(bookRepository.getAllBooks().contains(bookToTest));
@@ -117,7 +117,7 @@ class BookRepositoryTest {
     void checkIfAnExceptionIsThrownWhenWhenAuthorsLastNameIsNotProvided(){
         Assertions.assertThrows(FieldMustBeProvidedException.class, () -> {
             bookBuilder().withTitle("The trial").withSummary("Summary").withNumberOfCopies(1)
-                    .withDateAdded(LocalDate.of(2020, 3, 21)).withISBN("9781452155272")
+                    .withISBN("9781452155272")
                     .withAuthor(authorBuilder().withFirstName("Franz").build()).build();
         });
     }
@@ -146,7 +146,7 @@ class BookRepositoryTest {
     @Test
     void checkIfBookIsRestoredWhenIDIsProvided(){
         Book bookToTest = bookBuilder().withTitle("The trial").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 21)).withISBN("9781452155272")
+                .withISBN("9781452155272")
                 .withAuthor(authorBuilder().withFirstName("Franz").withLastName("Kafka").build()).build();
         bookRepository.addBook(bookToTest);
         Assertions.assertTrue(bookRepository.getBookById(bookToTest.getID()) != null);

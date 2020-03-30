@@ -30,7 +30,6 @@ class BookControllerTest {
             .withTitle("book1")
             .withSummary("summary of book 1")
             .withAuthor(author)
-            .withDateAdded(LocalDate.now())
             .withNumberOfCopies(1)
             .build();
     Book book2 = bookBuilder()
@@ -38,7 +37,6 @@ class BookControllerTest {
             .withTitle("book2")
             .withSummary("summary of book 2")
             .withAuthor(author)
-            .withDateAdded(LocalDate.now())
             .withNumberOfCopies(1)
             .build();
     BookDto bookDto1 = bookMapper.toDto(book1);

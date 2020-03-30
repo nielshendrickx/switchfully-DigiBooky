@@ -18,14 +18,12 @@ class BookTest {
         Book book = bookBuilder()
                 .withISBN("9783161484100")
                 .withAuthor(author)
-                .withDateAdded(LocalDate.of(2020, 3, 29))
                 .withNumberOfCopies(2)
                 .withSummary("summary")
                 .withTitle("title")
                 .build();
         assertEquals("9783161484100", book.getISBN());
         assertEquals(author, book.getAuthor());
-        assertEquals(LocalDate.of(2020, 3, 29), book.getDateAdded());
         assertEquals(2, book.getNumberOfCopies());
         assertEquals("summary", book.getSummary());
         assertEquals("title", book.getTitle());

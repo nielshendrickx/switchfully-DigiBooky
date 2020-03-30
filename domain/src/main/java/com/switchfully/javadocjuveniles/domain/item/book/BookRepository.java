@@ -101,13 +101,13 @@ public class BookRepository {
 
     private void createDefaultData(){
         Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780802148537").withInitialPrice(10)
+                .withISBN("9780802148537").withInitialPrice(10)
                 .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
         Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(5)
-                .withDateAdded(LocalDate.of(2020, 3, 23)).withISBN("9780062941503")
+                .withISBN("9780062941503")
                 .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
         Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(3)
-                .withDateAdded(LocalDate.of(2020, 3, 25)).withISBN("9780805096606")
+                .withISBN("9780805096606")
                 .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
         addBook(book1);
         addBook(book2);
