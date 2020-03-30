@@ -5,6 +5,9 @@ import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullExcep
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class BorrowRepository {
     private final ConcurrentHashMap<String, Borrow> borrowDatabase;
 
