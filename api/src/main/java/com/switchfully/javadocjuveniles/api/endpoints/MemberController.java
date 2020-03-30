@@ -70,6 +70,6 @@ public class MemberController {
     @ApiOperation(value = "Find member by id", notes = "Provide an id to look up a member", response = MemberDto.class)
     @ResponseStatus(HttpStatus.OK)
     public MemberDto getById(@ApiParam(value = "ID value for the member you need to retrieve", required = true) @PathVariable String id) {
-        return memberService.getById(id);
+        return memberService.getDtoById(id);
     }
 }
