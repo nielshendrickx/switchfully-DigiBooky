@@ -37,6 +37,11 @@ public class BookDto extends Item {
     public BookDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
             , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice) {
         super(title, summary, numberOfCopies, dateAdded, initialPrice);
+        this.title = title;
+        this.summary = summary;
+        this.numberOfCopies = numberOfCopies;
+        this.initialPrice = initialPrice;
+        this.dateAdded = dateAdded;
         this.ID = ID;
         this.ISBN = ISBN;
         this.author = author;
@@ -54,4 +59,28 @@ public class BookDto extends Item {
         return ID;
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getSummary() {
+        return summary;
+    }
+
+    @Override
+    public int getNumberOfCopies() {
+        return numberOfCopies;
+    }
+
+    @Override
+    public double getInitialPrice() {
+        return initialPrice;
+    }
+
+    @Override
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
 }

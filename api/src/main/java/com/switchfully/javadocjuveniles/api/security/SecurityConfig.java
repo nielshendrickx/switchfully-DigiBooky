@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.api.security;
 
 import com.switchfully.javadocjuveniles.api.endpoints.BookController;
+import com.switchfully.javadocjuveniles.api.endpoints.BorrowController;
 import com.switchfully.javadocjuveniles.api.endpoints.MemberController;
 import com.switchfully.javadocjuveniles.api.exceptions.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(MemberController.USER_RESOURCE_PATH + "/**").permitAll()
                 .antMatchers(BookController.BOOK_RESOURCE_PATH + "/**").permitAll()
+                .antMatchers(BorrowController.BORROW_RESOURCE_PATH + "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .authenticationEntryPoint(authEntryPoint)

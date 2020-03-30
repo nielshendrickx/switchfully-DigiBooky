@@ -2,7 +2,7 @@ package com.switchfully.javadocjuveniles.api.endpoints;
 
 import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowService;
-import com.switchfully.javadocjuveniles.service.borrow.CreateBorrowDto;
+import com.switchfully.javadocjuveniles.service.borrow.CreateBookBorrowDto;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +25,12 @@ public class BorrowController {
         this.borrowService = borrowService;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/book/", consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Generating a new borrow", notes = "INSS and ISBN should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public BorrowDto startBorrow(@RequestBody CreateBorrowDto newBorrow) {
-        loggerBorrow.info("Creating a new borrow");
-        return borrowService.addBorrow(newBorrow);
+    public BorrowDto startBorrow(@RequestBody CreateBookBorrowDto newBookBorrow) {
+        loggerBorrow.info("Creating a new book borrow");
+        return borrowService.addBorrow(newBookBorrow);
     }
 
     @PostMapping(path = "/return/{id}", consumes = "application/json", produces = "application/json")

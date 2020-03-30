@@ -3,22 +3,22 @@ package com.switchfully.javadocjuveniles.service.borrow;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateBorrowDto {
+public class CreateBookBorrowDto {
     private final String memberId;
-    private final String borrowableId;
+    private final String bookISBN;
 
     @JsonCreator
-    public CreateBorrowDto(@JsonProperty("memberId") String memberId, @JsonProperty("borrowableId")String borrowableId) {
+    public CreateBookBorrowDto(@JsonProperty("memberId") String memberId, @JsonProperty("bookISBN")String bookISBN) {
         this.memberId = memberId;
-        this.borrowableId = borrowableId;
+        this.bookISBN = bookISBN;
     }
 
     public String getMemberId() {
         return memberId;
     }
 
-    public String getBorrowableId() {
-        return borrowableId;
+    public String getBookISBN() {
+        return bookISBN;
     }
 
 }
