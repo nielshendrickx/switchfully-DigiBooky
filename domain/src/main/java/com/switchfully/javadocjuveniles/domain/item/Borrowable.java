@@ -12,5 +12,4 @@ public interface Borrowable {
     Item setSummary(String summary);
     Item setNumberOfCopies(int numberOfCopies);
     Item setInitialPrice(float initialPrice);
-    void toggleAvailability();
 }

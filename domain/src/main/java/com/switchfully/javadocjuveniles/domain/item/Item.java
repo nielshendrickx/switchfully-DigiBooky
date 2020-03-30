@@ -8,7 +8,6 @@ public abstract class Item implements Borrowable {
     private String title;
     private String summary;
     private int numberOfCopies;
-    private boolean available;
     private LocalDate dateAdded;
     private float initialPrice;
 
@@ -18,7 +17,6 @@ public abstract class Item implements Borrowable {
         this.title = title;
         this.summary = summary;
         this.numberOfCopies = numberOfCopies;
-        this.available = true;
         this.dateAdded = dateAdded;
         this.initialPrice = initialPrice;
     }
@@ -58,14 +56,6 @@ public abstract class Item implements Borrowable {
     public Item setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
         return this;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void toggleAvailability(){
-        this.available = !available;
     }
 
     @Override

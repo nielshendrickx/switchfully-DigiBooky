@@ -30,6 +30,5 @@ class BookTest {
         assertEquals("summary", book.getSummary());
         assertEquals("title", book.getTitle());
         assertNotNull(book.getID());
-        assertTrue(book.isAvailable());
     }
 }
