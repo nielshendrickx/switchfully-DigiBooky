@@ -3,6 +3,8 @@ package com.switchfully.javadocjuveniles.service.books;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
+import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
+import com.switchfully.javadocjuveniles.service.borrow.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,10 @@ public class BookService {
 
     public void restoreBook(String ID){
         bookRepository.restoreBook(ID);
+    }
+
+    public BookDetailsDto getBookDetails(String ID, Collection<BorrowDto> borrowDtoList ) {
+        return bookMapper.toBookDetailsDto(bookRepository.getBookById(ID), borrowDtoList);
     }
 
 }

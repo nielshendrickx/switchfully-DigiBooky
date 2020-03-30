@@ -22,7 +22,7 @@ public class BorrowService {
     }
 
     public Collection<BorrowDto> findAllActiveBorrowsForItem(String id) {
-        return borrowMapper.toDto(borrowRepository.getBorrowReportForItem(id));
+        return borrowMapper.toDto(borrowRepository.getActiveBorrowsForItem(id));
     }
 
     public Collection<BorrowDto> findAllBorrowsForMember(String id) {

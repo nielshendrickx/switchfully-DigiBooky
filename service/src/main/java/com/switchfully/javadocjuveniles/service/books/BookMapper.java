@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.service.books;
 
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
+import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -27,5 +28,10 @@ public class BookMapper {
                 .withNumberOfCopies(bookDto.getNumberOfCopies())
                 .withDateAdded(bookDto.getDateAdded()).withISBN(bookDto.getISBN())
                 .withAuthor(bookDto.getAuthor()).build();
+    }
+
+    public BookDetailsDto toBookDetailsDto(Book book, Collection<BorrowDto> borrowDtoList) {
+        return new BookDetailsDto(book.getID(), book.getISBN(), book.getAuthor(), book.getTitle()
+                , book.getSummary(), book.getNumberOfCopies(), book.getDateAdded(), book.getInitialPrice(), borrowDtoList);
     }
 }

@@ -1,8 +1,12 @@
 package com.switchfully.javadocjuveniles.service.users;
 
+import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +19,8 @@ class MemberDtoTest {
                 .withPostalCode("1111")
                 .withCity("city")
                 .build();
-        MemberDto memberDto = new MemberDto("id", "firstName", "lastName", "email", "password", "inss", address);
+        List<FineType> fines = new ArrayList<>();
+        MemberDto memberDto = new MemberDto("id", "firstName", "lastName", "email", "password", "inss", address, fines);
         assertEquals("id", memberDto.getId());
         assertEquals("firstName", memberDto.getFirstName());
         assertEquals("lastName", memberDto.getLastName());
