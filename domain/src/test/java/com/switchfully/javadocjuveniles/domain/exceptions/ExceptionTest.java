@@ -24,4 +24,24 @@ class ExceptionTest {
     void memberNotFoundException_returnsCorrectMessage() {
         assertEquals("Could not find the user.", new MemberNotFoundException().getMessage());
     }
+
+    @Test
+    void bookNotFoundException_returnsCorrectMessage() {
+        assertEquals("The book with given test is not found.", new BookNotFoundException("test").getMessage());
+    }
+
+    @Test
+    void bookDoesNotExistException_returnsCorrectMessage() {
+        assertEquals("The book does not exist", new BookDoesNotExistException().getMessage());
+    }
+
+    @Test
+    void bookAlreadyExistException_returnsCorrectMessage() {
+        assertEquals("The book is already in the database", new BookAlreadyExistsException().getMessage());
+    }
+
+    @Test
+    void bookIsNotValidException_returnsCorrectMessage() {
+        assertEquals("The book is not valid", new BookIsNotValidException().getMessage());
+    }
 }
