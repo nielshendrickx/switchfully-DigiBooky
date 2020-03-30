@@ -12,7 +12,7 @@ public class UserDto implements Identable, Createable {
     private String lastName;
     private String email;
     private UserRole role;
-    private String passWord;
+    private String password;
 
     @JsonCreator
     public UserDto(@JsonProperty("id") String id, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userRole") UserRole userRole) {
@@ -21,7 +21,7 @@ public class UserDto implements Identable, Createable {
         this.lastName = lastName;
         this.email = email;
         this.role = userRole;
-        this.passWord = password;
+        this.password = password;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserDto implements Identable, Createable {
 
     @Override
     public String getPassword() {
-        return passWord;
+        return password;
     }
 
     @Override

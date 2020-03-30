@@ -10,7 +10,7 @@ public class CreateUserDto implements Createable {
     private String lastName;
     private String email;
     private UserRole role;
-    private String passWord;
+    private String password;
 
     @JsonCreator
     public CreateUserDto(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userRole") UserRole userRole) {
@@ -18,7 +18,7 @@ public class CreateUserDto implements Createable {
         this.lastName = lastName;
         this.email = email;
         this.role = userRole;
-        this.passWord = password;
+        this.password = password;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CreateUserDto implements Createable {
 
     @Override
     public String getPassword() {
-        return passWord;
+        return password;
     }
 
 }

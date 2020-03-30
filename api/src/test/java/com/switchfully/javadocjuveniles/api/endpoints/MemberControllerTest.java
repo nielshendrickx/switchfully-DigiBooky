@@ -6,6 +6,7 @@ import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException
 import com.switchfully.javadocjuveniles.domain.exceptions.InssAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InssNotValidException;
 import com.switchfully.javadocjuveniles.domain.user.MemberRepository;
+import com.switchfully.javadocjuveniles.domain.user.UserRepository;
 import com.switchfully.javadocjuveniles.service.users.*;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,10 @@ class MemberControllerTest {
     MemberRepository memberRepository = new MemberRepository();
     MemberMapper memberMapper = new MemberMapper();
     MemberService memberService = new MemberService(memberRepository, memberMapper);
-    MemberController memberController = new MemberController(memberService);
+    UserRepository userRepository = new UserRepository();
+    UserMapper userMapper = new UserMapper();
+    UserService userService = new UserService(userRepository, userMapper);
+    MemberController memberController = new MemberController(memberService, userService);
 
     @Test
     void whenRegister_ifGivenWrongMail_shouldThrowException() {

@@ -1,8 +1,6 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
-import com.switchfully.javadocjuveniles.service.users.CreateMemberDto;
-import com.switchfully.javadocjuveniles.service.users.MemberDto;
-import com.switchfully.javadocjuveniles.service.users.MemberService;
+import com.switchfully.javadocjuveniles.service.users.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -21,11 +19,13 @@ public class MemberController {
 
     public static final String USER_RESOURCE_PATH = "/member";
     private final Logger loggerMember = LoggerFactory.getLogger(MemberController.class);
+    private final UserService userService;
     private MemberService memberService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, UserService userService) {
         this.memberService = memberService;
+        this.userService = userService;
     }
 
     @GetMapping(produces = "application/json")
@@ -37,7 +37,7 @@ public class MemberController {
     }
 
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
-
+    @ApiOperation(value = "Register as a member", notes = "Everyone can freely join Digibooky!" , response = MemberDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDto register(@RequestBody CreateMemberDto newMember) {
         validateNewMember(newMember);
@@ -45,11 +45,25 @@ public class MemberController {
         return memberService.register(newMember);
     }
 
+    @PostMapping(path = "/librarian", consumes = "application/json", produces = "application/json")
+    @ApiOperation(value = "Create a new librarian", notes = "A librarian can be created with admin role." , response = LibrarianDto.class)
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto registerALibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
+        validateNewLibrarian(newLibrarian);
+        loggerMember.info("Creating a new librarian");
+        return userService.register(newLibrarian);
+    }
+
     private void validateNewMember(@RequestBody CreateMemberDto newMember) {
         isValidEmailAddress(newMember.getEmail());
         memberService.isEmailAvailable(newMember.getEmail());
         isValidInss(newMember.getINSS());
         memberService.isInssAvailable(newMember.getINSS());
+    }
+
+    private void validateNewLibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
+        isValidEmailAddress(newLibrarian.getEmail());
+        memberService.isEmailAvailable(newLibrarian.getEmail());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
