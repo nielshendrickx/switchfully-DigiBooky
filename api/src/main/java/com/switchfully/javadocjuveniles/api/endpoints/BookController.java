@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookService;
 import com.switchfully.javadocjuveniles.service.books.View;
-import com.switchfully.javadocjuveniles.service.users.MemberDto;
+import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

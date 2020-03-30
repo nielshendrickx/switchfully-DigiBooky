@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.service.users;
 
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import com.switchfully.javadocjuveniles.service.users.users.CreateUserDto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

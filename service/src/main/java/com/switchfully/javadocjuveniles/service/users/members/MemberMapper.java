@@ -1,7 +1,6 @@
-package com.switchfully.javadocjuveniles.service.users;
+package com.switchfully.javadocjuveniles.service.users.members;
 
 import com.switchfully.javadocjuveniles.domain.user.Member;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

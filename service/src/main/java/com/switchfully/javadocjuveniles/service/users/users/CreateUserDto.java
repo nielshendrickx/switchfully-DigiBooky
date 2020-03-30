@@ -1,4 +1,4 @@
-package com.switchfully.javadocjuveniles.service.users;
+package com.switchfully.javadocjuveniles.service.users.users;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

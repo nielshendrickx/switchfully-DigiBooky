@@ -1,13 +1,13 @@
-package com.switchfully.javadocjuveniles.service.users;
+package com.switchfully.javadocjuveniles.service.users.users;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 
-public class CreateAdminDto extends CreateUserDto{
+public class LibrarianDto extends UserDto {
     @JsonCreator
-    public CreateAdminDto(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password) {
-        super(firstName, lastName, email, password, UserRole.ADMIN);
+    public LibrarianDto(@JsonProperty("id") String id, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("email") String email, @JsonProperty("password") String password) {
+        super(id, firstName, lastName, email, password, UserRole.LIBRARIAN);
     }
 
     @Override
@@ -29,5 +29,4 @@ public class CreateAdminDto extends CreateUserDto{
     public String getPassword() {
         return super.getPassword();
     }
-
 }

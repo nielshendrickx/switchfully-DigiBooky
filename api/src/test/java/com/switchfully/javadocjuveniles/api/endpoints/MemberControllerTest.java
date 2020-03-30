@@ -7,10 +7,14 @@ import com.switchfully.javadocjuveniles.domain.exceptions.InssAlreadyRegisteredE
 import com.switchfully.javadocjuveniles.domain.exceptions.InssNotValidException;
 import com.switchfully.javadocjuveniles.domain.user.MemberRepository;
 import com.switchfully.javadocjuveniles.domain.user.UserRepository;
-import com.switchfully.javadocjuveniles.service.users.*;
+import com.switchfully.javadocjuveniles.service.users.members.CreateMemberDto;
+import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
+import com.switchfully.javadocjuveniles.service.users.services.MemberService;
+import com.switchfully.javadocjuveniles.service.users.services.UserService;
+import com.switchfully.javadocjuveniles.service.users.users.UserDto;
+import com.switchfully.javadocjuveniles.service.users.users.UserMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 

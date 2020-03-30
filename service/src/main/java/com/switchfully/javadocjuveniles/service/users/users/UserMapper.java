@@ -1,11 +1,7 @@
-package com.switchfully.javadocjuveniles.service.users;
+package com.switchfully.javadocjuveniles.service.users.users;
 
-import com.switchfully.javadocjuveniles.domain.user.Member;
 import com.switchfully.javadocjuveniles.domain.user.User;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
 

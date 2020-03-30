@@ -1,8 +1,8 @@
 package com.switchfully.javadocjuveniles.service.borrow;
 
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
-import com.switchfully.javadocjuveniles.service.users.MemberMapper;
-import com.switchfully.javadocjuveniles.service.users.MemberService;
+import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
+import com.switchfully.javadocjuveniles.service.users.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

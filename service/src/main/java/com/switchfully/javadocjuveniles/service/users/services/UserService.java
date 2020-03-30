@@ -1,6 +1,9 @@
-package com.switchfully.javadocjuveniles.service.users;
+package com.switchfully.javadocjuveniles.service.users.services;
 
 import com.switchfully.javadocjuveniles.domain.user.UserRepository;
+import com.switchfully.javadocjuveniles.service.users.users.CreateUserDto;
+import com.switchfully.javadocjuveniles.service.users.users.UserDto;
+import com.switchfully.javadocjuveniles.service.users.users.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

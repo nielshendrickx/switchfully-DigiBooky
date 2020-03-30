@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.service.users;
 
+import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

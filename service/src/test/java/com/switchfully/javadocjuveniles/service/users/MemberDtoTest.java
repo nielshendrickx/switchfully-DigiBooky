@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.service.users;
 
 import com.switchfully.javadocjuveniles.domain.user.Address;
+import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import org.junit.jupiter.api.Test;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;

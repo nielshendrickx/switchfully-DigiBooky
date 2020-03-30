@@ -1,6 +1,10 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
-import com.switchfully.javadocjuveniles.service.users.*;
+import com.switchfully.javadocjuveniles.service.users.members.CreateMemberDto;
+import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
+import com.switchfully.javadocjuveniles.service.users.services.MemberService;
+import com.switchfully.javadocjuveniles.service.users.services.UserService;
+import com.switchfully.javadocjuveniles.service.users.users.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;

@@ -1,10 +1,7 @@
 package com.switchfully.javadocjuveniles.api.security.validation;
 
-import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InssNotValidException;
-import com.switchfully.javadocjuveniles.service.users.MemberDto;
-import com.switchfully.javadocjuveniles.service.users.MemberService;
 
 public class Validation {
     public static void isValidEmailAddress(String email) {

@@ -3,7 +3,7 @@ package com.switchfully.javadocjuveniles.service.borrow;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.switchfully.javadocjuveniles.domain.item.Borrowable;
-import com.switchfully.javadocjuveniles.service.users.MemberDto;
+import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 
 import java.time.LocalDate;
 
