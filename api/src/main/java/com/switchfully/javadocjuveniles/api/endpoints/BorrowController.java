@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.switchfully.javadocjuveniles.domain.fines.DamageFine;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowService;
 import com.switchfully.javadocjuveniles.service.borrow.CreateBookBorrowDto;
@@ -44,6 +45,14 @@ public class BorrowController {
         return borrowService.endBorrow(id);
     }
 
+    @PostMapping(path = "/return/damaged/{id}", produces = "application/json")
+    @ApiOperation(value = "Ending borrow", notes = "BorrowId should be provided." , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public DamageFine endBorrowDamaged(@PathVariable String id ) {
+        loggerBorrow.info("Ending damaged borrow for id: " + id);
+        return borrowService.endDamagedBorrow(id);
+    }
+
     @PreAuthorize("hasAuthority('VIEW_LENT_ITEMS')")
     @GetMapping(path = "/listforuser/{id}", produces = "application/json")
     @ApiOperation(value = "List of lent books", notes = "Returns all lent books per user" , response = BorrowDto.class)
@@ -61,4 +70,17 @@ public class BorrowController {
         loggerBorrow.info("Retrieving list of overdue books.");
         return borrowService.findOverdueBooks();
     }
+
+    @PreAuthorize("hasAuthority('VIEW_LENDING_HISTORY')")
+    @GetMapping(path = "/history/{id}", produces = "application/json")
+    @ApiOperation(value = "List lending history of an item.", notes = "Returns all lending history of an item" , response = BorrowDto.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<BorrowDto> getLendingHistory(@PathVariable String id) {
+        loggerBorrow.info("Retrieving lending history of an item.");
+        return borrowService.generateBorrowReport(id);
+    }
+
+
+
+
 }

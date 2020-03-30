@@ -3,6 +3,7 @@ package com.switchfully.javadocjuveniles.domain.fines;
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class DamageFine implements FineType {
 
@@ -13,7 +14,7 @@ public class DamageFine implements FineType {
 
     @Override
     public void calculateFine(Borrow borrow) {
-        double fine = borrow.getBorrowable().getInitialPrice() * (START_AMOUNT - (LocalDate.now().getYear() - borrow.getBorrowable().getDateAdded().getYear() * ADD_ON_PERCENTAGE));
+        double fine = borrow.getItem().getInitialPrice() * (START_AMOUNT - (ChronoUnit.YEARS.between(LocalDate.now(), borrow.getItem().getDateAdded()) * ADD_ON_PERCENTAGE));
         if (fine < MINIMUM_FINE) {
             fine = 4;
         }

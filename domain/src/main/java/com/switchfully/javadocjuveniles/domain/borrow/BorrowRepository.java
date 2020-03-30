@@ -1,9 +1,9 @@
 package com.switchfully.javadocjuveniles.domain.borrow;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.NoMoreItemsAvailableException;
-import com.switchfully.javadocjuveniles.domain.item.Borrowable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -17,16 +17,16 @@ public class BorrowRepository {
     }
 
     public Borrow addBorrow(Borrow borrow) {
-        if (borrow.getBorrowable().getNumberOfCopies() > getActiveBorrowsForItem(borrow.getBorrowable()).size()) {
+        if (borrow.getItem().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getItem().getID()).size()) {
             throw new NoMoreItemsAvailableException();
         }
         borrowDatabase.put(borrow.getId(), borrow);
         return borrow;
     }
 
-    public Collection<Borrow> getActiveBorrowsForItem(Borrowable borrowable) {
+    public Collection<Borrow> getActiveBorrowsForItem(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getBorrowable().equals(borrowable))
+                .filter(borrow -> borrow.getItem().getID().equals(id))
                 .filter(borrow -> borrow.getEndDate() == null)
                 .collect(Collectors.toList());
     }
@@ -42,9 +42,17 @@ public class BorrowRepository {
         return borrowDatabase.get(id).setEndDate();
     }
 
+    public Collection<Borrow> getBorrowReportForItem(String id) {
+        return borrowDatabase.values().stream()
+                .filter(borrow -> borrow.getItem().getID().equals(id))
+                .filter(borrow -> borrow.getEndDate() != null)
+                .collect(Collectors.toList());
+    }
+
     public Collection<Borrow> getOverdueBooks() {
         return borrowDatabase.values().stream()
                 .filter(borrow -> borrow.getEndDate() == null)
+                .filter(borrow -> LocalDate.now().isAfter(borrow.getDueDate()))
                 .collect(Collectors.toList());
     }
 }
