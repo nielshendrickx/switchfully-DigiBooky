@@ -43,6 +43,7 @@ public class BookController {
         return bookService.getBookByISBN(ISBN);
     }
 
+    @PreAuthorize("hasAuthority('VIEW_ITEM_DETAILS')")
     @GetMapping(path = "/unlimited/{ID}", produces = "application/json")
     @ApiOperation(value = "Get book by ID", notes = "The book information will be returned when its ID is provided" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
@@ -114,7 +115,6 @@ public class BookController {
         return bookService.findAll();
     }
 
-    @PreAuthorize("hasAuthority('VIEW_ITEM_DETAILS')")
     @GetMapping(path = "/details/{ID}", produces = "application/json")
     @ApiOperation(value = "Get details of a book by ID", notes = "ISBN, title, author and summary of a book be returned" , response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
