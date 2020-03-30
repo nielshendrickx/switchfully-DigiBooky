@@ -1,7 +1,9 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.FieldMustBeProvidedException;
+import com.switchfully.javadocjuveniles.domain.exceptions.ISBNNotValidException;
 import com.switchfully.javadocjuveniles.domain.item.Item;
+import org.apache.commons.validator.routines.ISBNValidator;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,7 +13,8 @@ public class Book extends Item {
     private Author author;
 
     public Book (BookBuilder bookBuilder){
-        super(bookBuilder.title, bookBuilder.summary, bookBuilder.numberOfCopies, bookBuilder.dateAdded);
+        super(bookBuilder.title, bookBuilder.summary, bookBuilder.numberOfCopies
+                , bookBuilder.dateAdded, bookBuilder.initialPrice);
         this.ISBN = bookBuilder.ISBN;
         this.author = bookBuilder.author;
     }
@@ -56,6 +59,7 @@ public class Book extends Item {
         private String summary;
         private int numberOfCopies;
         private LocalDate dateAdded;
+        private float initialPrice;
 
         private BookBuilder(){}
         public static BookBuilder bookBuilder() {
@@ -65,16 +69,24 @@ public class Book extends Item {
         public Book build() {
             if(title == null) {
                 throw new FieldMustBeProvidedException("Title");
-            }
-            if (ISBN == null){
+            } else if (ISBN == null){
                 throw new FieldMustBeProvidedException("ISBN");
+            }else if (author.getLastName() == null) {
+                throw new FieldMustBeProvidedException("Author's last name");
             }
             return new Book(this);
         }
 
         public BookBuilder withISBN(String ISBN) {
+            if(validateISBN(ISBN) == false){
+                throw new ISBNNotValidException();
+            }
             this.ISBN = ISBN;
             return this;
+        }
+
+        private boolean validateISBN(String ISBN) {
+            return new ISBNValidator().isValidISBN13(ISBN);
         }
 
         public BookBuilder withAuthor(Author author) {
@@ -95,6 +107,10 @@ public class Book extends Item {
         }
         public BookBuilder withDateAdded(LocalDate dateAdded) {
             this.dateAdded = dateAdded;
+            return this;
+        }
+        public BookBuilder withInitialPrice(float initialPrice) {
+            this.initialPrice = initialPrice;
             return this;
         }
     }

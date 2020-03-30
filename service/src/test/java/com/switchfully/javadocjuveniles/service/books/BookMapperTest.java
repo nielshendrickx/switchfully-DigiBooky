@@ -20,7 +20,7 @@ class BookMapperTest {
                 .withFirstName("firstName")
                 .withLastName("lastName")
                 .build();
-        BookDto bookDto = new BookDto("1234", "5678", author, "title", "summary", 2, LocalDate.of(2020, 3, 29), 2);
+        BookDto bookDto = new BookDto("1234", "9783161484100", author, "title", "summary", 2, LocalDate.of(2020, 3, 29), 2);
         Book book = bookMapper.toBook(bookDto);
         assertEquals(bookDto.getISBN(), book.getISBN());
         assertEquals(bookDto.getAuthor(), book.getAuthor());
@@ -42,7 +42,7 @@ class BookMapperTest {
                 .withNumberOfCopies(2)
                 .withDateAdded(LocalDate.of(2020, 3, 29))
                 .withAuthor(author)
-                .withISBN("5678")
+                .withISBN("9783161484100")
                 .build();
         BookDto bookDto = bookMapper.toDto(book);
         assertEquals(book.getISBN(), bookDto.getISBN());

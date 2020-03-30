@@ -17,9 +17,8 @@ class BookServiceTest {
         BookMapper bookMapper = new BookMapper();
         BookService bookService = new BookService(bookRepository, bookMapper);
 
-        bookService.update(bookRepository.getBookByISBN("9787166484100").getID()
-                , authorBuilder().withFirstName("Paulo").withLastName("Coelho").build(), "abc", "summary", 1);
-        Assertions.assertEquals("abc", bookRepository.getBookByISBN("9787166484100").getTitle());
+        bookService.updateBook(bookRepository.getBookByISBN("9780802148537").getID()
+                , authorBuilder().withFirstName("Paulo").withLastName("Coelho").build(), "abc", "summary", 1, 2);
+        Assertions.assertEquals("abc", bookRepository.getBookByISBN("9780802148537").getTitle());
     }
-
 }

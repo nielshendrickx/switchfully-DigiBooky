@@ -1,7 +1,9 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookService;
+import com.switchfully.javadocjuveniles.service.books.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,55 +15,96 @@ import java.util.Collection;
 @RestController
 @RequestMapping(path = BookController.BOOK_RESOURCE_PATH)
 public class BookController {
-
     public static final String BOOK_RESOURCE_PATH = "/books";
-    private final Logger loggerBook = LoggerFactory.getLogger(BookController.class);
+    private final Logger logger = LoggerFactory.getLogger(BookController.class);
     private BookService bookService;
+
 
     @Autowired
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
-    @GetMapping(produces = "application/json")
+    @GetMapping(path = "/allInfo", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public Collection<BookDto> findAll() {
-        loggerBook.info("Returning all books");
+    public Collection<BookDto> findAllBooks() {
+        logger.info("Returning all books");
         return bookService.findAll();
     }
 
     @GetMapping(path = "/isbn/{ISBN}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDto getBookByISBN(@PathVariable("ISBN") String ISBN) {
-        loggerBook.info("Returning the book for given ISBN");
+        logger.info("Returning the book for given ISBN");
         return bookService.getBookByISBN(ISBN);
     }
 
-    @GetMapping(path = "/id/{ID}", produces = "application/json")
+    @GetMapping(path = "/unlimited/{ID}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDto getBookByID(@PathVariable("ID") String ID) {
-        loggerBook.info("Returning the book for given ID");
+        logger.info("Returning the book for given ID");
         return bookService.getBookByID(ID);
     }
 
     @GetMapping(path = "/title/{title}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDto getBookByTitle(@PathVariable("title") String title) {
-        loggerBook.info("Returning the book for given title");
+        logger.info("Returning the book for given title");
         return bookService.getBookByTitle(title);
     }
 
     @GetMapping(path = "/author/{author}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public BookDto getBookByAuthor(@PathVariable("author") String author) {
-        loggerBook.info("Returning the book for given author");
+        logger.info("Returning the book for given author");
         return bookService.getBookByAuthor(author);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public BookDto save(@RequestBody BookDto bookDto) {
-        loggerBook.info("Creating a new book");
+    public BookDto saveBook(@RequestBody BookDto bookDto) {
+        logger.info("Creating a new book");
         return bookService.addBook(bookDto);
     }
+
+    @PutMapping(path = "/update/{ID}", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDto updateBook(@RequestBody BookDto bookDto, @PathVariable("ID") String ID) {
+        logger.info("Updating a book");
+        BookDto bookToUpdate = bookService.updateBook(ID
+                , bookDto.getAuthor(), bookDto.getTitle(), bookDto.getSummary()
+                , bookDto.getNumberOfCopies(), bookDto.getInitialPrice());
+        return bookToUpdate;
+    }
+
+    @DeleteMapping(path = "/delete/{ID}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(@PathVariable("ID") String ID) {
+        logger.info("Deleting an existing book");
+        bookService.deleteBook(ID);
+    }
+
+    @PutMapping (path = "/restore/{ID}")
+    @ResponseStatus(HttpStatus.OK)
+    public void restoreBook(@PathVariable("ID") String ID) {
+        logger.info("Restoring a deleted book");
+        bookService.restoreBook(ID);
+    }
+
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    @JsonView(View.Public.class)
+    public Collection<BookDto> getAllBooksWithLimitedInfo() {
+        logger.info("Returning limited book information (for user)");
+        return bookService.findAll();
+    }
+
+    @GetMapping(path = "/details/{ID}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    @JsonView({View.PublicWithSummary.class})
+    public BookDto getBookByID_forUser_Detailed(@PathVariable("ID") String ID) {
+        logger.info("Returning detailed book information for given ID");
+        return bookService.getBookByID(ID);
+    }
+
 }
