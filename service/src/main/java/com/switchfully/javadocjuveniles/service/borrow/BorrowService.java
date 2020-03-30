@@ -29,7 +29,7 @@ public class BorrowService {
     }
 
     public Collection<BorrowDto> findOverdueBooks() {
-        return null;
+        return borrowMapper.toDto(borrowRepository.getOverdueBooks());
     }
 
     public Collection<BorrowDto> generateBorrowReport() {
@@ -49,4 +49,6 @@ public class BorrowService {
         }
         return borrowMapper.toDto(borrow);
     }
+
+
 }

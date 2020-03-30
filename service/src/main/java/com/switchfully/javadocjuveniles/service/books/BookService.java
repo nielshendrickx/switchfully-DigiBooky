@@ -23,7 +23,7 @@ public class BookService {
         return bookMapper.toDto(bookRepository.getAllBooks());
     }
 
-    public BookDto updateBook(String id, Author author, String title, String summary, int numberOfCopies, float initialPrice) {
+    public BookDto updateBook(String id, Author author, String title, String summary, int numberOfCopies, double initialPrice) {
         Book item = (Book) bookRepository.getBookById(id)
                 .setTitle(title).setSummary(summary).setNumberOfCopies(numberOfCopies).setInitialPrice(initialPrice);
         item.setAuthor(author);

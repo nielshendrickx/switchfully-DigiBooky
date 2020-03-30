@@ -25,7 +25,7 @@ public class BookDto {
     @JsonView(View.Restricted.class)
     private int numberOfCopies;
     @JsonView(View.Restricted.class)
-    private float initialPrice;
+    private double initialPrice;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -34,7 +34,7 @@ public class BookDto {
 
     @JsonCreator
     public BookDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
-            , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") float initialPrice) {
+            , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice) {
 
         this.ID = ID;
         this.ISBN = ISBN;
@@ -75,7 +75,7 @@ public class BookDto {
         return ID;
     }
 
-    public float getInitialPrice() {
+    public double getInitialPrice() {
         return initialPrice;
     }
 }

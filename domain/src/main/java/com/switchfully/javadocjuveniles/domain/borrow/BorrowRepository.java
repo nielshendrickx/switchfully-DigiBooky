@@ -50,4 +50,10 @@ public class BorrowRepository {
     public Borrow endBorrow(String id) {
         return borrowDatabase.get(id).setEndDate();
     }
+
+    public Collection<Borrow> getOverdueBooks() {
+        return borrowDatabase.values().stream()
+                .filter(borrow -> borrow.getEndDate() == null)
+                .collect(Collectors.toList());
+    }
 }

@@ -3,10 +3,6 @@ package com.switchfully.javadocjuveniles.api.endpoints;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowDto;
 import com.switchfully.javadocjuveniles.service.borrow.BorrowService;
 import com.switchfully.javadocjuveniles.service.borrow.CreateBorrowDto;
-import com.switchfully.javadocjuveniles.service.users.CreateMemberDto;
-import com.switchfully.javadocjuveniles.service.users.MemberDto;
-import com.switchfully.javadocjuveniles.service.users.MemberService;
-import com.switchfully.javadocjuveniles.service.users.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +26,7 @@ public class BorrowController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "Generating a new borrow", notes = "INSS and ISBN should be provided." , response = BorrowDto.class)
     @ResponseStatus(HttpStatus.CREATED)
-    public BorrowDto register(@RequestBody CreateBorrowDto newBorrow) {
+    public BorrowDto startBorrow(@RequestBody CreateBorrowDto newBorrow) {
         loggerBorrow.info("Creating a new borrow");
         return borrowService.addBorrow(newBorrow);
     }
@@ -42,4 +38,6 @@ public class BorrowController {
         loggerBorrow.info("Ending borrow for id: " + id);
         return borrowService.endBorrow(id);
     }
+
+
 }
