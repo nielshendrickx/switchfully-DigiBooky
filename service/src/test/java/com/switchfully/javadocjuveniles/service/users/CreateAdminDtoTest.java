@@ -14,6 +14,7 @@ class CreateAdminDtoTest {
         assertEquals("firstName", adminDto.getFirstName());
         assertEquals("lastName", adminDto.getLastName());
         assertEquals("email", adminDto.getEmail());
+        assertEquals("password", adminDto.getPassword());
         assertEquals(UserRole.ADMIN, adminDto.getRole());
     }
 }

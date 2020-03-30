@@ -19,4 +19,9 @@ public class DamageFine implements FineType {
         }
         fineAmount += fine;
     }
+
+    @Override
+    public double getFineAmount() {
+        return fineAmount;
+    }
 }

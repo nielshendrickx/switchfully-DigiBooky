@@ -2,6 +2,9 @@ package com.switchfully.javadocjuveniles.domain.fines;
 
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class OverdueFine implements FineType {
 
     private double fineAmount;
@@ -11,6 +14,11 @@ public class OverdueFine implements FineType {
 
     @Override
     public void calculateFine(Borrow borrow) {
-        fineAmount += START_AMOUNT + AMOUNT_EXTRA_PER_WEEK * ((borrow.getEndDate().getDayOfYear() - borrow.getDueDate().getDayOfYear()) % 7);
+        fineAmount += START_AMOUNT + AMOUNT_EXTRA_PER_WEEK * (ChronoUnit.WEEKS.between(borrow.getEndDate(), borrow.getDueDate()));
+    }
+
+    @Override
+    public double getFineAmount() {
+        return fineAmount;
     }
 }
