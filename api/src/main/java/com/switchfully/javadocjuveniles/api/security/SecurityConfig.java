@@ -2,7 +2,9 @@ package com.switchfully.javadocjuveniles.api.security;
 
 import com.switchfully.javadocjuveniles.api.endpoints.BookController;
 import com.switchfully.javadocjuveniles.api.endpoints.MemberController;
+import com.switchfully.javadocjuveniles.api.exceptions.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -38,7 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic()
                 .authenticationEntryPoint(authEntryPoint)
                 .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
     }
 
     @Autowired

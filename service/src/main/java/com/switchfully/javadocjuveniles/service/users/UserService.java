@@ -19,4 +19,8 @@ public class UserService {
         return userMapper.toDto(userRepository.registerNewUser(userMapper.toUser(newUser)));
     }
 
+    public boolean isEmailAvailable(String email) {
+        return userRepository.isEmailAvailable(email);
+    }
+
 }

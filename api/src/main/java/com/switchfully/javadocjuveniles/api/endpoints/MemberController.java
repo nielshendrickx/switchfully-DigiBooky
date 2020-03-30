@@ -51,9 +51,19 @@ public class MemberController {
     @ApiOperation(value = "Create a new librarian", notes = "A librarian can be created with admin role." , response = LibrarianDto.class)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto registerALibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
-        validateNewLibrarian(newLibrarian);
+        validateNewUser(newLibrarian);
         loggerMember.info("Creating a new librarian");
         return userService.register(newLibrarian);
+    }
+
+    @PreAuthorize("hasAuthority('REGISTER_ADMIN')")
+    @PostMapping(path = "/admin", consumes = "application/json", produces = "application/json")
+    @ApiOperation(value = "Create a new admin", notes = "An admin can only be created with admin role." , response = AdminDto.class)
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto registerAnAdmin(@RequestBody CreateAdminDto newAdmin) {
+        validateNewUser(newAdmin);
+        loggerMember.info("Creating a new librarian");
+        return userService.register(newAdmin);
     }
 
     private void validateNewMember(@RequestBody CreateMemberDto newMember) {
@@ -63,9 +73,9 @@ public class MemberController {
         memberService.isInssAvailable(newMember.getINSS());
     }
 
-    private void validateNewLibrarian(@RequestBody CreateLibrarianDto newLibrarian) {
-        isValidEmailAddress(newLibrarian.getEmail());
-        memberService.isEmailAvailable(newLibrarian.getEmail());
+    private void validateNewUser(@RequestBody CreateUserDto newUser) {
+        isValidEmailAddress(newUser.getEmail());
+        userService.isEmailAvailable(newUser.getEmail());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")

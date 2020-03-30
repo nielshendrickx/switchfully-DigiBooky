@@ -11,6 +11,7 @@ public enum Feature {
     REGISTER_NEW_ITEM(UserRole.LIBRARIAN, UserRole.ADMIN),
     VIEW_MEMBERS(UserRole.ADMIN),
     REGISTER_LIBRARIAN(UserRole.ADMIN),
+    REGISTER_ADMIN(UserRole.ADMIN),
     LEND_AN_ITEM(UserRole.MEMBER);
 
     private UserRole[] roles;
