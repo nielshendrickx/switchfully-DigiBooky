@@ -1,7 +1,7 @@
 package com.switchfully.javadocjuveniles.api.security;
 
-import com.switchfully.javadocjuveniles.api.security.authentication.external.ExternalAuthentication;
-import com.switchfully.javadocjuveniles.api.security.authentication.external.FakeAuthenticationService;
+import com.switchfully.javadocjuveniles.api.security.authentication.AuthenticationService;
+import com.switchfully.javadocjuveniles.domain.user.User;
 import com.switchfully.javadocjuveniles.domain.user.feature.Feature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,24 +17,26 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
-    private final FakeAuthenticationService fakeAuthenticationService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public UserAuthenticationProvider(FakeAuthenticationService fakeAuthenticationService) {
-        this.fakeAuthenticationService = fakeAuthenticationService;
+    public UserAuthenticationProvider(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        ExternalAuthentication user = fakeAuthenticationService.getUser(authentication.getPrincipal().toString(), authentication.getCredentials().toString());
+        User user = authenticationService.getUser(authentication.getPrincipal().toString(), authentication.getCredentials().toString());
         if(user != null){
             return new UsernamePasswordAuthenticationToken(
-                    user.getUsername(),
+                    user.getFirstName(),
                     user.getPassword(),
-                    rolesToGrantedAuthorities(Feature.getFeaturesForRoles(user.getRoles())));
+                    rolesToGrantedAuthorities(Feature.getFeaturesForRoles(newArrayList(user.getRole().toString()))));
         }
         throw new BadCredentialsException("The provided credentials were invalid.");
 
