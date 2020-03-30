@@ -12,7 +12,7 @@ class FeatureTest {
     void getFeaturesForRoles_GivenFeatureContainsOneOfTheRoles_ThenReturnAllFeaturesContainingOneOfThoseRoles() {
         List<Feature> actual = Feature.getFeaturesForRoles(newArrayList(UserRole.ADMIN.name()));
 
-        assertThat(actual).contains(Feature.VIEW_MEMBERS, Feature.REGISTER_NEW_ITEM);
+        assertThat(actual).contains(Feature.VIEW_MEMBERS, Feature.REGISTER_ADMIN, Feature.REGISTER_LIBRARIAN);
         assertThat(actual).doesNotContain(Feature.LEND_AN_ITEM);
     }
 
