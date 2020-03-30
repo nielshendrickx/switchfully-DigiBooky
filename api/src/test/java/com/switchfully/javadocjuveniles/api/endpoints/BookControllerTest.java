@@ -1,11 +1,13 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
 import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookMapper;
 import com.switchfully.javadocjuveniles.service.books.BookService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +17,7 @@ import java.util.Collection;
 import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
 import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BookControllerTest {
     BookRepository bookRepository = new BookRepository();
@@ -57,4 +60,49 @@ class BookControllerTest {
         bookController.saveBook(bookDto1);
         assertThat(bookController.getBookByAuthor(bookDto1.getAuthor().getFullName()).equals(bookDto1));
     }
+    @Test
+    void getBookByISBN_shouldReturnCorrectBook() {
+        bookController.saveBook(bookDto1);
+        assertThat(bookController.getBookByISBN(bookDto1.getISBN()).equals(bookDto1));
+    }
+    @Test
+    void getBookByTitle_shouldReturnCorrectBook() {
+        bookController.saveBook(bookDto1);
+        assertThat(bookController.getBookByTitle(bookDto1.getTitle()).equals(bookDto1));
+    }
+    @Test
+    void getBookByID_shouldReturnCorrectBook() {
+        String id = bookController.saveBook(bookDto1).getID();
+        assertThat(bookController.getBookByID(id).equals(bookDto1));
+    }
+    @Test
+    void verifyThatRepositoryContainsSavedBook() {
+        bookController.saveBook(bookDto1);
+        assertThat(bookController.getAllBooksWithLimitedInfo().contains(bookDto1));
+    }
+    @Test
+    void verifyThatBookIsDeletedFromRepository() {
+        String id = bookController.saveBook(bookDto1).getID();
+        assertThat(bookController.getBookByID(id));
+        bookController.deleteBook(id);
+        assertThatThrownBy(() -> bookController.getBookByID(id))
+                .isInstanceOf(BookNotFoundException.class);
+    }
+
+    @Test
+    void verifyThatDeletedBookIsRestored() {
+        String id = bookController.saveBook(bookDto1).getID();
+        assertThat(bookController.getBookByID(id));
+        bookController.deleteBook(id);
+        bookController.restoreBook(id);
+        assertThat(bookController.getAllBooksWithLimitedInfo().contains(bookDto1));
+    }
+
+    @Test
+    void verifyThatBookInfoIsUpdated() {
+        String id = bookController.saveBook(bookDto1).getID();
+        bookController.updateBook(bookDto2, id);
+        assertThat(bookController.getBookByID(id).getTitle().equals("book2"));
+    }
+
 }
