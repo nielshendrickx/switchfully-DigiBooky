@@ -1,7 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
 import com.switchfully.javadocjuveniles.domain.exceptions.BookAlreadyExistsException;
-import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import org.springframework.stereotype.Repository;
@@ -36,7 +35,7 @@ public class BookRepository {
 
     public Collection<Book> getAllBooks(){
         return bookDatabase.values();
-    }
+    } //TODO check if available
 
     public Book getBookByISBN(String isbn){
         checkIfInputNull(isbn);
@@ -75,7 +74,7 @@ public class BookRepository {
         return book;
     }
 
-    public void deleteBook(String ID){
+    public void deleteBook(String ID){ //TODO book.togleAvailabilty()
         checkIfInputNull(ID);
         deletedBooksDatabase.put(getBookById(ID).getISBN(), getBookById(ID));
         bookDatabase.remove(getBookById(ID).getISBN());
