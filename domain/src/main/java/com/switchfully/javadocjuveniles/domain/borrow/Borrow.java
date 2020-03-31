@@ -75,6 +75,13 @@ public class Borrow {
             this.dueDate = startDate.plusWeeks(3);
         }
 
+        // Dummy method for tests and presentation
+        public BorrowBuilder setDummyDate() {
+            this.startDate = LocalDate.of(2019,7,13);
+            this.dueDate = startDate.plusWeeks(3);
+            return this;
+        }
+
         public BorrowBuilder withMember(Member member) {
             this.member = member;
             return this;

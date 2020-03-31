@@ -3,6 +3,8 @@ package com.switchfully.javadocjuveniles.domain.user;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InssAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.MemberNotFoundException;
+import com.switchfully.javadocjuveniles.domain.fines.DamageFine;
+import com.switchfully.javadocjuveniles.domain.fines.OverdueFine;
 import com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.springframework.stereotype.Repository;
@@ -76,6 +78,8 @@ public class MemberRepository {
                 .buildMember();
         registerNewMember(member1);
         registerNewMember(member2);
+        member1.addFine(new OverdueFine());
+        member2.addFine(new DamageFine());
     }
 
     public Member registerNewMember(Member newMember) {
