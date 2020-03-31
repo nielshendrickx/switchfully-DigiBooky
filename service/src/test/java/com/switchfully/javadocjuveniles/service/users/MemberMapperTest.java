@@ -6,6 +6,7 @@ import com.switchfully.javadocjuveniles.service.users.members.CreateMemberDto;
 import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
 import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
@@ -21,7 +22,7 @@ class MemberMapperTest {
         assertEquals("firstName", member.getFirstName());
         assertEquals("lastName", member.getLastName());
         assertEquals("email", member.getEmail());
-        assertEquals("password", member.getPassword());
+        assertTrue(verifyHash("password", member.getPassword()));
         assertEquals("inss", member.getINSS());
         assertEquals(address, member.getAddress());
     }
@@ -42,8 +43,12 @@ class MemberMapperTest {
         assertEquals("firstName", memberDto.getFirstName());
         assertEquals("lastName", memberDto.getLastName());
         assertEquals("email", memberDto.getEmail());
-        assertEquals("password", memberDto.getPassword());
+        assertTrue(verifyHash("password", memberDto.getPassword()));
         assertEquals("inss", memberDto.getINSS());
         assertEquals(address, memberDto.getAddress());
+    }
+
+    public boolean verifyHash(String password, String hash) {
+        return BCrypt.checkpw(password, hash);
     }
 }
