@@ -46,7 +46,7 @@ class MemberControllerTest {
 
     @Test
     void whenRegister_ifGivenWrongMail_shouldThrowException() {
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "not_a_correct_email_address", null, null, null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "not_a_correct_email_address", "password", null, null);
         assertThrows(EmailNotValidException.class, () -> memberController.register(createMemberDto));
 
     }
@@ -54,8 +54,8 @@ class MemberControllerTest {
     @Test
     void whenRegistering_withAlreadyExistingMail_shouldThrowError() throws IOException {
         // Given
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", null, "00.00.00-000.00", null);
-        CreateMemberDto createMemberDto2 = new CreateMemberDto(null, null, "test@gmail.com", null, "11.11.11-111.11", null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", "password", "00.00.00-000.00", null);
+        CreateMemberDto createMemberDto2 = new CreateMemberDto(null, null, "test@gmail.com", "password", "11.11.11-111.11", null);
         // When
         memberController.register(createMemberDto);
         // Then
@@ -64,7 +64,7 @@ class MemberControllerTest {
 
     @Test
     void whenAskingToGetAllMembers_shouldReturnAListOfAllRegisteredMembers() throws IOException {
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@mail.com", null, "00.00.00-000.00", null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@mail.com", "password", "00.00.00-000.00", null);
 
         // When
         String expectedId = memberController.register(createMemberDto).getId();
@@ -76,7 +76,7 @@ class MemberControllerTest {
     @Test
     void givenWrongInss_throwsException() {
         String givenInss = "wrong inss";
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@mail.com", null, givenInss, null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@mail.com", "password", givenInss, null);
         assertThrows(InssNotValidException.class, () -> memberController.register(createMemberDto));
     }
 
@@ -89,8 +89,8 @@ class MemberControllerTest {
     @Test
     void whenRegistering_withAlreadyExistingInss_shouldThrowError() throws IOException {
         // Given
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", null, "00.00.00-000.00", null);
-        CreateMemberDto createMemberDto2 = new CreateMemberDto(null, null, "otheraddress@gmail.com", null, "00.00.00-000.00", null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", "password", "00.00.00-000.00", null);
+        CreateMemberDto createMemberDto2 = new CreateMemberDto(null, null, "otheraddress@gmail.com", "password", "00.00.00-000.00", null);
         // When
         memberController.register(createMemberDto);
         // Then
@@ -101,7 +101,7 @@ class MemberControllerTest {
     void whenRegistering_withNewInss_shouldReturnTrue() throws IOException {
         // Given
         String inss1 = "00.00.00-000.00";
-        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", null, inss1, null);
+        CreateMemberDto createMemberDto = new CreateMemberDto(null, null, "test@gmail.com", "password", inss1, null);
         String inss2 = "11.11.11-111.11";
         // When
         memberController.register(createMemberDto);
