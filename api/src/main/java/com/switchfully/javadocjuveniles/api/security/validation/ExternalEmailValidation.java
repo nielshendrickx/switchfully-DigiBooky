@@ -13,7 +13,7 @@ import java.net.URL;
 public class ExternalEmailValidation {
     private static final String USER_AGENT = "Mozilla/5.0";
     private static ObjectMapper objectMapper = new ObjectMapper();
-    private static final String GET_URL = "https://api.emailverifyapi.com/v3/lookups/json?key=C387D7D88D1899BF&email=";
+    private static final String GET_URL = "https://api.emailverifyapi.com/v3/lookups/json?key=7E65D43BDE6FEAD6&email=";
     private static boolean validFormat;
 
     static void sendGET(String email) throws IOException {
