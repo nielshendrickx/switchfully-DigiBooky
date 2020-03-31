@@ -166,7 +166,7 @@ public class DummyData {
                 .withBorrowable(book)
                 .setDummyDate()
                 .withMember(member)
-                .buildBorrow();
+                .buildOverdueBorrow();
         defaultBorrows.add(borrow);
     }
 
