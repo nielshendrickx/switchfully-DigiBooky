@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.service.borrow;
 
 import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
+import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.service.books.BookService;
 import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
 import com.switchfully.javadocjuveniles.service.users.services.MemberService;
@@ -36,7 +37,7 @@ public class BorrowMapper {
     public Borrow toBorrow(CreateBookBorrowDto createBookBorrowDto) {
         return borrowBuilder()
                 .withMember(memberService.getMemberById(createBookBorrowDto.getMemberId()))
-                .withBorrowable(bookService.getBookByISBN(createBookBorrowDto.getBookISBN()))
+                .withBorrowable(bookService.getBookByISBN(createBookBorrowDto.getBookISBN()).stream().findFirst().orElseThrow(() -> new BookNotFoundException("ISBN")))
                 .buildBorrow();
     }
 }
