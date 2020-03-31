@@ -1,13 +1,10 @@
 package com.switchfully.javadocjuveniles.service.users.users;
 
-import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.User;
-import com.switchfully.javadocjuveniles.service.users.members.MemberDto;
-import com.switchfully.javadocjuveniles.service.users.members.MemberMapper;
+import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +13,17 @@ class UserMapperTest {
     UserMapper userMapper = new UserMapper();
 
     @Test
-    void mappingToDto_returnsDtoWithSameValuesAsMemberDto() {
+    void mappingToUser_returnsUserWithSameValuesAsCreateUserDto() {
+        User user = userMapper.toUser(new CreateUserDto("firstName", "lastName", "email", "password", UserRole.MEMBER));
+        assertEquals("firstName", user.getFirstName());
+        assertEquals("lastName", user.getLastName());
+        assertEquals("email", user.getEmail());
+        assertTrue(verifyHash("password", user.getPassword()));
+        assertNull(user.getRole());
+    }
+
+    @Test
+    void mappingToDto_returnsDtoWithSameValuesAsUserDto() {
         User user = userBuilder()
                 .withFirstName("firstName")
                 .withLastName("lastName")
