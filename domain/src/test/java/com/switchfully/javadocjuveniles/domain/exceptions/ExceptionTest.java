@@ -44,4 +44,14 @@ class ExceptionTest {
     void bookIsNotValidException_returnsCorrectMessage() {
         assertEquals("The book is not valid", new BookIsNotValidException().getMessage());
     }
+
+    @Test
+    void ISBNNotValidException_returnsCorrectMessage() {
+        assertEquals("The provided ISBN is not valid", new ISBNNotValidException().getMessage());
+    }
+
+    @Test
+    void NoMoreItemsAvailableException_returnsCorrectMessage() {
+        assertEquals("No more items available!", new NoMoreItemsAvailableException().getMessage());
+    }
 }
