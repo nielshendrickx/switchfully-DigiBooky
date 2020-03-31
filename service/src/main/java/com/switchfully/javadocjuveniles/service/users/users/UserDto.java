@@ -11,6 +11,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    @JsonView(View.Restricted.class)
     private UserRole role;
     @JsonView(View.Restricted.class)
     private String password;
