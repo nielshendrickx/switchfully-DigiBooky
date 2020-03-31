@@ -2,8 +2,6 @@ package com.switchfully.javadocjuveniles.domain.item.book;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
 import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +25,6 @@ class BookTest {
         assertEquals(2, book.getNumberOfCopies());
         assertEquals("summary", book.getSummary());
         assertEquals("title", book.getTitle());
-        assertNotNull(book.getID());
+        assertNotNull(book.getId());
     }
 }

@@ -1,13 +1,11 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
-import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.FieldMustBeProvidedException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -67,7 +65,7 @@ class BookRepositoryTest {
 
     @Test
     void checkIfTheCorrectBookIsReturnedWhenIDIsProvided(){
-        String bookId = bookRepository.getBookByISBN("9780802148537").getID();
+        String bookId = bookRepository.getBookByISBN("9780802148537").getId();
         Assertions.assertEquals("War and Peace", bookRepository.getBookById(bookId).getTitle());
     }
 
@@ -137,7 +135,7 @@ class BookRepositoryTest {
     @Test
     void checkIfBookIsDeleted(){
         Assertions.assertTrue(bookRepository.getBookByISBN("9780802148537") != null);
-        bookRepository.deleteBook(bookRepository.getBookByISBN("9780802148537").getID());
+        bookRepository.deleteBook(bookRepository.getBookByISBN("9780802148537").getId());
         Assertions.assertThrows(BookNotFoundException.class, () -> {
             bookRepository.getBookByISBN("9780802148537");
         });
@@ -149,10 +147,10 @@ class BookRepositoryTest {
                 .withISBN("9781452155272")
                 .withAuthor(authorBuilder().withFirstName("Franz").withLastName("Kafka").build()).build();
         bookRepository.addBook(bookToTest);
-        Assertions.assertTrue(bookRepository.getBookById(bookToTest.getID()) != null);
-        bookRepository.deleteBook(bookToTest.getID());
-        bookRepository.restoreBook(bookToTest.getID());
-        Assertions.assertEquals("The trial", bookRepository.getBookById(bookToTest.getID()).getTitle());
+        Assertions.assertTrue(bookRepository.getBookById(bookToTest.getId()) != null);
+        bookRepository.deleteBook(bookToTest.getId());
+        bookRepository.restoreBook(bookToTest.getId());
+        Assertions.assertEquals("The trial", bookRepository.getBookById(bookToTest.getId()).getTitle());
     }
 
 }

@@ -6,16 +6,16 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Author {
-    private final String ID;
+    private final String Id;
     private String firstName;
     private String lastName;
 
     public Author() {
-        this.ID = UUID.randomUUID().toString();
+        this.Id = UUID.randomUUID().toString();
     }
 
     public Author(AuthorBuilder authorBuilder) {
-        this.ID = UUID.randomUUID().toString();
+        this.Id = UUID.randomUUID().toString();
         this.firstName = authorBuilder.firstName;
         this.lastName = authorBuilder.lastName;
     }

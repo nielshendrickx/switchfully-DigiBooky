@@ -17,7 +17,7 @@ public class BorrowRepository {
     }
 
     public Borrow addBorrow(Borrow borrow) {
-        if (borrow.getItem().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getItem().getID()).size()) {
+        if (borrow.getItem().getNumberOfCopies() <= getActiveBorrowsForItem(borrow.getItem().getId()).size()) {
             throw new NoMoreItemsAvailableException();
         }
         borrowDatabase.put(borrow.getId(), borrow);
@@ -26,7 +26,7 @@ public class BorrowRepository {
 
     public Collection<Borrow> getActiveBorrowsForItem(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getItem().getID().equals(id))
+                .filter(borrow -> borrow.getItem().getId().equals(id))
                 .filter(borrow -> borrow.getEndDate() == null)
                 .collect(Collectors.toList());
     }
@@ -44,7 +44,7 @@ public class BorrowRepository {
 
     public Collection<Borrow> getBorrowReportForItem(String id) {
         return borrowDatabase.values().stream()
-                .filter(borrow -> borrow.getItem().getID().equals(id))
+                .filter(borrow -> borrow.getItem().getId().equals(id))
                 .filter(borrow -> borrow.getEndDate() != null)
                 .collect(Collectors.toList());
     }

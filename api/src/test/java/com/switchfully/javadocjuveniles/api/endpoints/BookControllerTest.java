@@ -7,12 +7,7 @@ import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookMapper;
 import com.switchfully.javadocjuveniles.service.books.BookService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.Collection;
 
 import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
 import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
@@ -70,7 +65,7 @@ class BookControllerTest {
     }
     @Test
     void getBookByID_shouldReturnCorrectBook() {
-        String id = bookController.saveBook(bookDto1).getID();
+        String id = bookController.saveBook(bookDto1).getId();
         assertThat(bookController.getBookByID(id).equals(bookDto1));
     }
     @Test
@@ -80,7 +75,7 @@ class BookControllerTest {
     }
     @Test
     void verifyThatBookIsDeletedFromRepository() {
-        String id = bookController.saveBook(bookDto1).getID();
+        String id = bookController.saveBook(bookDto1).getId();
         assertThat(bookController.getBookByID(id));
         bookController.deleteBook(id);
         assertThatThrownBy(() -> bookController.getBookByID(id))
@@ -89,7 +84,7 @@ class BookControllerTest {
 
     @Test
     void verifyThatDeletedBookIsRestored() {
-        String id = bookController.saveBook(bookDto1).getID();
+        String id = bookController.saveBook(bookDto1).getId();
         assertThat(bookController.getBookByID(id));
         bookController.deleteBook(id);
         bookController.restoreBook(id);
@@ -98,7 +93,7 @@ class BookControllerTest {
 
     @Test
     void verifyThatBookInfoIsUpdated() {
-        String id = bookController.saveBook(bookDto1).getID();
+        String id = bookController.saveBook(bookDto1).getId();
         bookController.updateBook(bookDto2, id);
         assertThat(bookController.getBookByID(id).getTitle().equals("book2"));
     }

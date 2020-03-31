@@ -2,7 +2,6 @@ package com.switchfully.javadocjuveniles.service.books;
 
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -49,6 +48,6 @@ class BookMapperTest {
         assertEquals(book.getSummary(), bookDto.getSummary());
         assertEquals(book.getNumberOfCopies(), bookDto.getNumberOfCopies());
         assertEquals(book.getDateAdded(), bookDto.getDateAdded());
-        assertEquals(book.getID(), bookDto.getID());
+        assertEquals(book.getId(), bookDto.getId());
     }
 }

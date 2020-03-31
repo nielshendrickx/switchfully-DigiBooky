@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public class BookDetailsDto extends Item {
     @JsonView(View.Public.class)
-    private String ID;
+    private String Id;
     @JsonView(View.Public.class)
     private String ISBN;
     @JsonView(View.Public.class)
@@ -38,7 +38,7 @@ public class BookDetailsDto extends Item {
     private LocalDate dateAdded;
 
     @JsonCreator
-    public BookDetailsDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
+    public BookDetailsDto(@JsonProperty("Id") String Id, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
             , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice, @JsonProperty("borrowDtoList") Collection<BorrowDto> currentlyBorrowedTo) {
         super(title, summary, numberOfCopies, initialPrice);
         this.title = title;
@@ -46,7 +46,7 @@ public class BookDetailsDto extends Item {
         this.numberOfCopies = numberOfCopies;
         this.initialPrice = initialPrice;
         this.dateAdded = dateAdded;
-        this.ID = ID;
+        this.Id = Id;
         this.ISBN = ISBN;
         this.author = author;
         this.currentlyBorrowedTo = currentlyBorrowedTo;
@@ -60,8 +60,8 @@ public class BookDetailsDto extends Item {
         return author;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return Id;
     }
 
     @Override

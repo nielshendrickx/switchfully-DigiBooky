@@ -4,7 +4,7 @@ import com.switchfully.javadocjuveniles.domain.exceptions.BookAlreadyExistsExcep
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import org.springframework.stereotype.Repository;
-import java.time.LocalDate;
+
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -66,7 +66,7 @@ public class BookRepository {
     public Book getBookById(String ID){
         checkIfInputNull(ID);
         Book book = bookDatabase.values()
-                .stream().filter(searchedBook -> ID.equals(searchedBook.getID()))
+                .stream().filter(searchedBook -> ID.equals(searchedBook.getId()))
                 .findAny()
                 .orElseThrow(() -> new BookNotFoundException("ID"));
         return book;
@@ -80,7 +80,7 @@ public class BookRepository {
 
     public Book restoreBook(String ID){
         checkIfInputNull(ID);
-        Book book = deletedBooksDatabase.values().stream().filter(x -> ID.equals(x.getID()))
+        Book book = deletedBooksDatabase.values().stream().filter(x -> ID.equals(x.getId()))
                 .findAny()
                 .orElseThrow(() -> new BookNotFoundException("ID"));
         bookDatabase.put(book.getISBN(), book);

@@ -16,7 +16,7 @@ class BookDtoTest {
                 .withLastName("lastName")
                 .build();
         BookDto bookDto = new BookDto("1234", "5678", author, "title", "summary", 2, LocalDate.of(2020, 3, 29), 2);
-        assertEquals("1234", bookDto.getID());
+        assertEquals("1234", bookDto.getId());
         assertEquals("5678", bookDto.getISBN());
         assertEquals(author, bookDto.getAuthor());
         assertEquals("title", bookDto.getTitle());

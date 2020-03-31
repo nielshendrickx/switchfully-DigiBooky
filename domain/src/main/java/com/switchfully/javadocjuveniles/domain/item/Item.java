@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Item implements Borrowable {
-    private final String ID;
+    private final String Id;
     private String title;
     private String summary;
     private int numberOfCopies;
@@ -14,7 +14,7 @@ public abstract class Item implements Borrowable {
 
 
     public Item(String title, String summary, int numberOfCopies, double initialPrice) {
-        this.ID = UUID.randomUUID().toString();
+        this.Id = UUID.randomUUID().toString();
         this.title = title;
         this.summary = summary;
         this.numberOfCopies = numberOfCopies;
@@ -22,8 +22,8 @@ public abstract class Item implements Borrowable {
         this.initialPrice = initialPrice;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return Id;
     }
 
     @Override
@@ -80,11 +80,11 @@ public abstract class Item implements Borrowable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(ID, item.ID);
+        return Objects.equals(Id, item.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(Id);
     }
 }

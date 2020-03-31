@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class BookDto extends Item {
     @JsonView(View.Public.class)
-    private String ID;
+    private String Id;
     @JsonView(View.Public.class)
     private String ISBN;
     @JsonView(View.Public.class)
@@ -34,7 +34,7 @@ public class BookDto extends Item {
     private LocalDate dateAdded;
 
     @JsonCreator
-    public BookDto(@JsonProperty("ID") String ID, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
+    public BookDto(@JsonProperty("Id") String Id, @JsonProperty("ISBN") String ISBN, @JsonProperty("author") Author author, @JsonProperty("title") String title, @JsonProperty("summary") String summary
             , @JsonProperty("numberOfCopies") int numberOfCopies, @JsonProperty("date") LocalDate dateAdded, @JsonProperty("initialPrice") double initialPrice) {
         super(title, summary, numberOfCopies, initialPrice);
         this.title = title;
@@ -42,7 +42,7 @@ public class BookDto extends Item {
         this.numberOfCopies = numberOfCopies;
         this.initialPrice = initialPrice;
         this.dateAdded = dateAdded;
-        this.ID = ID;
+        this.Id = Id;
         this.ISBN = ISBN;
         this.author = author;
     }
@@ -55,8 +55,8 @@ public class BookDto extends Item {
         return author;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return Id;
     }
 
     @Override
