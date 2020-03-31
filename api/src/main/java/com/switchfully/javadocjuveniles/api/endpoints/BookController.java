@@ -33,6 +33,7 @@ public class BookController {
         this.borrowService = borrowService;
     }
 
+    @PreAuthorize("hasAuthority('VIEW_ALL_DETAILS')")
     @GetMapping(path = "/allInfo", produces = "application/json")
     @ApiOperation(value = "Get all books", notes = "A list of all books with their full information will be returned", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
@@ -44,6 +45,7 @@ public class BookController {
     @GetMapping(path = "/isbn/{ISBN}", produces = "application/json")
     @ApiOperation(value = "Get book by ISBN", notes = "The book information will be returned when its ISBN is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
+    @JsonView(View.PublicWithSummary.class)
     public BookDto getBookByISBN(@PathVariable("ISBN") String ISBN) {
         logger.info("Returning the book for given ISBN");
         return bookService.getBookByISBN(ISBN);
@@ -53,6 +55,7 @@ public class BookController {
     @GetMapping(path = "/unlimited/{ID}", produces = "application/json")
     @ApiOperation(value = "Get book by ID", notes = "The book information will be returned when its ID is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
+    @JsonView(View.PublicWithSummary.class)
     public BookDto getBookByID(@PathVariable("ID") String ID) {
         logger.info("Returning the book for given ID");
         return bookService.getBookByID(ID);
@@ -61,6 +64,7 @@ public class BookController {
     @GetMapping(path = "/title/{title}", produces = "application/json")
     @ApiOperation(value = "Get book by title", notes = "The book information will be returned when its title is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
+    @JsonView(View.PublicWithSummary.class)
     public BookDto getBookByTitle(@PathVariable("title") String title) {
         logger.info("Returning the book for given title");
         return bookService.getBookByTitle(title);
@@ -69,6 +73,7 @@ public class BookController {
     @GetMapping(path = "/author/{author}", produces = "application/json")
     @ApiOperation(value = "Get book by author", notes = "The book information will be returned when its author is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
+    @JsonView(View.PublicWithSummary.class)
     public BookDto getBookByAuthor(@PathVariable("author") String author) {
         logger.info("Returning the book for given author");
         return bookService.getBookByAuthor(author);
@@ -124,7 +129,7 @@ public class BookController {
     @GetMapping(path = "/details/{ID}", produces = "application/json")
     @ApiOperation(value = "Get details of a book by ID", notes = "ISBN, title, author and summary of a book be returned", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
-    @JsonView({View.PublicWithSummary.class})
+    @JsonView(View.PublicWithSummary.class)
     public BookDetailsDto getBookByID_forUser_withSummary(@PathVariable("ID") String ID) {
         logger.info("Returning detailed book information for given ID");
         Collection<BorrowDto> borrowDtoList = borrowService.findAllActiveBorrowsForItem(ID);
