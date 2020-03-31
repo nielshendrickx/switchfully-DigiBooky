@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class BookService {
@@ -43,7 +44,7 @@ public class BookService {
         return bookMapper.toDto(bookRepository.getBookByTitle(title));
     }
 
-    public BookDto getBookByAuthor(String name){
+    public Collection<BookDto> getBookByAuthor(String name){
         return bookMapper.toDto(bookRepository.getBookByAuthor(name));
     }
 

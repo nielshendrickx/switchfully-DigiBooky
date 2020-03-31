@@ -6,8 +6,11 @@ import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullExcep
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
 import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
 
@@ -52,15 +55,15 @@ public class BookRepository {
                 .orElseThrow(() -> new BookNotFoundException("Title"));
         return bookByTitle;
     }
-    public Book getBookByAuthor(String author){
+    public Collection<Book> getBookByAuthor(String author){
         checkIfInputNull(author);
-        Book bookByAuthor = bookDatabase.values()
+        List<Book> books = bookDatabase.values()
                 .stream().filter(object -> author.toLowerCase().equals(object.getAuthor().getFirstName().toLowerCase())
                         || author.toLowerCase().equals(object.getAuthor().getLastName().toLowerCase())
                         || author.toLowerCase().equals(object.getAuthor().getFullName().toLowerCase()))
-                .findAny()
-                .orElseThrow(() -> new BookNotFoundException("Author"));
-        return bookByAuthor;
+                .collect(Collectors.toList());
+        if (books.isEmpty()) throw new BookNotFoundException("Author");
+        return books;
     }
 
     public Book getBookById(String ID){

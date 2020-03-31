@@ -74,7 +74,7 @@ public class BookController {
     @ApiOperation(value = "Get book by author", notes = "The book information will be returned when its author is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(View.PublicWithSummary.class)
-    public BookDto getBookByAuthor(@PathVariable("author") String author) {
+    public Collection<BookDto> getBookByAuthor(@PathVariable("author") String author) {
         logger.info("Returning the book for given author");
         return bookService.getBookByAuthor(author);
     }
