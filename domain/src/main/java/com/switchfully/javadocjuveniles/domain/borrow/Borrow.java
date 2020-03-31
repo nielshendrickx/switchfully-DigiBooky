@@ -70,6 +70,11 @@ public class Borrow {
             return new Borrow(this);
         }
 
+        public Borrow buildOverdueBorrow() {
+            setDummyDate();
+            return new Borrow(this);
+        }
+
         private void setStartDueDate() {
             this.startDate = LocalDate.now();
             this.dueDate = startDate.plusWeeks(3);

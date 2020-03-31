@@ -55,9 +55,8 @@ public class DummyData {
 
         Borrow borrow = Borrow.BorrowBuilder.borrowBuilder()
                 .withBorrowable(book)
-                .setDummyDate()
                 .withMember(member)
-                .buildBorrow();
+                .buildOverdueBorrow();
         defaultBorrows.add(borrow);
     }
 

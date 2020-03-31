@@ -12,9 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
-import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
-
 @Repository
 public class BookRepository {
     private final ConcurrentHashMap<String, Book> bookDatabase;
