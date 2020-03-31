@@ -98,8 +98,7 @@ public class BookRepository {
     }
 
     public static boolean checkIfKeywordExists(String savedValue, String searchedValue){
-        boolean bool = Pattern.compile(".*" + savedValue.toLowerCase() +".*").matcher(searchedValue.toLowerCase()).find();
-        return bool;
+        return Pattern.compile(".*" + savedValue.toLowerCase() +".*").matcher(searchedValue.toLowerCase()).find();
     }
 
     private void createDefaultData(){
