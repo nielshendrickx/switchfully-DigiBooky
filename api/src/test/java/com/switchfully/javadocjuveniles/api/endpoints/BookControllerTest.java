@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
+import com.switchfully.javadocjuveniles.domain.DummyData;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.item.book.Author;
 import com.switchfully.javadocjuveniles.domain.item.book.Book;
@@ -15,7 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BookControllerTest {
-    BookRepository bookRepository = new BookRepository();
+    DummyData dummyData = new DummyData();
+    BookRepository bookRepository = new BookRepository(dummyData);
     BookMapper bookMapper = new BookMapper();
     BookService bookService = new BookService(bookRepository, bookMapper);
     BookController bookController = new BookController(bookService, null);
@@ -36,11 +38,6 @@ class BookControllerTest {
             .build();
     BookDto bookDto1 = bookMapper.toDto(book1);
     BookDto bookDto2 = bookMapper.toDto(book2);
-
-    @Test
-    void verifyThatRepositoryContains3BooksToStartWith() {
-        assertThat(bookController.getAllBooksWithLimitedInfo().size()).isEqualTo(3);
-    }
 
     @Test
     void getBookByIsbn_shouldReturnCorrectBook() {

@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.service.books;
 
+import com.switchfully.javadocjuveniles.domain.DummyData;
 import com.switchfully.javadocjuveniles.domain.item.book.BookRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,10 +9,10 @@ import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBui
 
 
 class BookServiceTest {
-
+    DummyData dummyData = new DummyData();
     @Test
     void checkIfBookUpDated(){
-        BookRepository bookRepository = new BookRepository();
+        BookRepository bookRepository = new BookRepository(dummyData);
         BookMapper bookMapper = new BookMapper();
         BookService bookService = new BookService(bookRepository, bookMapper);
 

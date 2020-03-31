@@ -1,5 +1,6 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
+import com.switchfully.javadocjuveniles.domain.DummyData;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookAlreadyExistsException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
@@ -8,18 +9,18 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
-import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
-import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
 
 @Repository
 public class BookRepository {
     private final ConcurrentHashMap<String, Book> bookDatabase;
     private final ConcurrentHashMap<String, Book> deletedBooksDatabase;
+    private final DummyData dummyData;
 
-    public BookRepository() {
+    public BookRepository(DummyData dummyData) {
         this.bookDatabase = new ConcurrentHashMap<>();
         this.deletedBooksDatabase = new ConcurrentHashMap<>();
-        createDefaultData();
+        this.dummyData = dummyData;
+        addDefaultData();
     }
 
     public Book addBook(Book book) {
@@ -99,18 +100,9 @@ public class BookRepository {
         return bool;
     }
 
-    private void createDefaultData(){
-        Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
-                .withISBN("9780802148537").withInitialPrice(10)
-                .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
-        Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(5)
-                .withISBN("9780062941503")
-                .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
-        Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1).withInitialPrice(3)
-                .withISBN("9780805096606")
-                .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
-        addBook(book1);
-        addBook(book2);
-        addBook(book3);
+    private void addDefaultData() {
+        for(Book book : dummyData.getDefaultBooks()) {
+            this.addBook(book);
+        }
     }
 }

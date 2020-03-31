@@ -1,6 +1,7 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
 import com.switchfully.javadocjuveniles.api.security.validation.Validation;
+import com.switchfully.javadocjuveniles.domain.DummyData;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailAlreadyRegisteredException;
 import com.switchfully.javadocjuveniles.domain.exceptions.EmailNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InssAlreadyRegisteredException;
@@ -24,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberControllerTest {
-
+    DummyData dummyData = new DummyData();
     MemberRepository memberRepository;
     MemberMapper memberMapper;
     MemberService memberService;
@@ -35,7 +36,7 @@ class MemberControllerTest {
 
     @BeforeEach
     void init() {
-        memberRepository = new MemberRepository();
+        memberRepository = new MemberRepository(dummyData);
         memberMapper = new MemberMapper();
         memberService = new MemberService(memberRepository, memberMapper);
         userRepository = new UserRepository();
