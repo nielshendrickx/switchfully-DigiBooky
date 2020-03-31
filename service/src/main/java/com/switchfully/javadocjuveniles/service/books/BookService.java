@@ -32,7 +32,7 @@ public class BookService {
         return bookMapper.toDto(item);
     }
 
-    public BookDto getBookByISBN(String ISBN){
+    public Collection<BookDto> getBookByISBN(String ISBN){
         return bookMapper.toDto(bookRepository.getBookByISBN(ISBN));
     }
 

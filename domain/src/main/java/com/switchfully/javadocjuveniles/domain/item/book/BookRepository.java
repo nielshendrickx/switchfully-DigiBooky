@@ -27,24 +27,24 @@ public class BookRepository {
 
     public Book addBook(Book book) {
         checkIfInputNull(book);
-        if(bookDatabase.keySet().contains(book.getISBN())){
+        if (bookDatabase.keySet().contains(book.getISBN())) {
             throw new BookAlreadyExistsException();
         }
         bookDatabase.put(book.getISBN(), book);
         return book;
     }
 
-    public Collection<Book> getAllBooks(){
+    public Collection<Book> getAllBooks() {
         return bookDatabase.values();
     } //TODO check if available
 
-    public Book getBookByISBN(String isbn){
+    public Collection<Book> getBookByISBN(String isbn) {
         checkIfInputNull(isbn);
-        String status = bookDatabase.keySet()
-                .stream().filter(key -> checkIfKeywordExists(isbn, key))
-                .findAny()
-                .orElseThrow(() -> new BookNotFoundException("ISBN"));
-        return bookDatabase.get(status);
+        List<Book> books = bookDatabase.values()
+                .stream().filter(value -> checkIfKeywordExists(isbn, value.getISBN()))
+                .collect(Collectors.toList());
+        if (books.isEmpty()) throw new BookNotFoundException("ISBN");
+        return books;
     }
 
     public Collection<Book> getBookByTitle(String title){
@@ -56,7 +56,8 @@ public class BookRepository {
                     throw new BookNotFoundException("Title");
         return booksByTitle;
     }
-    public Collection<Book> getBookByAuthor(String author){
+
+    public Collection<Book> getBookByAuthor(String author) {
         checkIfInputNull(author);
         List<Book> books = bookDatabase.values()
                 .stream().filter(object -> author.toLowerCase().equals(object.getAuthor().getFirstName().toLowerCase())
@@ -67,7 +68,7 @@ public class BookRepository {
         return books;
     }
 
-    public Book getBookById(String ID){
+    public Book getBookById(String ID) {
         checkIfInputNull(ID);
         Book book = bookDatabase.values()
                 .stream().filter(searchedBook -> ID.equals(searchedBook.getId()))
@@ -76,13 +77,13 @@ public class BookRepository {
         return book;
     }
 
-    public void deleteBook(String ID){ //TODO book.togleAvailabilty()
+    public void deleteBook(String ID) { //TODO book.togleAvailabilty()
         checkIfInputNull(ID);
         deletedBooksDatabase.put(getBookById(ID).getISBN(), getBookById(ID));
         bookDatabase.remove(getBookById(ID).getISBN());
     }
 
-    public Book restoreBook(String ID){
+    public Book restoreBook(String ID) {
         checkIfInputNull(ID);
         Book book = deletedBooksDatabase.values().stream().filter(x -> ID.equals(x.getId()))
                 .findAny()
@@ -92,17 +93,17 @@ public class BookRepository {
         return book;
     }
 
-    public static <T>  void checkIfInputNull(T input){
-        if (input == null){
+    public static <T> void checkIfInputNull(T input) {
+        if (input == null) {
             throw new InputCanNotBeNullException();
         }
     }
 
-    public static boolean checkIfKeywordExists(String savedValue, String searchedValue){
-        return Pattern.compile(".*" + savedValue.toLowerCase() +".*").matcher(searchedValue.toLowerCase()).find();
+    public static boolean checkIfKeywordExists(String savedValue, String searchedValue) {
+        return Pattern.compile(".*" + savedValue.toLowerCase() + ".*").matcher(searchedValue.toLowerCase()).find();
     }
 
-    private void createDefaultData(){
+    private void createDefaultData() {
         Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
                 .withISBN("9780802148537").withInitialPrice(10)
                 .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();

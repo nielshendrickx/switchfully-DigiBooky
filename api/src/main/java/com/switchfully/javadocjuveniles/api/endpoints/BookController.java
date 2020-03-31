@@ -45,7 +45,7 @@ public class BookController {
     @ApiOperation(value = "Get book by ISBN", notes = "The book information will be returned when its ISBN is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(View.PublicWithSummary.class)
-    public BookDto getBookByISBN(@PathVariable("ISBN") String ISBN) {
+    public Collection<BookDto> getBookByISBN(@PathVariable("ISBN") String ISBN) {
         logger.info("Returning the book for given ISBN");
         return bookService.getBookByISBN(ISBN);
     }
