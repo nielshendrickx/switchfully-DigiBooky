@@ -2,6 +2,7 @@
 package com.switchfully.javadocjuveniles.domain.user;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
 import static com.switchfully.javadocjuveniles.domain.user.feature.UserRole.ADMIN;
@@ -22,7 +23,11 @@ class UserTest {
         assertEquals("lastName", user.getLastName());
         assertEquals("email", user.getEmail());
         assertEquals(ADMIN, user.getRole());
-        assertEquals("password", user.getPassword());
+        assertTrue(verifyHash("password", user.getPassword()));
         assertNotNull(user.getId());
+    }
+
+    public boolean verifyHash(String password, String hash) {
+        return BCrypt.checkpw(password, hash);
     }
 }

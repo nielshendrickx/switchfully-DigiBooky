@@ -2,11 +2,11 @@ package com.switchfully.javadocjuveniles.domain.user;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import static com.switchfully.javadocjuveniles.domain.user.builders.AddressBuilder.addressBuilder;
 import static com.switchfully.javadocjuveniles.domain.user.builders.UserBuilder.userBuilder;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MemberTest {
 
@@ -32,8 +32,12 @@ class MemberTest {
         assertEquals("FirstName", member.getFirstName());
         assertEquals("LastName", member.getLastName());
         assertEquals("test@email.com", member.getEmail());
-        assertEquals("aPassword", member.getPassword());
+        assertTrue(verifyHash("aPassword", member.getPassword()));
         assertNotNull(member.getId());
+    }
+
+    public boolean verifyHash(String password, String hash) {
+        return BCrypt.checkpw(password, hash);
     }
 
 }
