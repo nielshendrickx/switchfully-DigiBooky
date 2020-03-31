@@ -2,7 +2,9 @@ package com.switchfully.javadocjuveniles.service.users.users;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import com.switchfully.javadocjuveniles.service.books.View;
 
 public class UserDto {
     private String id;
@@ -10,6 +12,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private UserRole role;
+    @JsonView(View.Restricted.class)
     private String password;
 
     @JsonCreator

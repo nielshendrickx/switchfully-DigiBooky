@@ -2,15 +2,18 @@ package com.switchfully.javadocjuveniles.service.users.members;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.switchfully.javadocjuveniles.domain.fines.FineType;
 import com.switchfully.javadocjuveniles.domain.user.Address;
 import com.switchfully.javadocjuveniles.domain.user.feature.UserRole;
+import com.switchfully.javadocjuveniles.service.books.View;
 import com.switchfully.javadocjuveniles.service.users.users.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDto extends UserDto {
+    @JsonView(View.Restricted.class)
     private final String INSS;
     private final Address address;
     private final List<FineType> fines;

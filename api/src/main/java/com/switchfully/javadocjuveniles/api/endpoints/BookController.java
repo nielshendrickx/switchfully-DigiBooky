@@ -55,9 +55,10 @@ public class BookController {
     @ApiOperation(value = "Get book by ID", notes = "The book information will be returned when its ID is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(View.PublicWithSummary.class)
-    public BookDto getBookByID(@PathVariable("ID") String ID) {
+    public BookDetailsDto getBookByID_forUser_withSummary(@PathVariable("ID") String ID) {
         logger.info("Returning the book for given ID");
-        return bookService.getBookByID(ID);
+        Collection<BorrowDto> borrowDtoList = borrowService.findAllActiveBorrowsForItem(ID);
+        return bookService.getBookDetails(ID, borrowDtoList);
     }
 
     @GetMapping(path = "/title/{title}", produces = "application/json")
@@ -129,9 +130,8 @@ public class BookController {
     @ApiOperation(value = "Get details of a book by ID", notes = "ISBN, title, author and summary of a book be returned", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(View.PublicWithSummary.class)
-    public BookDetailsDto getBookByID_forUser_withSummary(@PathVariable("ID") String ID) {
+    public BookDto getBookByID(@PathVariable("ID") String ID) {
         logger.info("Returning detailed book information for given ID");
-        Collection<BorrowDto> borrowDtoList = borrowService.findAllActiveBorrowsForItem(ID);
-        return bookService.getBookDetails(ID, borrowDtoList);
+        return bookService.getBookByID(ID);
     }
 }
