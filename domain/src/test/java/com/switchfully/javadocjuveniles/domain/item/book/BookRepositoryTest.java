@@ -91,15 +91,15 @@ class BookRepositoryTest {
         });
     }
 
-    //@Test
-    //void checkIfTheCorrectBookIsReturnedWhenTitleIsProvided() {
-      //  Assertions.assertEquals("9780802148537", bookRepository.getBookByTitle("War and Peace").getISBN());
-    //}
+    @Test
+    void checkIfTheCorrectBookIsReturnedWhenTitleIsProvided() {
+        assertThat(bookRepository.getBookByTitle("War and Peace").contains(book1));
+    }
 
-    //@Test
-    //void checkIfTheCorrectBookIsReturnedWhenHalfOfTheTitleIsProvided() {
-      //  Assertions.assertEquals("9780802148537", bookRepository.getBookByTitle("War and P").getISBN());
-    //}
+    @Test
+    void checkIfTheCorrectBookIsReturnedWhenHalfOfTheTitleIsProvided() {
+        assertThat(bookRepository.getBookByTitle("War and P").contains(book1));
+    }
 
     @Test
     void checkIfAnExceptionIsThrownWhenUnknownTitleIsProvided() {
