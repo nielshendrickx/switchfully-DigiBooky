@@ -1,7 +1,6 @@
 package com.switchfully.javadocjuveniles.api.endpoints;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.switchfully.javadocjuveniles.domain.borrow.Borrow;
 import com.switchfully.javadocjuveniles.service.books.BookDetailsDto;
 import com.switchfully.javadocjuveniles.service.books.BookDto;
 import com.switchfully.javadocjuveniles.service.books.BookService;
@@ -65,7 +64,7 @@ public class BookController {
     @ApiOperation(value = "Get book by title", notes = "The book information will be returned when its title is provided", response = BookDto.class)
     @ResponseStatus(HttpStatus.OK)
     @JsonView(View.PublicWithSummary.class)
-    public BookDto getBookByTitle(@PathVariable("title") String title) {
+    public Collection<BookDto> getBookByTitle(@PathVariable("title") String title) {
         logger.info("Returning the book for given title");
         return bookService.getBookByTitle(title);
     }

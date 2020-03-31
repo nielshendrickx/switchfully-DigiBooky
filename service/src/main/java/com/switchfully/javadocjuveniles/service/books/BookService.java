@@ -40,7 +40,7 @@ public class BookService {
         return bookMapper.toDto(bookRepository.getBookById(ID));
     }
 
-    public BookDto getBookByTitle(String title){
+    public Collection<BookDto> getBookByTitle(String title){
         return bookMapper.toDto(bookRepository.getBookByTitle(title));
     }
 

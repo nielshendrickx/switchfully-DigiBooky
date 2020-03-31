@@ -47,13 +47,14 @@ public class BookRepository {
         return bookDatabase.get(status);
     }
 
-    public Book getBookByTitle(String title){
+    public Collection<Book> getBookByTitle(String title){
         checkIfInputNull(title);
-        Book bookByTitle = bookDatabase.values()
+        List<Book> booksByTitle = bookDatabase.values()
                 .stream().filter(object -> checkIfKeywordExists(title, object.getTitle()))
-                .findAny()
-                .orElseThrow(() -> new BookNotFoundException("Title"));
-        return bookByTitle;
+                .collect(Collectors.toList());
+        if (booksByTitle.isEmpty())
+                    throw new BookNotFoundException("Title");
+        return booksByTitle;
     }
     public Collection<Book> getBookByAuthor(String author){
         checkIfInputNull(author);
