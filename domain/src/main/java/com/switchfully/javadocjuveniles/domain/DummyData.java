@@ -33,6 +33,7 @@ public class DummyData {
                 .withSummary("Summary of a wonderful book")
                 .withTitle("War and Peace")
                 .build();
+
         defaultBooks.add(book);
 
         Member member = userBuilder()

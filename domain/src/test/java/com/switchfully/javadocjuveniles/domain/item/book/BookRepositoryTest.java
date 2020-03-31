@@ -1,17 +1,11 @@
 package com.switchfully.javadocjuveniles.domain.item.book;
 
 import com.switchfully.javadocjuveniles.domain.DummyData;
-import com.switchfully.javadocjuveniles.domain.exceptions.BookIsNotValidException;
 import com.switchfully.javadocjuveniles.domain.exceptions.BookNotFoundException;
 import com.switchfully.javadocjuveniles.domain.exceptions.FieldMustBeProvidedException;
 import com.switchfully.javadocjuveniles.domain.exceptions.InputCanNotBeNullException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import static com.switchfully.javadocjuveniles.domain.item.book.Author.AuthorBuilder.authorBuilder;
 import static com.switchfully.javadocjuveniles.domain.item.book.Book.BookBuilder.bookBuilder;
@@ -21,20 +15,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BookRepositoryTest {
     DummyData dummyData = new DummyData();
     BookRepository bookRepository = new BookRepository(dummyData);
-   /* @Test
-    void getAllItemsTest(){
-        Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
-                .withISBN("9780802148537")
-                .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
-        Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1)
-                .withISBN("9780062941503")
-                .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
-        Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1)
-                .withISBN("9780805096606")
-                .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
-        Collection<Book> books = new ArrayList<>(List.of(book1, book2, book3));
-        Assertions.assertTrue(bookRepository.getAllBooks().containsAll(books));
-    }*/
+
+    Book book1 = bookBuilder().withTitle("War and Peace").withSummary("Summary").withNumberOfCopies(1)
+            .withISBN("9780802148537")
+            .withAuthor(authorBuilder().withFirstName("Leo").withLastName("Tolstoy").build()).build();
+    Book book2 = bookBuilder().withTitle("It").withSummary("Summary").withNumberOfCopies(1)
+            .withISBN("9780062941503")
+            .withAuthor(authorBuilder().withFirstName("Stephen").withLastName("King").build()).build();
+    Book book3 = bookBuilder().withTitle("1984").withSummary("Summary").withNumberOfCopies(1)
+            .withISBN("9780805096606")
+            .withAuthor(authorBuilder().withFirstName("George").withLastName("Orwell").build()).build();
 
     @Test
     void addItemTest() {
@@ -59,6 +49,8 @@ class BookRepositoryTest {
 
     @Test
     void checkIfTheCorrectBookIsReturnedWhenHalfOfTheISBNIsProvided() {
+        bookRepository.addBook(book2);
+        bookRepository.addBook(book3);
         System.out.println(bookRepository.getBookByISBN("9"));
         assertThat(bookRepository.getBookByISBN("9")).contains(book1, book2, book3);
     }
